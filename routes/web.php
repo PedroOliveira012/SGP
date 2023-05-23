@@ -4,6 +4,7 @@ use App\Http\Controllers\ProjetosController;
 use App\Http\Controllers\TarefasController;
 use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\AjudaController;
+use App\Http\Controllers\ChamadosController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiretoriaController;
 use Illuminate\Support\Facades\Route;
@@ -78,6 +79,13 @@ Route::get('/ajuda/{id}', [AjudaController::class, 'mostra'])->name('index_ajuda
 //Diretoria
 Route::get('/diretoria/index', [DiretoriaController::class, 'index'])->name('index_diretoria')->middleware('auth');
 ROute::get('/diretoria/lista/{id}', [DiretoriaController::class, 'lista'])->name('lista_diretoria')->middleware('auth');
+
+//Chamados
+Route::get('/chamados/lista', [ChamadosController::class, 'lista'])->name('lista_chamados')->middleware('auth');//funciona
+Route::get('/chamados/mostra/{id}', [ChamadosController::class, 'mostra'])->name('mostra_chamados')->middleware('auth');
+Route::get('/chamados/novo', [ChamadosController::class, 'novo'])->name('novo_chamado')->middleware('auth');//funciona
+Route::post('/chamados/adiciona', [ChamadosController::class, 'adiciona'])->name('adiciona_chamados')->middleware('auth');//funciona
+Route::put('/chamados/concluir/{id}', [ChamadosController::class, 'concluir'])->name('concluir_chamado')->middleware('auth');//funciona
 
 //Logout
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');
