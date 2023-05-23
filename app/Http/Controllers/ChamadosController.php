@@ -20,6 +20,16 @@ class ChamadosController extends Controller
     public function lista()
     {
         $lista = chamados::all();
+        $status = request('escolher-status');
+
+        if ($status == 'Reclamação'){
+            $lista = chamados::where([['tipo', '=', $status]])->get();
+        }elseif ($status =='Sugestão'){
+            $lista = chamados::where([['tipo', '=', $status]])->get();
+        }else{
+            $lista = chamados::all();
+        }
+
         return view('chamados.chamados_index',compact('lista'));
     }
 
@@ -49,6 +59,11 @@ class ChamadosController extends Controller
         $chamado->save();
 
         return redirect('/chamados/lista');
+    }
+
+    public function mostra($id){
+        $chamado = chamados::find($id);
+        return view('chamados.chamados_mostra', compact('chamado'));
     }
 
     /**

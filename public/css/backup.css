@@ -99,7 +99,20 @@ img{
 .painel{
     margin: 15px;
     margin-left: 2.5%;
-    /* display: inline-block; */
+}
+
+.painel-status{
+    margin: 15px;
+    margin-left: 2.5%;
+    /* width: 20%; */
+}
+
+.escolher-status-chamados{
+    display: flex;
+}
+
+.filtro-status{
+    display: inline-flex;
 }
 
 .escolher-painel{
@@ -215,6 +228,15 @@ a:link, a:visited{
 }
 
 #notas{
+    display: block !important;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.solucao-chamado, .conteudo-chamado{
     display: block !important;
     width: 80%;
     margin-left: auto;

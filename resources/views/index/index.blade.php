@@ -158,7 +158,7 @@
                                     @else
                                         <li class="list-group-item text-bg-dark"><a href="{{ url('/funcionarios/index') }}">Tarefas designadas</a></li>
                                     @endif --}}
-                                    <li class="list-group-item text-bg-dark"><a href="{{ url('/chamados/lista') }}">Controle de tarefas</a></li>
+                                    <li class="list-group-item text-bg-dark"><a href="{{ url('/chamados/lista') }}">Chamados</a></li>
                                 </ul>
                             </div>
                         </div>

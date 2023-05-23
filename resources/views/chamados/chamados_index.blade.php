@@ -10,7 +10,8 @@
         <a href="{{ url('/projeto/novo') }}"><button type="button" class="btn search-and-add__button"><i class="fa-solid fa-plus" aria-hidden="true"></i>  Adicionar</button></a>
     </div> --}}
 </div>
-<div class="painel">
+<div class="painel-status">
+
     {{-- <div> isso é o botão de voltar, colocar no chamados mostra
         <a href="{{ url('/chamados/lista/') }}">
             <button class="btn voltar-tarefas">
@@ -19,19 +20,28 @@
             </button>
         </a>
     </div> --}}
-    {{-- <div> --}}
-        <div>
-            {{-- <form action="{{ url('diretoria/lista/' .$lista->id)}}" method="get" class="escolher-painel-diretoria"> --}}
-                <select class="form-select select-func" name="escolher-status">
-                    <option value="" selected disabled hidden>{{----}}</option>
-                    <option value="Reclamação">Reclamação</option>
-                    <option value="Sugestão">Sugestão</option>
-                </select>
-                <button type="submit" class="btn btn-primary botao-painel"><i class="fa-solid fa-filter"></i></button>
-            {{-- </form> --}}
-        </div>
-    {{-- </div> --}}
+
+    @if (Auth::user()->cargo == 'Admin')
+    <div class="filtro-status">
+        <form action="{{ url('chamados/lista/')}}" method="get" class="escolher-status-chamados">
+            <select class="form-select select-status" name="escolher-status">
+                <option value="" selected disabled hidden>Selecione uma opção</option>
+                <option value="Reclamação">Reclamação</option>
+                <option value="Sugestão">Sugestão</option>
+            </select>
+            <button type="submit" class="btn btn-primary botao-painel"><i class="fa-solid fa-filter"></i></button>
+        </form>
+    </div>
+
+    @else
+        <a href="{{ url('/chamados/novo') }}">
+            <button type="button" class="btn search-and-add__button">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i>  Adicionar
+            </button>
+        </a>
+    @endif
 </div>
+
 <div>
     <table class="table table-dark table-hover tabela">
         <thead>
@@ -42,8 +52,9 @@
                 <th class="tabela__head--esquerda">Tipo</th>
                 <th>Assunto</th>
                 <th>Status</th>
-                {{-- <th class="tabela__head--esquerda">Status</th> --}}
-                <th></th>
+                @if (Auth::user()->cargo == 'Admin')
+                    <th></th>
+                @endif
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -76,7 +87,7 @@
                             <td>
                                 <div class="tabela__dados botoes centralizado">
                                     <div class="tabela__dados--botoes ">
-                                        <a class="tabela__dados--link" href="{{ url('/projeto/mostra/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i></button></a>
+                                        <a class="tabela__dados--link" href="{{ url('/chamados/mostra/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i></button></a>
                                     </div>
                                     @if (Auth::user()->cargo == 'Admin')
                                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdropModal{{$i->id}}">
@@ -87,14 +98,6 @@
                                             <a href="{{ url('/projeto/editar/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-ruler"></i></button></a>
                                         </div>
                                     @endif
-                                    {{-- <div class="tabela__dados--botoes">
-                                        <a href="{{ url('/projeto/editar/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-ruler"></i></button></a>
-                                    </div> --}}
-                                    {{-- <div class="tabela__dados--botoes">
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropModal{{$i->id}}">
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </button>
-                                    </div> --}}
                                 </div>
                             </td>
                         @endif
