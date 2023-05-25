@@ -63,7 +63,18 @@
                             </form>
                         </div>
                         <div class="tabela__dados--botoes ">
-                            <a class="tabela__dados--link" href="{{ url('/projeto/mostra/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-bars"></i></button></a>
+                            <a class="tabela__dados--link" href="{{ url('/projeto/mostra/' .$i->id) }}">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="tabela__dados--botoes ">
+                            <a class="tabela__dados--link" href="{{ url('/tarefas/lista/' .$i->id) }}">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-solid fa-bars"></i>
+                                </button>
+                            </a>
                         </div>
                     </td>
                 </tr>

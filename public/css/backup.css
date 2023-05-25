@@ -544,7 +544,6 @@ a:link, a:visited{
 
 .voltar-funcionario{
     background: #121212;
-    /* border: ; */
     font-size: x-large;
     margin-left: 2.5%;
     margin-bottom: 15px;
@@ -554,7 +553,7 @@ a:link, a:visited{
 .voltar-projeto{
     background: #121212;
     font-size: x-large;
-    margin-left: 8.25%;
+    margin-left: 6.25%;
     margin-top: 15px;
     color: #ffffff;
 }

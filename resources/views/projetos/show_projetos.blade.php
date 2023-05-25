@@ -2,9 +2,9 @@
 
 @section('conteudo')
 <body onload="Relembrar()">
-    <a href="/projeto/andamento">
+    <a href={{ url("/projeto/andamento")}}>
         <button class="btn voltar-projeto">
-            <i class="fa-solid fa-chevron-left voltar-projeto"></i> Voltar
+            <i class="fa-solid fa-chevron-left voltar-icone"></i> Voltar
         </button>
     </a>
     <section class="container contorno write-section">

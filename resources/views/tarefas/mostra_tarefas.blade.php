@@ -4,8 +4,7 @@
 <body>
     <a href="{{ url('/tarefas/lista/' .$i->id_projeto) }}">
         <button class="btn voltar">
-            <i class="fa-solid fa-chevron-left voltar-icone"></i>
-            Voltar
+            <i class="fa-solid fa-chevron-left voltar-icone">Voltar</i>
         </button>
     </a>
     {{-- <section class="linha">
