@@ -68,6 +68,7 @@ class FuncionariosController extends Controller
         $dias = $termino->diffInWeekdays($inicio);
         $minutos = 0;
         $pausa = $tarefa->total_pausa;
+        $intervalo = 0;
 
 
         //para tarefas terminadas no mesmo dia

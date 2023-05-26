@@ -4,8 +4,18 @@
 <div class="topo">
     <h1>Tarefas do Projeto {{$projeto->num_projeto}} - {{$projeto->nome_projeto}}</h1>
     <div class="btn-group add">
-        <a href="{{ url('/tarefas/novo/' .$projeto->id) }}"><button type="button" class="btn search-and-add__button"><i class="fa-solid fa-plus" aria-hidden="true"></i>  Adicionar</button></a>
-        <a href="{{ url('/tarefas/conjunto/' .$projeto->id) }}"><button type="button" class="btn search-and-add__button"><i class="fa-solid fa-plus" aria-hidden="true"></i>  Adicionar conjunto</button></a>
+        <a href="{{ url('/tarefas/novo/' .$projeto->id) }}">
+            <button type="button" class="btn add_task">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                Tarefa
+            </button>
+        </a>
+        <a href="{{ url('/tarefas/conjunto/' .$projeto->id) }}">
+            <button type="button" class="btn add_group">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                Conjunto
+            </button>
+        </a>
     </div>
 </div>
 <div class="painel">

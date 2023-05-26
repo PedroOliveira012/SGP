@@ -173,6 +173,24 @@ a:link, a:visited{
     color: white;
 }
 
+.add_task, .add_group{
+    font-size: large;
+    margin-right: 5px;
+}
+
+.add_group{
+    width: 130px;
+}
+
+.add_task{
+    width: 95px;
+}
+
+.add_task:hover, .add_group:hover{
+    background-color: #F49F0A !important;
+    color: #121212 !important;
+}
+
 .search-and-add__button:hover{
     background-color: #F49F0A !important;
     color: #121212 !important;

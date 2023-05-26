@@ -34,9 +34,11 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user(); //cria a variavel com os dados do usuario
 
-        if($user->cargo == 'Diretor'){
+        if( $user->cargo == 'Admin'){
+            return redirect('/chamados/lista');
+        }elseif($user->cargo == 'Diretor'){
             return redirect('/diretoria/index');
-        }elseif ($user->cargo == 'Coordenador de Engenharia' || $user->cargo == 'Analista' || $user->cargo == 'Consultor técnico / projetista' || $user->cargo == 'Admin') {
+        }elseif ($user->cargo == 'Coordenador de Engenharia' || $user->cargo == 'Analista' || $user->cargo == 'Consultor técnico / projetista') {
             return redirect('/projeto/andamento');
         }elseif ($user->cargo == 'Coodernador Produção'){
             return redirect('/projeto/liberados');

@@ -77,6 +77,7 @@ class TarefasController extends Controller
 
             $funcionarios = implode('/', request('funcionarios'));
             $conjunto->funcionario = $funcionarios;
+            $conjunto->envio_tarefa = Carbon::now()->subHour(3);
 
             $conjunto->tarefa = $tarefa->titulo;
 
