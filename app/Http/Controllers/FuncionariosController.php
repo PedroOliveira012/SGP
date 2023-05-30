@@ -34,7 +34,9 @@ class FuncionariosController extends Controller
     public function inicio($id){
         $tarefa = Task::find($id);
         $tarefa->inicio_tarefa = Carbon::now()->subHour(3);
-        $tarefa->funcionario = Auth::user()->name;
+        if ($tarefa->tarefa_conjunta == 0){
+            $tarefa->funcionario = Auth::user()->name;
+        }
         $tarefa->status = 'andamento';
         $tarefa->save();
 

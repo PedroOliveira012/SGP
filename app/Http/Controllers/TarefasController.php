@@ -80,6 +80,7 @@ class TarefasController extends Controller
             $conjunto->envio_tarefa = Carbon::now()->subHour(3);
 
             $conjunto->tarefa = $tarefa->titulo;
+            $conjunto->tarefa_conjunta = request('tarefaConjunta');
 
             $conjunto->status = 'aguardo';
             $conjunto->save();

@@ -48,6 +48,18 @@
             <input type="checkbox" class="form-check-input" name="funcionarios[]" value="{{ $f->name }}"> {{ $f->name }}<br>
         @endforeach
 
+        <div class="row">
+            <label for="" class="col-form-label">A tarefa precisa de mais de uma pessoa?</label>
+            <div class="col-md-3 form-group mb-3">
+                <input class="form-check-input" type="radio" name="tarefaConjunta" id="sim" value="1">
+                <label class="form-check-label" for="sim">Sim</label>
+            </div>
+            <div class="col-md-3 form-group mb-3">
+                <input class="form-check-input" type="radio" name="tarefaConjunta" id="nao" value="0">
+                <label class="form-check-label" for="nao">Não</label>
+            </div>
+        </div>
+
 
         <div class="row">
             <div class="col-md-12 form-group">

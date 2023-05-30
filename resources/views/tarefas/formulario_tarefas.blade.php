@@ -118,19 +118,6 @@
                 <label class="form-check-label" for="nao">Não</label>
             </div>
         </div>
-
-        {{-- <div class="row">
-            <label for="">O projeto terá mais de um painel?</label>
-            <div class="col-md-3 form-group mb-3">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="sim" onclick="Habilita_paineis()">
-                <label class="form-check-label" for="sim">Sim</label>
-            </div>
-            <div class="col-md-3 form-group mb-3">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="nao" onclick="Habilita_paineis()">
-                <label class="form-check-label" for="nao">Não</label>
-            </div>
-        </div> --}}
-
         <div class="row">
             <div class="col-md-12 form-group mb-3 quadro-div">
             <label for="message" class="col-form-label">Notas / Observações:</label>
