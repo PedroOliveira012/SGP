@@ -123,7 +123,6 @@ class FuncionariosController extends Controller
         $projeto->tempo_total += $tarefa->tempo_total;
 
         $projeto->save();
-
         $tarefa->save();
 
         return redirect()->back();

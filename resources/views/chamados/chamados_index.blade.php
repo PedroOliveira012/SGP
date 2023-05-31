@@ -68,7 +68,7 @@
                             <div class="tabela__dados tabela__dados--line centralizado"><?= $i->nome?></div>
                         </td>
                         <td>
-                            <div class="tabela__dados tabela__dados--line centralizado"><?= $i->data_e_hora?></div>
+                            <div class="tabela__dados tabela__dados--line centralizado"><?= Carbon\Carbon::parse($i->data_e_hora)->isoFormat('DD/MM/YYYY HH:mm')?></div>
                         </td>
                         <td>
                             <div class="tabela__dados tabela__dados--line centralizadoe"><?= $i->tipo?></div>

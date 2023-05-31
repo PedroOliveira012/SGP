@@ -43,7 +43,7 @@
             <form action="{{ url('tarefas/lista/' .$projeto->id)}}" method="GET" class="escolher-status">
                 <select class="form-select select-status" name="escolher-status">
                     <option value="" selected disabled hidden>--Status da tarefa--</option>
-                    <option value="concluida">Concluída</option>
+                    <option value="concluido">Concluído</option>
                     <option value="aguardo">Aguardando revisão</option>
                     <option value="andamento">Andamento</option>
                     <option value="pendente">Pendente</option>
