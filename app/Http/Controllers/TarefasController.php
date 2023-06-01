@@ -78,6 +78,7 @@ class TarefasController extends Controller
             $funcionarios = implode('/', request('funcionarios'));
             $conjunto->funcionario = $funcionarios;
             $conjunto->envio_tarefa = Carbon::now()->subHour(3);
+            $conjunto->painel = request('painel');
 
             $conjunto->tarefa = $tarefa->titulo;
             $conjunto->tarefa_conjunta = request('tarefaConjunta');
@@ -118,11 +119,12 @@ class TarefasController extends Controller
 
     public function novo_conjunto($id){
         $projeto = Project::find($id);
+        $opcoes = explode('; ', $projeto->paineis);
         $func = User::where('cargo', 'like', '%Montador%')->get();
         $tarefa = Procedure::all();
         $opcoes = explode('; ', $projeto->paineis);
 
-        return view('tarefas.conjunto_tarefas', ['func' => $func, 'tarefa' => $tarefa,'projeto' => $projeto->id, 'opcoes' => $opcoes]);
+        return view('tarefas.conjunto_tarefas', ['func' => $func, 'tarefa' => $tarefa,'projeto' => $projeto->id, 'opcoes' => $opcoes, 'opcoes' => $opcoes]);
     }
 
     public function remove($id){

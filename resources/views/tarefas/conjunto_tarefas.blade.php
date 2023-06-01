@@ -38,8 +38,18 @@
                     <option value="Porta" id="Portas">Porta</option>
                     <option value="Fabricação" id="Fabricacao">Fabricação</option>
                     <option value="Instalação" id="Instalacao">Instalação</option>
-                    {{-- <option value="Pendência" id="Pendencia">Pendência</option> --}}
                     <option value="Pré-montagem" id="Pre">Pré-montagem</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group mb-3 filtro-div">
+                <label for="" class="col-form-label">Painel:</label>
+                <select name="painel" class="form-select text-bg-dark" id="chaparia">
+                    <option value="" class="opcao_padrao" selected disabled hidden>Selecione uma chaparia</option>
+                    @foreach ($opcoes as $opcao)
+                        <option value="{{$opcao}}" id={{$opcao}}>{{$opcao}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
