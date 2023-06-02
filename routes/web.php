@@ -7,6 +7,7 @@ use App\Http\Controllers\AjudaController;
 use App\Http\Controllers\ChamadosController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiretoriaController;
+use App\Http\Controllers\ExcelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,6 +87,9 @@ Route::get('/chamados/mostra/{id}', [ChamadosController::class, 'mostra'])->name
 Route::get('/chamados/novo', [ChamadosController::class, 'novo'])->name('novo_chamado')->middleware('auth');//funciona
 Route::post('/chamados/adiciona', [ChamadosController::class, 'adiciona'])->name('adiciona_chamados')->middleware('auth');//funciona
 Route::put('/chamados/concluir/{id}', [ChamadosController::class, 'concluir'])->name('concluir_chamado')->middleware('auth');//funciona
+
+//Teste
+Route::get('users/export/', [ExcelController::class, 'export'])->name('excel');
 
 //Logout
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');
