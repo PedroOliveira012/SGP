@@ -427,6 +427,21 @@ a:link, a:visited{
     width: 200px;
     font-size: 35px;
 }
+.btn-download{
+    height: 100px;
+    width: 250px;
+    font-size: 35px;
+}
+
+.icone-download{
+    padding-right: 5px;
+}
+
+.btn-download:hover{
+    color: #000 !important;
+}
+
+
 
 .responsavel{
     display:flex;
