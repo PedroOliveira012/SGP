@@ -43,27 +43,6 @@ class TestExport implements FromQuery, ShouldAutoSize, WithEvents, WithHeadings{
         ];
     }
 
-    // public function startCell(): string
-    // {
-    //     return 'G1'; // Define a célula de início para B2
-    // }
-
-    // public function registerEvents(): array
-    // {
-    //     // return [
-    //     //     AfterSheet::class => function (AfterSheet $event) {
-    //     //         $sheet = $event->sheet;
-
-    //     //         // Estilize a célula B2 como exemplo
-    //     //         $sheet->getStyle('B2')->applyFromArray([
-    //     //             'font' => [
-    //     //                 'bold' => true,
-    //     //                 'color' => ['rgb' => 'FF0000'], // Fonte em vermelho
-    //     //             ],
-    //     //         ]);
-    //     //     },
-    //     // ];
-    // }
     public function registerEvents(): array
     {
         return [

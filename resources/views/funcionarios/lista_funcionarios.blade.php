@@ -16,6 +16,7 @@
                 <th>Inicio da Tarefa</th>
                 <th>Termino da Tarefa</th>
                 <th></th>
+                <th>Status da tarefa</th>
                 <th>Funcionario</th>
                 <th class="tabela__head--esquerda">Tarefa</th>
                 <th>Notas / OBS</th>
@@ -68,6 +69,19 @@
                                 @endif
                             @endif
 
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            @if ($i->inicio_tarefa)
+                                @if ($i->inicio_pausa)
+                                    Tarefa pausada
+                                @else
+                                    Tarefa em andamento
+                                @endif
+                            @else
+                                Tarefa não iniciada
+                            @endif
                         </div>
                     </td>
                     <td class="funcionario">
