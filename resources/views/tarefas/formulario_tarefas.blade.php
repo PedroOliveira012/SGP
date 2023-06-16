@@ -55,6 +55,7 @@
                     <option value="Fabricação" id="Fabricacao" disabled hidden>Fabricação</option>
                     <option value="Instalação" id="Instalacao" disabled hidden>Instalação</option>
                     <option value="Pendencias" id="Pendencia" disabled hidden>Pendências</option>
+                    <option value="Teste" id="Teste" disabled hidden>Teste</option>
                 </select>
             </div>
         </div>

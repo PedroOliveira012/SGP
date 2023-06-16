@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\chamados;
+use App\Models\Chamados;
 
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -19,29 +19,29 @@ class ChamadosController extends Controller
      */
     public function lista()
     {
-        $lista = chamados::all();
+        $lista = Chamados::all();
         $status = request('escolher-status');
 
         if ($status == 'Reclamação'){
-            $lista = chamados::where([['tipo', '=', $status]])->get();
+            $lista = Chamados::where([['tipo', '=', $status]])->get();
         }elseif ($status =='Sugestão'){
-            $lista = chamados::where([['tipo', '=', $status]])->get();
+            $lista = Chamados::where([['tipo', '=', $status]])->get();
         }else{
-            $lista = chamados::all();
+            $lista = Chamados::all();
         }
 
-        return view('chamados.chamados_index',compact('lista'));
+        return view('Chamados.Chamados_index',compact('lista'));
     }
 
 
     public function novo()
     {
-        return view('chamados.chamados_form');
+        return view('Chamados.Chamados_form');
     }
 
     public function adiciona(Request $request)
     {
-        $chamado = new chamados;
+        $chamado = new Chamados;
         $chamado->nome = Auth::user()->name;
         $chamado->data_e_hora = Carbon::now()->subHour(3);
         $chamado->tipo = $request->input('tipo');
@@ -50,20 +50,20 @@ class ChamadosController extends Controller
         $chamado->status = 0;
         $chamado->save();
 
-        return redirect('/chamados/lista');
+        return redirect('/Chamados/lista');
     }
 
     public function concluir($id){
-        $chamado = chamados::find($id);
+        $chamado = Chamados::find($id);
         $chamado->status = 1;
         $chamado->save();
 
-        return redirect('/chamados/lista');
+        return redirect('/Chamados/lista');
     }
 
     public function mostra($id){
-        $chamado = chamados::find($id);
-        return view('chamados.chamados_mostra', compact('chamado'));
+        $chamado = Chamados::find($id);
+        return view('Chamados.Chamados_mostra', compact('chamado'));
     }
 
     /**

@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjetosRequest;
-use App\Http\Requests\ComentariosRequest;
 use App\Models\Project;
 use App\Models\Comments;
-use App\Models\Funcionario;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -145,12 +143,6 @@ class ProjetosController extends Controller
         $busca = Project::findOrFail($id);
         return view('projetos.editar_projetos', ['projeto'=>$busca]);
     }
-
-    // public function responsavel($id){
-    //     $busca = Project::findOrFail($id);
-    //     $func = User::where('cargo', '=', 'Líder')->get();
-    //     return view('projetos.responsavel', ['projeto'=>$busca, 'func' => $func]);
-    // }
 
     public function atualizar($id){
         $projeto = Project::find($id);

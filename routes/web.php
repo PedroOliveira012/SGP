@@ -7,6 +7,7 @@ use App\Http\Controllers\AjudaController;
 use App\Http\Controllers\ChamadosController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiretoriaController;
+use App\Http\Controllers\ExcelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,7 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
+//Projeto - Em andamento
 Route::post('/projeto/adiciona',[ProjetosController::class, 'adiciona'])->name('add_projeto')->middleware('auth');//funciona
 Route::post('/projeto/add_comentario/{id}',[ProjetosController::class, 'add_comentario'])->name('add_comentario')->middleware('auth');//funciona
 Route::get('/projeto/andamento', [ProjetosController::class, 'andamento'])->name('controle')->middleware('auth');//funciona
@@ -40,6 +42,7 @@ Route::get('/projeto/novo', [ProjetosController::class,'novo_registro'])->name('
 Route::get('/projeto/mostra/{id}', [ProjetosController::class, 'mostra'])->name('mostra_projeto')->middleware('auth');//funciona
 Route::get('/projeto/editar/{id}', [ProjetosController::class, 'editar'])->name('editar_projeto')->middleware('auth');//funciona
 Route::get('/projeto/responsavel/{id}', [ProjetosController::class, 'responsavel'])->name('responsavel')->middleware('auth');//funciona
+Route::get('/projeto/export/{id}', [ExcelController::class, 'export'])->name('excel');
 Route::put('/projeto/concluir/{id}', [ProjetosController::class, 'concluir'])->name('concluir_projeto')->middleware('auth');//funciona
 Route::put('/projeto/moverparateste/{id}', [ProjetosController::class, 'para_teste'])->name('para_teste')->middleware('auth');//funciona
 Route::put('/projeto/libera/{id}', [ProjetosController::class, 'liberar'])->name('liberar_projeto')->middleware('auth');//funciona
@@ -64,7 +67,7 @@ Route::put('/tarefas/retrabalho/{id}', [TarefasController::class, 'retrabalho'])
 Route::get('/tarefas/concluir/{id}', [TarefasController::class, 'concluir'])->name('concluir_tarefa')->middleware('auth');//funciona
 Route::delete('/tarefas/remove/{id}', [TarefasController::class, 'remove'])->name('remover_tarefa')->middleware('auth');//funciona
 
-//Rotas Funcionarios - Em andamento
+//Rotas Funcionarios
 Route::get('/funcionarios/index', [FuncionariosController::class, 'index'])->name('index_funcionario')->middleware('auth');//funciona
 Route::get('/funcionarios/lista/{id}', [FuncionariosController::class, 'lista'])->name('lista_tarefas_funcionario')->middleware('auth');//funciona
 Route::post('/funcionarios/inicio/{id}', [FuncionariosController::class, 'inicio'])->name('inicio_tarefa')->middleware('auth');//funciona
@@ -76,16 +79,19 @@ Route::post('/funcionarios/terminoPausa/{id}', [FuncionariosController::class, '
 Route::get('/ajuda/lista', [AjudaController::class, 'lista'])->name('ajuda_lista')->middleware('auth');//funciona
 Route::get('/ajuda/{id}', [AjudaController::class, 'mostra'])->name('index_ajuda')->middleware('auth');//funciona
 
-//Diretoria
+//Diretoria - Em andamento
 Route::get('/diretoria/index', [DiretoriaController::class, 'index'])->name('index_diretoria')->middleware('auth');
 ROute::get('/diretoria/lista/{id}', [DiretoriaController::class, 'lista'])->name('lista_diretoria')->middleware('auth');
 
-//Chamados
+//Chamados - Feito
 Route::get('/chamados/lista', [ChamadosController::class, 'lista'])->name('lista_chamados')->middleware('auth');//funciona
 Route::get('/chamados/mostra/{id}', [ChamadosController::class, 'mostra'])->name('mostra_chamados')->middleware('auth');
 Route::get('/chamados/novo', [ChamadosController::class, 'novo'])->name('novo_chamado')->middleware('auth');//funciona
 Route::post('/chamados/adiciona', [ChamadosController::class, 'adiciona'])->name('adiciona_chamados')->middleware('auth');//funciona
 Route::put('/chamados/concluir/{id}', [ChamadosController::class, 'concluir'])->name('concluir_chamado')->middleware('auth');//funciona
+
+//Teste
+// Route::get('users/export/', [ExcelController::class, 'export'])->name('excel');
 
 //Logout
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');

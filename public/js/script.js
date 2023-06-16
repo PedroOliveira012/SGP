@@ -42,6 +42,7 @@ function escolher_area(){
     var fabricacao = document.getElementById('Fabricacao')
     var instalacao = document.getElementById('Instalacao')
     var pendencia = document.getElementById('Pendencia')
+    var teste = document.getElementById('Teste')
 
 
     switch(valor_area.value){
@@ -67,6 +68,8 @@ function escolher_area(){
             instalacao.disabled = true
             pendencia.hidden = true
             pendencia.disabled = true
+            teste.hidden = true
+            teste.disabled = true
             break
 
         case "Oficina":
@@ -86,6 +89,8 @@ function escolher_area(){
             instalacao.disabled = true
             pendencia.hidden = true
             pendencia.disabled = true
+            teste.hidden = true
+            teste.disabled = true
             break
 
         case "Produção":
@@ -109,6 +114,8 @@ function escolher_area(){
             instalacao.disabled = false
             pendencia.hidden = false
             pendencia.disabled = false
+            teste.hidden = false
+            teste.disabled = false
             break
 
         case "Almoxarifado":
@@ -132,6 +139,8 @@ function escolher_area(){
             instalacao.disabled = true
             pendencia.hidden = true
             pendencia.disabled = true
+            teste.hidden = true
+            teste.disabled = true
             break
     }
 }

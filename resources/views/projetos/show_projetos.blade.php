@@ -75,13 +75,13 @@
                 </div>
             </form>
             <div class="controle">
-                @if ($i->liberado == 0 && $i->fase_teste == 0)
+                @if ($i->liberado == 0 && $i->fase_teste == 0 && $i->finalizado == 0)
                     <div class="liberar">
                         <button type="button" class="btn btn-success btn-liberar" data-bs-toggle="modal" data-bs-target="#staticBackdropModal">
                             <i class="fa-solid fa-check-to-slot"></i> Liberar
                         </button>
                     </div>
-                @else
+                @elseif ($i->liberado == 1 && $i->fase_teste == 0 && $i->finalizado == 0)
                     <div class="designar">
                         <form action="{{ url('/projeto/atualizar/' .$i->id) }}" method="POST">
                             @csrf
@@ -101,6 +101,14 @@
                                 <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i>  Designar</button>
                             </div>
                         </form>
+                    </div>
+                @elseif ($i->liberado == 0 && $i->fase_teste == 0 && $i->finalizado == 1)
+                    <div class="liberar">
+                        <a href="{{ url('/projeto/export/' .$i->id) }}">
+                            <button type="button" class="btn btn-success btn-download">
+                                <i class="fa-solid fa-file-arrow-down icone-download"></i>Download
+                            </button>
+                        </a>
                     </div>
                 @endif
             </div>
