@@ -23,61 +23,6 @@
                     <button class="btn btn-primary btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
                         <i class="fa-solid fa-bars icone-menu"></i>
                     </button>
-                    {{-- <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbar__div--list">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle navbar__div__link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Menu
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                                @if (Auth::user()->cargo == 'Admin')
-                                    <li><a class="dropdown-item" href="{{ url('/diretoria/index') }}">Diretoria</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/andamento') }}">Em andamento</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/liberados') }}">Liberados</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/teste') }}">Fase de teste</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/encerrados') }}">Encerrados</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/tarefas/index') }}">Controle de tarefas</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li class="dropdown-item">Configurações</li>
-                                @elseif (Auth::user()->cargo == 'Diretor')
-                                    <li><a class="dropdown-item" href="{{ url('/diretoria/index') }}">Diretoria</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/andamento') }}">Em andamento</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/liberados') }}">Liberados</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/teste') }}">Fase de teste</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/encerrados') }}">Encerrados</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/tarefas/index') }}">Controle de tarefas</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                @elseif (Auth::user()->cargo == 'Coordenador de Engenharia')
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/andamento') }}">Em andamento</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/liberados') }}">Liberados</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/teste') }}">Fase de teste</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/encerrados') }}">Encerrados</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/tarefas/index') }}">Controle de tarefas</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                @elseif (Auth::user()->cargo == 'Coordenador de Produção / Montador')
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/liberados') }}">Liberados</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/teste') }}">Fase de teste</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/encerrados') }}">Encerrados</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/tarefas/index') }}">Controle de tarefas</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/funcionarios/index') }}">Pagina de Funcionarios</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                @elseif (Auth::user()->cargo == 'Líder de Oficina Mecânica / Montador' || Auth::user()->cargo == 'Líder de Testes / Montador' || Auth::user()->cargo == 'Líder de Montagem / Montador' )
-                                    <li><a class="dropdown-item" href="{{ url('/tarefas/index') }}">Controle de tarefas</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/teste') }}">Fase de teste</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/funcionarios/index') }}">Pagina de Funcionarios</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                @elseif (Auth::user()->cargo == 'Analista')
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/andamento') }}">Em andamento</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/liberados') }}">Liberados</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/teste') }}">Fase de teste</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('/projeto/encerrados') }}">Encerrados</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                @else
-                                   <li><a class="dropdown-item" href="{{ url('/funcionarios/index') }}">Pagina de Funcionarios</a></li>
-                                @endif
-
-                            </ul>
-                        </li>
-                    </ul> --}}
                 </div>
                 <div class="navbar__div--img">
                     <img src="{{asset('logo/logo.png')}}" class="logo">
@@ -117,7 +62,9 @@
                             <div id="flush-collapseTwo" class="accordion-collapse collapse bg-dark" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     <ul class="list-group">
-                                        <li class="list-group-item text-bg-dark"><a href="{{ url('/projeto/andamento') }}">Em andamento</a></li>
+                                        @if (Auth::user()->cargo == 'Coordenador de Engenharia' or Auth::user()->cargo == 'Analista' or Auth::user()->cargo == 'Admin')
+                                            <li class="list-group-item text-bg-dark"><a href="{{ url('/projeto/andamento') }}">Em andamento</a></li>
+                                        @endif
                                         <li class="list-group-item text-bg-dark"><a href="{{ url('/projeto/liberados') }}">Liberados</a></li>
                                         <li class="list-group-item text-bg-dark"><a href="{{ url('/projeto/teste') }}">Fase de teste</a></li>
                                         <li class="list-group-item text-bg-dark"><a href="{{ url('/projeto/encerrados') }}">Encerrados</a></li>

@@ -129,7 +129,7 @@ class ProjetosController extends Controller
 
     public function mostra($id){
         $busca = Project::find($id);
-        $func = User::where('cargo', 'like', '%'.'LÍder'.'%')->get();
+        $func = User::where('cargo', 'like', '%'.'Líder'.'%')->get();
         $comentario = Comments::where('id_projeto', 'like', $id)->get();
         // $espera = request('espera');
 
