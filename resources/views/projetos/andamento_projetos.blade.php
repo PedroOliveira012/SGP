@@ -1,6 +1,15 @@
 @extends('index.index')
 
 @section('conteudo')
+
+@if ($errors->any())
+    <ul class=" container errors alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <li class="error">{{$error}}</li>
+        @endforeach
+    </ul>
+@endif
+
 <div class="topo">
     <h1>Controle de projetos</h1>
     <div class="search-and-add">

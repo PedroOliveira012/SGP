@@ -3,24 +3,17 @@
 @section('conteudo')
 <div class="topo">
     <h1>Chamados</h1>
-    {{-- <div class="search-and-add">
-        <form action="{{ url('/projeto/andamento') }}" method="GET" class="search-and-add__input">
-            <input type="text" id="search" name="search" class="form-control text-light" placeholder="Buscar por projetos...">
-        </form>
-        <a href="{{ url('/projeto/novo') }}"><button type="button" class="btn search-and-add__button"><i class="fa-solid fa-plus" aria-hidden="true"></i>  Adicionar</button></a>
-    </div> --}}
 </div>
+
+@if ($errors->any())
+    <ul class=" container errors alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <li class="error">{{$error}}</li>
+        @endforeach
+    </ul>
+@endif
+
 <div class="painel-status">
-
-    {{-- <div> isso é o botão de voltar, colocar no chamados mostra
-        <a href="{{ url('/chamados/lista/') }}">
-            <button class="btn voltar-tarefas">
-                <i class="fa-solid fa-chevron-left voltar-icone"></i>
-                Voltar
-            </button>
-        </a>
-    </div> --}}
-
     @if (Auth::user()->cargo == 'Admin')
     <div class="filtro-status">
         <form action="{{ url('chamados/lista/')}}" method="get" class="escolher-status-chamados">

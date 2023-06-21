@@ -15,9 +15,14 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+    // protected function schedule(Schedule $schedule)
+    // {
+    //     $schedule->command(BackupCommand::class)->dailyAt('01:00');
+    // }
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(BackupCommand::class)->dailyAt('01:00');
+        $schedule->command('backup:clean')->daily()->at('01:00');
+        $schedule->command('backup:run')->daily()->at('01:30');
     }
 
     /**

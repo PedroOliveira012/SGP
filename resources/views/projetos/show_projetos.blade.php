@@ -1,12 +1,30 @@
 @extends('index.index')
 
 @section('conteudo')
+
+@if ($errors->any())
+    <ul class=" container errors alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <li class="error">{{$error}}</li>
+        @endforeach
+    </ul>
+@endif
+
 <body onload="Relembrar()">
-    <a href={{ url("/projeto/andamento")}}>
-        <button class="btn voltar-projeto">
-            <i class="fa-solid fa-chevron-left voltar-icone"></i> Voltar
-        </button>
-    </a>
+    @if (Auth::user()->cargo == 'Coordenador de Engenharia' or Auth::user()->cargo == 'Analista' or Auth::user()->cargo == 'Diretor' or Auth::user()->cargo == 'Admin')
+        <a href={{ url("/projeto/andamento")}}>
+            <button class="btn voltar-projeto">
+                <i class="fa-solid fa-chevron-left voltar-icone"></i> Voltar
+            </button>
+        </a>
+    @else
+        <a href={{ url("/projeto/liberados")}}>
+            <button class="btn voltar-projeto">
+                <i class="fa-solid fa-chevron-left voltar-icone"></i> Voltar
+            </button>
+        </a>
+    @endif
+
     <section class="container contorno write-section">
         <div class="write-section__lista">
             <h1>Número do Projeto: <?= $i->num_projeto?></h1>
