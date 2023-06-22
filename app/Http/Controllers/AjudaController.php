@@ -13,11 +13,17 @@ class AjudaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function mostra($id)
+
+    public function shadlksa($id)
     {
         $task = Task::where('id', '=', $id)->get();
         $fit = Procedure::where('titulo', '=', $task[0]->tarefa)->get();
 
-        return view('ajuda.mostra', ['fit' => $fit]);
+        return view('ajuda.mostra', compact('fit', $fit));
+    }
+
+    public function mostra(){
+        $tarefa = Procedure::all();
+        return view('ajuda.combinacao_ajuda', compact('tarefa', $tarefa));
     }
 }

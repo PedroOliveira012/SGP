@@ -61,7 +61,11 @@
                     <td>
                         <div class="tabela__dados botoes centralizado">
                             <div class="tabela__dados--botoes ">
-                                <a class="tabela__dados--link" href="{{ url('/projeto/mostra/' .$i->id) }}"><button type="submit" class="btn btn-primary">{{--<i class="fa-solid fa-bars"></i>--}}<i class="fa-solid fa-list"></i></button></a>
+                                <a class="tabela__dados--link" href="{{ url('/projeto/mostra/' .$i->id) }}">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-list"></i>
+                                    </button>
+                                </a>
                             </div>
                             <div class="tabela__dados--botoes">
                                 <a href="{{ url('/projeto/editar/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-ruler"></i></button></a>

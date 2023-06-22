@@ -78,10 +78,13 @@ Route::post('/funcionarios/terminoPausa/{id}', [FuncionariosController::class, '
 //Rotas Ajuda/Fit
 Route::get('/ajuda/lista', [AjudaController::class, 'lista'])->name('ajuda_lista')->middleware('auth');//funciona
 Route::get('/ajuda/{id}', [AjudaController::class, 'mostra'])->name('index_ajuda')->middleware('auth');//funciona
+// Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('combinacao_ajuda')->middleware(('auth'));
+Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('ajuda_combinacao')->middleware('auth');
+
 
 //Diretoria - Em andamento
 Route::get('/diretoria/index', [DiretoriaController::class, 'index'])->name('index_diretoria')->middleware('auth');
-ROute::get('/diretoria/lista/{id}', [DiretoriaController::class, 'lista'])->name('lista_diretoria')->middleware('auth');
+Route::get('/diretoria/lista/{id}', [DiretoriaController::class, 'lista'])->name('lista_diretoria')->middleware('auth');
 
 //Chamados - Feito
 Route::get('/chamados/lista', [ChamadosController::class, 'lista'])->name('lista_chamados')->middleware('auth');//funciona
@@ -89,9 +92,6 @@ Route::get('/chamados/mostra/{id}', [ChamadosController::class, 'mostra'])->name
 Route::get('/chamados/novo', [ChamadosController::class, 'novo'])->name('novo_chamado')->middleware('auth');//funciona
 Route::post('/chamados/adiciona', [ChamadosController::class, 'adiciona'])->name('adiciona_chamados')->middleware('auth');//funciona
 Route::put('/chamados/concluir/{id}', [ChamadosController::class, 'concluir'])->name('concluir_chamado')->middleware('auth');//funciona
-
-//Teste
-// Route::get('users/export/', [ExcelController::class, 'export'])->name('excel');
 
 //Logout
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');
