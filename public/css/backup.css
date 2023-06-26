@@ -803,3 +803,10 @@ progress::-webkit-progress-value {
     border-radius: 1.5px;
 }
 
+.filtro_e_combinacao{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 66px;
+    flex-wrap: nowrap;
+}
+

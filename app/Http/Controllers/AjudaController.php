@@ -14,7 +14,7 @@ class AjudaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function shadlksa($id)
+    public function desc($id)
     {
         $task = Task::where('id', '=', $id)->get();
         $fit = Procedure::where('titulo', '=', $task[0]->tarefa)->get();
