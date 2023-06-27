@@ -16,10 +16,11 @@ class AjudaController extends Controller
 
     public function desc($id)
     {
-        $task = Task::where('id', '=', $id)->get();
-        $fit = Procedure::where('titulo', '=', $task[0]->tarefa)->get();
+        $task = Task::where('id', $id)->first();
+        $fit = Procedure::where('titulo', $task->tarefa)->first();
+        $passos = explode(';', $fit->descricao);
 
-        return view('ajuda.mostra', compact('fit', $fit));
+        return view('ajuda.mostra', ['fit' => $fit, 'passos' => $passos]);
     }
 
     public function mostra(){

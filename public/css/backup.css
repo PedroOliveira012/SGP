@@ -810,3 +810,7 @@ progress::-webkit-progress-value {
     flex-wrap: nowrap;
 }
 
+.inicio-fit, .desc-fit, .media-fit{
+    font-size: large;
+    padding: 15px;
+}
