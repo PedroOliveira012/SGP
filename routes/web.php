@@ -7,6 +7,7 @@ use App\Http\Controllers\AjudaController;
 use App\Http\Controllers\ChamadosController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiretoriaController;
+use App\Http\Controllers\TestesController;
 use App\Http\Controllers\ExcelController;
 use Illuminate\Support\Facades\Route;
 
@@ -92,6 +93,13 @@ Route::get('/chamados/mostra/{id}', [ChamadosController::class, 'mostra'])->name
 Route::get('/chamados/novo', [ChamadosController::class, 'novo'])->name('novo_chamado')->middleware('auth');//funciona
 Route::post('/chamados/adiciona', [ChamadosController::class, 'adiciona'])->name('adiciona_chamados')->middleware('auth');//funciona
 Route::put('/chamados/concluir/{id}', [ChamadosController::class, 'concluir'])->name('concluir_chamado')->middleware('auth');//funciona
+
+//Testes
+Route::get('/testes/pendencias', [TestesController::class, 'pendencia'])->name('testes_pendencias')->middleware('auth');
+Route::get('/testes/info', [TestesController::class, 'info'])->name('testes_info')->middleware('auth');//info
+Route::get('/testes/checklist', [TestesController::class, 'checklist'])->name('testes_checklist')->middleware('auth');//checklist
+Route::get('/testes/comissionamento', [TestesController::class, 'comissionamento'])->name('testes_comissionamento')->middleware('auth');//comissionamento
+Route::get('/testes/inspecao', [TestesController::class, 'inspecao'])->name('testes_inspecao')->middleware('auth');//inspeção
 
 //Logout
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');
