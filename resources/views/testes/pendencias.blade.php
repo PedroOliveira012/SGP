@@ -18,45 +18,49 @@
         </form>
         <a href="{{ url('/projeto/novo') }}"><button type="button" class="btn search-and-add__button"><i class="fa-solid fa-plus" aria-hidden="true"></i>  Adicionar</button></a>
     </div> --}}
+    <a href={{ url("/testes/info/". $lista[0]->id_projeto)}}>
+        <button class="btn voltar-projeto">
+            <i class="fa-solid fa-chevron-left voltar-icone"></i> Voltar
+        </button>
+    </a>
 </div>
 <div>
     <table class="table table-dark table-hover tabela">
         <thead>
             <tr class="tabela__head">
-                <th></th>
-                <th></th>
-                <th></th>
-                <th class="tabela__head--esquerda"></th>
-                <th></th>
-                <th></th>
-                <th class="tabela__head--esquerda"></th>
+                <th>Envio da pendencia</th>
+                <th>Inicio da pendencia</th>
+                <th>Termino da pendencia</th>
+                <th>Funcionário</th>
+                <th>Descrição da pendencia</th>
+                <th>Prazo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            {{-- <?php foreach ($lista as $i): ?>
-                @if ($i->finalizado == 0 && $i->fase_teste == 0 && $i->liberado == 0)
+            <?php foreach ($lista as $i): ?>
                 <tr>
                     <td>
-                        <div class="tabela__dados tabela__dados--line numero_projeto centralizado"><?= $i->num_projeto?></a></div>
+                        <div class="tabela__dados tabela__dados--line numero_projeto centralizado"><?= Carbon\Carbon::parse($i->envio_tarefa)->isoFormat('DD/MM/YYYY HH:mm')?></a></div>
                     </td>
                     <td>
-                        <div class="tabela__dados tabela__dados--line centralizado cliente"><?= $i->cliente?></div>
+                        <div class="tabela__dados tabela__dados--line centralizado cliente"><?= Carbon\Carbon::parse($i->inicio_tarefa)->isoFormat('DD/MM/YYYY HH:mm')?></div>
                     </td>
                     <td>
-                        <div class="tabela__dados tabela__dados--line centralizado unidade"><?= $i->unidade?></div>
+                        <div class="tabela__dados tabela__dados--line centralizado unidade"><?= Carbon\Carbon::parse($i->termino_tarefa)->isoFormat('DD/MM/YYYY HH:mm')?></div>
                     </td>
                     <td>
-                        <div class="tabela__dados tabela__dados--line nome_projeto"><?= $i->nome_projeto?></div>
+                        <div class="tabela__dados tabela__dados--line nome_projeto"><?= $i->funcionario?></div>
                     </td>
                     <td>
-                        <div class="tabela__dados tabela__dados--line centralizado valor">R$ <?=number_format($i->valor_contratado,2,',','.')?></div>
+                        <div class="tabela__dados tabela__dados--line centralizado prazo"><?= $i->Notas?></div>
                     </td>
                     <td>
-                        <div class="tabela__dados tabela__dados--line centralizado prazo"><?= $i->prazo_entrega?> dias</div>
-                    </td>
-                    <td>
-                        <div class="tabela__dados tabela__dados--line obs"><?= $i->observacoes?></div>
+                        @if ($i->prazo)
+                            <div class="tabela__dados tabela__dados--line obs"><?= Carbon\Carbon::parse($i->prazo)->isoFormat('DD/MM/YYYY HH:mm')?></div>
+                        @else
+                            <div class="tabela__dados tabela__dados--line obs">Sem prazo</div>
+                        @endif
                     </td>
                     <td>
                         <div class="tabela__dados botoes centralizado">
@@ -71,8 +75,7 @@
                                 <a href="{{ url('/projeto/editar/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-ruler"></i></button></a>
                             </div>
                             <div class="tabela__dados--botoes">
-                                {{-- <button type="submit" class="btn btn-danger" onclick="return confirm('Deseja mesmo excluir este projeto?')"><i class="fa-regular fa-trash-can"></i></button> --}}
-                                {{--<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropModal{{$i->id}}">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropModal{{$i->id}}">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                             </div>
@@ -98,8 +101,7 @@
                         </div>
                     </div>
                 </form>
-                @endif
-            <?php endforeach?> --}}
+            <?php endforeach?>
         <tbody>
     </table>
 </div>

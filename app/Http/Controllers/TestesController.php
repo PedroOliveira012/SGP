@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;
 
 class TestesController extends Controller
 {
@@ -11,74 +12,35 @@ class TestesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function pendencia()
+    public function pendencia($id)
     {
-        return view('testes.pendencias');
+        $lista = Task::where([
+            ['id_projeto', '=', $id],
+            ['tarefa', '=', 'pendencia']
+            ])->get();
+
+
+        // $filtro = Task::where([
+        //     ['id_projeto', '=', $projeto->id],
+        //     ['painel', '=', $painel]
+        // ])->get();
+        return view('testes.pendencias', ['lista' => $lista]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function info($id){
+        $lista = Task::where('id_projeto', '=', $id)->get();
+        return view('testes.info', compact('lista'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function checklist(){
+        return view('testes.checklist');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function comissionamento(){
+        return view('testes.comissionamento');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function inspecao(){
+        return view('testes.inspecao');
     }
 }
