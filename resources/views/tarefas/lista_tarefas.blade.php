@@ -57,6 +57,7 @@
                     <option value="andamento">Andamento</option>
                     <option value="pendente">Pendente</option>
                     <option value="retrabalho">Retrabalho</option>
+                    <option value="pendencia">Pendencias</option>
                 </select>
                 <button type="submit" class="btn btn-primary botao-status"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>

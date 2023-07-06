@@ -13,7 +13,8 @@
 <body>
     <a href="{{ url('/tarefas/lista/' .$i->id_projeto) }}">
         <button class="btn voltar">
-            <i class="fa-solid fa-chevron-left voltar-icone">Voltar</i>
+            <i class="fa-solid fa-chevron-left voltar-icone"></i>
+              Voltar
         </button>
     </a>
     {{-- <section class="linha">
@@ -117,9 +118,15 @@
           </div>
           <div class="carousel-item">
             <div class="view_conteudo--botao">
-                <div class="tabela__dados--botoes">
-                    <a href="{{ url('/tarefas/editar/' .$i->id) }}"><button type="submit" class="btn tarefas btn-primary"><i class="fa-solid fa-pen-ruler fa-2x"></i></button></a>
-                </div>
+                @if ($i->tarefa == 'Pendencia')
+                    <div class="tabela__dados--botoes">
+                        <a href="{{ url('/testes/pendencia/editar/' .$i->id) }}"><button type="submit" class="btn tarefas btn-primary"><i class="fa-solid fa-pen-ruler fa-2x"></i></button></a>
+                    </div>
+                @else
+                    <div class="tabela__dados--botoes">
+                        <a href="{{ url('/tarefas/editar/' .$i->id) }}"><button type="submit" class="btn tarefas btn-primary"><i class="fa-solid fa-pen-ruler fa-2x"></i></button></a>
+                    </div>
+                @endif
                 <div class="tabela__dados--botoes">
                     <a href="{{ url('tarefas/concluir/' .$i->id) }}"><button type="submit" class="btn tarefas btn-success"><i class="fa-solid fa-check fa-3x"></i></button></a>
                 </div>

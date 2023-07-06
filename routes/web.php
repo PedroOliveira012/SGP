@@ -96,6 +96,9 @@ Route::put('/chamados/concluir/{id}', [ChamadosController::class, 'concluir'])->
 
 //Testes
 Route::get('/testes/pendencias/{id}', [TestesController::class, 'pendencia'])->name('testes_pendencias')->middleware('auth');
+Route::get('/testes/pendencia/editar/{id}', [TestesController::class, 'form_pendencia'])->name('form_pendencias')->middleware('auth');
+Route::put('/testes/pendencias/atualiza/{id}', [TestesController::class, 'atualiza_pendencia'])->name('atualiza_pendencia')->middleware('auth');
+Route::delete('/testes/pendencias/remover/{id}', [TestesController::class, 'remove_pendencia'])->name('remove_pendencia')->middleware('auth');
 Route::get('/testes/info/{id}', [TestesController::class, 'info'])->name('testes_info')->middleware('auth');//info
 Route::get('/testes/checklist', [TestesController::class, 'checklist'])->name('testes_checklist')->middleware('auth');//checklist
 Route::get('/testes/comissionamento', [TestesController::class, 'comissionamento'])->name('testes_comissionamento')->middleware('auth');//comissionamento

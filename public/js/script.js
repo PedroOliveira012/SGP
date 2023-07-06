@@ -173,6 +173,18 @@ function Habilita_prazo(){
     }
 }
 
+function Habilita_prazo_pendencia(){
+    sim = document.getElementById('sim')
+    nao = document.getElementById('nao')
+    paineis = document.getElementById('paineis')
+
+    if (sim.checked) {
+        prazo.hidden = false
+    }else{
+        prazo.hidden = true
+    }
+}
+
 function Teste(){
     var espera = document.getElementById('espera')
     var barra = document.getElementById('barra')

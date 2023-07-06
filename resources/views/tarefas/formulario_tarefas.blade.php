@@ -85,6 +85,7 @@
                     @foreach ($tarefa as $t)
                         <option value="{{$t->titulo}}"><?=$t->titulo?></option>
                     @endforeach
+                    <option value="Pendencia">Pendencia</option>
                 </select>
             </div>
         </div>

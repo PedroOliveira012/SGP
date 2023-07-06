@@ -62,7 +62,11 @@ class TarefasController extends Controller
         $tarefa->prazo = request('prazo');
         $tarefa->painel = request('painel');
         $tarefa->Notas = request('obs');
-        $tarefa->status = request('status');
+        if($tarefa->tarefa == 'Pendencia'){
+            $tarefa->status = 'pendencia';
+        }else{
+            $tarefa->status = request('status');
+        }
         $tarefa->save();
 
         return redirect()->action([TarefasController::class, 'lista'], ['id' => $tarefa->id_projeto]);
