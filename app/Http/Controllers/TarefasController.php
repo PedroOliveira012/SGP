@@ -140,8 +140,7 @@ class TarefasController extends Controller
     public function editar($id){
         $func = User::where('nivel_acesso', '=', 1)->get();
         $proc = Procedure::all();
-        $tarefa = Procedure::find($id);
-
+        $tarefa = Task::find($id);
 
         return view('tarefas.editar_tarefas', ['func'=>$func, 'tarefa' => $tarefa, 'proc'=>$proc]);
     }

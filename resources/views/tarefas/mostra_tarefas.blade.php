@@ -66,12 +66,12 @@
                         @endif
                     </li>
                     <li class="itens_lista"><h3>Tempo de de execução da tarefa</h3>
-                        @if ($i->termino_tarefa)
-                            {{-- <input type="hidden" name="hora_inicio" id="hora_inicio"> --}}
-                            {{-- <p>{{Carbon\Carbon::parse($i->termino_tarefa)->diffInWeekdays($i->inicio_tarefa)}} dias</p>
+                        {{-- @if ($i->termino_tarefa)
+                            <input type="hidden" name="hora_inicio" id="hora_inicio">
+                            <p>{{Carbon\Carbon::parse($i->termino_tarefa)->diffInWeekdays($i->inicio_tarefa)}} dias</p>
                             <p>{{Carbon\Carbon::parse($i->termino_tarefa)->diffInHours($i->inicio_tarefa)}} horas</p>
-                            <p>{{Carbon\Carbon::parse($i->termino_tarefa)->diffInMinutes($i->inicio_tarefa)}} minutos</p> --}}
-                            {{-- @if ($total_horas == 0)
+                            <p>{{Carbon\Carbon::parse($i->termino_tarefa)->diffInMinutes($i->inicio_tarefa)}} minutos</p>
+                            @if ($total_horas == 0)
                                 <p>Tempo total: {{$total_min}} minutos</p>
                             @elseif ($total_min == 0)
                                 @if ($total_horas > 1)
@@ -89,11 +89,11 @@
                                 @else
                                     <p>Total em horas: {{$total_horas}} hora e {{$total_min}} minutos</p>
                                 @endif
-                            @endif --}}
-                            <p>Tempo total: {{$total_horas}} horas e {{$total_minutos}} minutos</p>
+                            @endif
+                            <p>Tempo total: {{$total_horas}} horas e {{$total_min}} minutos</p>
                         @else
                             <p>--:--</p>
-                        @endif
+                        @endif --}}
                     </li>
                     <li class="itens_lista"><h3>Tempo de retrabalho: <?= $i->termino_retrabalho?></h3>
                         @if ($i->termino_retrabalho)

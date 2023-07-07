@@ -65,6 +65,7 @@
         </div>
     </form>
 </div> --}}
+
 <div class="quadro">
     <form action="{{ url('/tarefas/atualizar/' .$tarefa->id) }}" class="mb-3" method="post">
         @csrf
@@ -97,20 +98,17 @@
             </div>
         </div>
 
-        {{-- <div class="row">
-            <div class="col-md-12 form-group mb-3 quadro-div">
-                <label for="" class="col-form-label">Data e hora de envio:</label>
-                <input type="datetime-local" class="form-control text-bg-dark" name="envio_tarefa" value="{{$tarefa->envio_tarefa}}">
-            </div>
-        </div> --}}
-
         <div class="row">
             <div class="col-md-12 form-group mb-3 quadro-div">
             <label for="message" class="col-form-label">Notas / Observações:</label>
             <textarea class="form-control text-bg-dark" name="obs" cols="30" rows="4" value="{{ old('obs') }}">{{$tarefa->Notas}}</textarea>
             </div>
         </div>
-
+        <div>
+            <p>
+                * É necessário alterar os valores no campo Tarefa e Funcionário
+            </p>
+        </div>
         <div class="row">
             <div class="col-md-12 form-group">
                 <button type="submit" class="btn btn-success adicionar"><i class="fa-solid fa-clipboard-check">  Finalizar</i></button>
