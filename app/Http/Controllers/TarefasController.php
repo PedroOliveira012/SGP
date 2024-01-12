@@ -74,21 +74,23 @@ class TarefasController extends Controller
 
     public function adicionaConjunto(){
         $busca = Procedure::where([['processo', 'like', '%'.request('conjunto').'%'], ['tipo', '=', request('chaparia')]])->get();
+        $tarefas = Task::where('id_projeto', '=', request('id_projeto'));
 
         foreach($busca as $tarefa){
             $conjunto = new Task;
             $conjunto->id_projeto = request('id_projeto');
+            if($tarefas != $busca){
+                $funcionarios = implode('/', request('funcionarios'));
+                $conjunto->funcionario = $funcionarios;
+                $conjunto->envio_tarefa = Carbon::now()->subHour(3);
+                $conjunto->painel = request('painel');
 
-            $funcionarios = implode('/', request('funcionarios'));
-            $conjunto->funcionario = $funcionarios;
-            $conjunto->envio_tarefa = Carbon::now()->subHour(3);
-            $conjunto->painel = request('painel');
+                $conjunto->tarefa = $tarefa->titulo;
+                $conjunto->tarefa_conjunta = request('tarefaConjunta');
 
-            $conjunto->tarefa = $tarefa->titulo;
-            $conjunto->tarefa_conjunta = request('tarefaConjunta');
-
-            $conjunto->status = 'aguardo';
-            $conjunto->save();
+                $conjunto->status = 'aguardo';
+                $conjunto->save();
+            }
         }
 
         return redirect()->action([TarefasController::class, 'lista'], ['id' => $conjunto->id_projeto]);
