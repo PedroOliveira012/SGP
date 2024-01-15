@@ -82,8 +82,7 @@ Route::get('/ajuda/{id}', [AjudaController::class, 'desc'])->name('index_ajuda')
 // Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('combinacao_ajuda')->middleware(('auth'));
 Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('ajuda_combinacao')->middleware('auth');
 
-
-//Diretoria - Em andamento
+//Diretoria - Feito
 Route::get('/diretoria/index', [DiretoriaController::class, 'index'])->name('index_diretoria')->middleware('auth');
 Route::get('/diretoria/lista/{id}', [DiretoriaController::class, 'lista'])->name('lista_diretoria')->middleware('auth');
 

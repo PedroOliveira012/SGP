@@ -62,7 +62,7 @@
 
         <div class="row filtro_e_combinacao">
             <div class="col-md-12 form-group mb-3 filtrar">
-                <button type="submit" class="btn btn-primary" onclick="limpar_input()"><i class="fa-solid fa-filter"> Filtrar</i></button>
+                <button type="submit" class="btn btn-primary" onclick="limpar_input_tarefa()"><i class="fa-solid fa-filter"> Filtrar</i></button>
             </div>
             <div class="col-md-12 form-group mb-3 combinacao">
                 <a href="{{url('/ajuda/combinacao')}}">

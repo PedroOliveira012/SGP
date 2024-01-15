@@ -14,7 +14,7 @@
 @endif
 
 <div class="filtro">
-    <form action="{{ url('/tarefas/adiciona_conjunto') }}" method="post">
+    <form action="{{ url('/tarefas/conjunto/'.$projeto) }}" method="get">
         @csrf
         <input type="hidden" name="id_projeto" value="{{$projeto}}">
         <div class="row">
@@ -46,42 +46,59 @@
             <div class="col-md-12 form-group mb-3 filtro-div">
                 <label for="" class="col-form-label">Painel:</label>
                 <select name="painel" class="form-select text-bg-dark" id="chaparia">
-                    <option value="" class="opcao_padrao" selected disabled hidden>Selecione uma chaparia</option>
+                    <option value="" class="opcao_padrao" selected disabled hidden>Selecione um painel</option>
                     @foreach ($opcoes as $opcao)
                         <option value="{{$opcao}}" id={{$opcao}}>{{$opcao}}</option>
                     @endforeach
                 </select>
             </div>
         </div>
-
-        <label for="">Funcionário</label>
-        <div class="grupo-funcionarios grid">
-            @foreach ($func as $f)
-                <div class="g-col-6">
-                    <input type="checkbox" class="form-check-input" name="funcionarios[]" value="{{ $f->name }}"> {{ $f->name }}<br>
-                </div>
-            @endforeach
+        <div class="col-md-12 form-group mb-3 filtrar">
+            <button type="submit" class="btn btn-primary" onclick="limpar_div()"><i class="fa-solid fa-filter"> Filtrar</i></button>
         </div>
-
-        <label for="" class="col-form-label">A tarefa precisa de mais de uma pessoa?</label>
-        <div class="row">
-            <div class="col-md-3 form-group mb-3">
-                <input class="form-check-input" type="radio" name="tarefaConjunta" id="sim" value="1">
-                <label class="form-check-label" for="sim">Sim</label>
-            </div>
-            <div class="col-md-3 form-group mb-3">
-                <input class="form-check-input" type="radio" name="tarefaConjunta" id="nao" value="0">
-                <label class="form-check-label" for="nao">Não</label>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-12 form-group">
-                <button type="submit" class="btn btn-success adicionar"><i class="fa-solid fa-clipboard-check">  Finalizar</i></button>
+        <div class="funcionarios">
+            <label for="">Funcionário</label>
+            <div class="grupo-funcionarios grid">
+                @foreach ($func as $f)
+                    <div class="g-col-6">
+                        <input type="checkbox" class="form-check-input" name="funcionarios[]" value="{{ $f->name }}"> {{ $f->name }}<br>
+                    </div>
+                @endforeach
             </div>
         </div>
     </form>
+
+    <div class="adiciona-conjunto">
+        <form action="{{ url('/tarefas/adiciona_conjunto') }}" method="post">
+            @csrf
+            <label for="">Tarefas</label>
+            <div class="grupo-funcionarios grid">
+                @foreach ($tarefa as $t)
+                <div class="g-col-12" id="tarefas">
+                        <input type="checkbox" class="form-check-input" name="tarefas" value="{{ $t->titulo }}"> {{ $t->titulo }}<br>
+                    </div>
+                @endforeach
+            </div>
+
+            <label for="" class="col-form-label">A tarefa precisa de mais de uma pessoa?</label>
+            <div class="row">
+                <div class="col-md-3 form-group mb-3">
+                    <input class="form-check-input" type="radio" name="tarefaConjunta" id="sim" value="1">
+                    <label class="form-check-label" for="sim">Sim</label>
+                </div>
+                <div class="col-md-3 form-group mb-3">
+                    <input class="form-check-input" type="radio" name="tarefaConjunta" id="nao" value="0">
+                    <label class="form-check-label" for="nao">Não</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <button type="submit" class="btn btn-success adicionar"><i class="fa-solid fa-clipboard-check">  Finalizar</i></button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 
