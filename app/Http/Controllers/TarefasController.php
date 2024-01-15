@@ -130,6 +130,23 @@ class TarefasController extends Controller
         $tarefa = Procedure::all();
         $opcoes = explode('; ', $projeto->paineis);
 
+        $chaparia = request('chaparia');
+        $conjunto = request('conjunto');
+        $painel = request('painel');
+
+        if ($chaparia == '' && $conjunto == '' && $painel == ''){
+            $chaparia = '--Selecione o tipo de painel--';
+            $conjunto = '--Selecione a área da produção--';
+            $painel = '--Selecione um processo--';
+        }
+
+        if ($chaparia and $conjunto and $painel){
+            $tarefa = Procedure::where([
+            ['tipo', '=', $chaparia],
+            ['processo', '=', $conjunto],
+            ])->get();
+        }
+
         return view('tarefas.conjunto_tarefas', ['func' => $func, 'tarefa' => $tarefa,'projeto' => $projeto->id, 'opcoes' => $opcoes, 'opcoes' => $opcoes]);
     }
 
