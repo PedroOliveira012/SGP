@@ -145,8 +145,13 @@ function escolher_area(){
     }
 }
 
-function limpar_input(){
+function limpar_input_tarefa(){
     document.getElementById('id_projeto').value = ''
+}
+
+function limpar_div(){
+    let div = document.getElementById('tarefas')
+    div.innerText = ""
 }
 
 function Habilita_paineis(){
