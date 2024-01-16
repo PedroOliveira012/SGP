@@ -73,28 +73,38 @@ class TarefasController extends Controller
     }
 
     public function adicionaConjunto(){
-        $busca = Procedure::where([['processo', 'like', '%'.request('conjunto').'%'], ['tipo', '=', request('chaparia')]])->get();
-        $tarefas = Task::where('id_projeto', '=', request('id_projeto'));
+        $busca = Procedure::where([
+            ['processo', 'like', '%' . request('conjunto') . '%'],
+            ['tipo', '=', request('chaparia')]
+        ])->get();
 
-        foreach($busca as $tarefa){
-            $conjunto = new Task;
-            $conjunto->id_projeto = request('id_projeto');
-            if($tarefas != $busca){
-                $funcionarios = implode('/', request('funcionarios'));
+        $id_projeto = request('id_projeto');
+        $itensSelecionados = request('tarefas', []);
+
+        foreach ($itensSelecionados as $tarefa_id) {
+            // Verifica se o ID da tarefa está nos resultados da busca
+            $tarefaEncontrada = $busca->contains('id_tarefa', $tarefa_id);
+
+            // Cria a nova Task apenas se a tarefa não for encontrada na busca
+            if (!$tarefaEncontrada) {
+                $funcionarios = implode('/', request('funcionarios', []));
+
+                $conjunto = new Task;
+                $conjunto->id_projeto = $id_projeto;
                 $conjunto->funcionario = $funcionarios;
                 $conjunto->envio_tarefa = Carbon::now()->subHour(3);
                 $conjunto->painel = request('painel');
-
-                $conjunto->tarefa = $tarefa->titulo;
+                $conjunto->tarefa = $tarefa_id; // Ajuste para usar o ID da tarefa, não um array
                 $conjunto->tarefa_conjunta = request('tarefaConjunta');
-
                 $conjunto->status = 'aguardo';
+                $conjunto->visualizado = 0;
                 $conjunto->save();
             }
         }
 
-        return redirect()->action([TarefasController::class, 'lista'], ['id' => $conjunto->id_projeto]);
+        return redirect()->action([TarefasController::class, 'lista'], ['id' => $id_projeto]);
     }
+
 
     public function nova_tarefa($id){
         $projeto = Project::find($id);
@@ -132,15 +142,14 @@ class TarefasController extends Controller
 
         $chaparia = request('chaparia');
         $conjunto = request('conjunto');
-        $painel = request('painel');
 
-        if ($chaparia == '' && $conjunto == '' && $painel == ''){
+        if ($chaparia == '' && $conjunto == ''){
             $chaparia = '--Selecione o tipo de painel--';
             $conjunto = '--Selecione a área da produção--';
             $painel = '--Selecione um processo--';
         }
 
-        if ($chaparia and $conjunto and $painel){
+        if ($chaparia and $conjunto){
             $tarefa = Procedure::where([
             ['tipo', '=', $chaparia],
             ['processo', '=', $conjunto],

@@ -14,6 +14,7 @@
 @endif
 
 <div class="filtro">
+
     <form action="{{ url('/tarefas/conjunto/'.$projeto) }}" method="get">
         @csrf
         <input type="hidden" name="id_projeto" value="{{$projeto}}">
@@ -42,6 +43,13 @@
                 </select>
             </div>
         </div>
+        <div class="col-md-12 form-group mb-3 filtrar">
+            <button type="submit" class="btn btn-primary" onclick="limpar_div()"><i class="fa-solid fa-filter"> Filtrar</i></button>
+        </div>
+    </form>
+
+    <form action="{{ url('/tarefas/adiciona_conjunto') }}" method="post">
+        @csrf
         <div class="row">
             <div class="col-md-12 form-group mb-3 filtro-div">
                 <label for="" class="col-form-label">Painel:</label>
@@ -53,9 +61,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-12 form-group mb-3 filtrar">
-            <button type="submit" class="btn btn-primary" onclick="limpar_div()"><i class="fa-solid fa-filter"> Filtrar</i></button>
-        </div>
+
         <div class="funcionarios">
             <label for="">Funcionário</label>
             <div class="grupo-funcionarios grid">
@@ -66,16 +72,14 @@
                 @endforeach
             </div>
         </div>
-    </form>
 
-    <div class="adiciona-conjunto">
-        <form action="{{ url('/tarefas/adiciona_conjunto') }}" method="post">
-            @csrf
+        <div class="adiciona-conjunto">
+            <input type="hidden" name="id_projeto" value="{{$projeto}}">
             <label for="">Tarefas</label>
             <div class="grupo-funcionarios grid">
                 @foreach ($tarefa as $t)
                 <div class="g-col-12" id="tarefas">
-                        <input type="checkbox" class="form-check-input" name="tarefas" value="{{ $t->titulo }}"> {{ $t->titulo }}<br>
+                        <input type="checkbox" class="form-check-input" name="tarefas[]" value="{{ $t->titulo }}"> {{ $t->titulo }}<br>
                     </div>
                 @endforeach
             </div>
@@ -97,8 +101,8 @@
                     <button type="submit" class="btn btn-success adicionar"><i class="fa-solid fa-clipboard-check">  Finalizar</i></button>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 
