@@ -64,6 +64,17 @@ class TestExport implements FromQuery, ShouldAutoSize, WithEvents, WithHeadings{
                     ],
                 ]);
                 for ($row = 2; $row <= $highestRow; $row++) {
+                    $tempoTotalTarefa = $sheet->getCell('F'.$row)->getValue();
+                    if ($tempoTotalTarefa > 60){
+                        $tempoFormatadoHora = floor($tempoTotalTarefa /60);
+                        $tempoFormatadoMin = $tempoTotalTarefa % 60;
+                        $novoTempo = sprintf('%d h e %d min', $tempoFormatadoHora, $tempoFormatadoMin);
+                        $sheet->setCellValue('F'.$row, $novoTempo);
+                    }else{{
+                        $novoTempo = sprintf('%d min', $tempoTotalTarefa);
+                        $sheet->setCellValue('F'.$row, $novoTempo);
+                    }}
+
                     $style = ($row % 2 == 0) ? '4bacc6' : '31869b';
 
                     $sheet->getStyle('A' . $row . ':F' . $row)->applyFromArray([
