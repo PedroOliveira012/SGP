@@ -28,7 +28,7 @@ class TestExport implements FromQuery, ShouldAutoSize, WithEvents, WithHeadings{
 
     public function query(){
         return Task::query()
-        ->select('painel', 'funcionario', 'inicio_tarefa', 'termino_tarefa', 'tempo_total')
+        ->select('painel', 'funcionario', 'tarefa', 'inicio_tarefa', 'termino_tarefa', 'tempo_total')
         ->where('id_projeto', $this->projectId);
     }
 
@@ -37,6 +37,7 @@ class TestExport implements FromQuery, ShouldAutoSize, WithEvents, WithHeadings{
         return [
             'Painel',
             'Funcionário',
+            'Tarefa',
             'Início da Tarefa',
             'Término da Tarefa',
             'Tempo Total',
@@ -50,7 +51,7 @@ class TestExport implements FromQuery, ShouldAutoSize, WithEvents, WithHeadings{
                 $sheet = $event->sheet;
                 $highestRow = $sheet->getHighestRow();
                 // Estilo para a primeira linha (cabeçalho)
-                $sheet->getStyle('A1:E1')->applyFromArray([
+                $sheet->getStyle('A1:F1')->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => 'FFFFFF'],
@@ -65,7 +66,7 @@ class TestExport implements FromQuery, ShouldAutoSize, WithEvents, WithHeadings{
                 for ($row = 2; $row <= $highestRow; $row++) {
                     $style = ($row % 2 == 0) ? '4bacc6' : '31869b';
 
-                    $sheet->getStyle('A' . $row . ':E' . $row)->applyFromArray([
+                    $sheet->getStyle('A' . $row . ':F' . $row)->applyFromArray([
                         'fill' => [
                             'fillType' => Fill::FILL_SOLID,
                             'startColor' => [
