@@ -63,8 +63,11 @@ class TestExport implements FromQuery, ShouldAutoSize, WithEvents, WithHeadings{
                         ],
                     ],
                 ]);
+
+                $tempoTotalProjeto = 0;
                 for ($row = 2; $row <= $highestRow; $row++) {
                     $tempoTotalTarefa = $sheet->getCell('F'.$row)->getValue();
+                    $tempoTotalProjeto += $tempoTotalTarefa;
                     if ($tempoTotalTarefa > 60){
                         $tempoFormatadoHora = floor($tempoTotalTarefa /60);
                         $tempoFormatadoMin = $tempoTotalTarefa % 60;
@@ -89,6 +92,11 @@ class TestExport implements FromQuery, ShouldAutoSize, WithEvents, WithHeadings{
                         ],
                     ]);
                 }
+                $rowTempoTotalProjeto = $highestRow + 1;
+                $tempoFormatadoHora = floor($tempoTotalProjeto /60);
+                $tempoFormatadoMin = $tempoTotalProjeto % 60;
+                $tempoTotalProjeto = sprintf('%d h e %d min', $tempoFormatadoHora, $tempoFormatadoMin);
+                $sheet->setCellValue('F'.$rowTempoTotalProjeto, $tempoTotalProjeto);
             },
         ];
     }
