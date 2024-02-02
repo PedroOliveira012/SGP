@@ -44,76 +44,87 @@ class FuncionariosController extends Controller
     }
 
     public function termino($id){
-        $tarefa = Task::find($id); //Pega a tarefa
+        $tarefa = Task::find($id); //Acha a tarefa
         $tarefa->termino_tarefa = Carbon::now()->subHour(3); //Subtrai 3 horas do horario que foi gravado
         $tarefa->status = 'concluido'; //Define o status da tarefa como concluido
         $tarefa->visualizado = 0; //Define a tarefa como nao visualizada
 
-        $projeto = Project::find($tarefa->id_projeto); //Pega o projeto
+        $projeto = Project::find($tarefa->id_projeto); //Acha o projeto
 
         $inicio = Carbon::parse($tarefa->inicio_tarefa); //Formata o valor do inicio da tarefa
         $termino = Carbon::parse($tarefa->termino_tarefa); //Formata o valor do termino da tarefa
 
-        $inicio_jornada = Carbon::now(); //Pega o dia e hora atual
-        $fim_jornada = Carbon::now(); //Pega o dia e hora atual
+        $inicio_jornada = Carbon::createFromTime(7, 0, 0); // Define a hora de início da jornada
+        $horario_almoço = Carbon::createFromTime(11, 25, 0); // Define a hora de almoço
+        $horario_cafe = Carbon::createFromTime(15, 15, 0); // Define a hora de café
+        $fim_jornada = Carbon::createFromTime(17, 3, 0); //Define a hora de termino da jornada
 
-        $inicio_jornada->month = $inicio->month; //Altera o mes da data de inicio da jornada
-        $inicio_jornada->day = $inicio->day; //Altera o dia da data de inicio da jornada
-        $inicio_jornada->hour = 7;//Define a hora da data de inicio da jornada
-        $inicio_jornada->minute = 0;//Define o minuto da data de inicio da jornada
+        $minutosTotais = 0;
+        // $pausa = $tarefa->total_pausa;
+        // $intervalo = 0;
 
-        $fim_jornada->month = $termino->month; //Altera o dia da data de termino da jornada
-        $fim_jornada->day = $termino->day; //Altera o dia da data de termino da jornada
-        $fim_jornada->hour = 17; //Define a hora da data de termino da jornada
-        $fim_jornada->minute = 3; //Define o minuto da data de termino da jornada
-
-        $dias = $termino->diffInWeekdays($inicio); //Faz o cálculo de diferença de dias entre o inicio e termino excluindo fim de semana
-        $minutos = 0;
-        $pausa = $tarefa->total_pausa;
-        $intervalo = 0;
-
-
-        //para tarefas terminadas no mesmo dia
-        if (($dias - 1) == 0){
-
-        //inicio antes do almoço
-            if($inicio->hour <= 11){
-                //termino antes do almoço
-                if($termino->hour <= 11){
-                    $intervalo += $pausa;
-                }
-                //termino depois do intervalo
-                else if($termino->hour > 15 || ($termino->hour == 15 && $termino->minute >= 30)){
-                    $intervalo = 90 + $pausa;
-                }
-                //termino depois do almoço e antes do intervalo
-                else{
-                    $intervalo = 75 + $pausa;
-                }
-            //inicio depois do almoço
-            }else if($inicio->hour >=12){
-                //termino depois do intervalo
-                if($termino->hour > 15 || ($termino->hour == 15 && $termino->minute >= 30)){
-                    $intervalo = 15 + $pausa;
-                }
+        if ($inicio->day == $termino->day) { //se o dia de inicio e de termino forem iguais
+            if ($termino->lt($horario_almoço)){ //se terminar antes do almoço, não descontar nada
+                $minutosTotais = $termino->diffInMinutes($inicio_jornada); //calcula a diferença entre os horarios em minutos sem descontar nada
+            }else if($inicio->gt($horario_almoço) && $termino->lt($horario_cafe)){ //se o horario de inicio e termino estiver entre o almoco e o café
+                $minutosTotais = $termino->diffInMinutes($inicio); //calcula a diferença entre os horarios em minutos sem descontar nada
             }else{
-                $intervalo += $pausa;
+                switch (true) {
+                    case $termino->lt($horario_cafe): //se o horario de termino for menor que o café
+                        $minutosTotais = $termino->diffInMinutes($inicio) - 75; //descontar o tempo de almoço no calculo
+                        break;
+                    default: //se não o horario vai ser maior
+                        $minutosTotais = $termino->diffInMinutes($inicio) - 90; //descontar o tempo de almoço e café no calculo
+                        break;
+                }
+            }
+        }else{
+            $inicio_jornada->setYear($inicio->year); //define a data do inicio da jornada usando a data de inicio da tarefa
+            $inicio_jornada->setMonth($inicio->month);
+            $inicio_jornada->setDay($inicio->day);
+
+            $fim_jornada->setYear($termino->year); //define a data do dim da jornada usando a data de termino da tarefa
+            $fim_jornada->setMonth($termino->month);
+            $fim_jornada->setDay($termino->day);
+
+            $dias_trabalhados = $termino->diffInWeekdays($inicio); //calcula a diferença em dias
+
+            if($termino->lt($inicio)){ //se o horario de termino for menor que o de inicio
+                $dias_trabalhados += 1; //adiciona 1 dia na diferença de dias
             }
 
-        }else{
-            $minutos = $dias * 603;
+            $min_uteis = $dias_trabalhados * 513; //define o tempo util do dia
 
-            $diffInicioJornada = $inicio->diffInMinutes($inicio_jornada); //Diferença entre o inicio da jornada com o inicio da tarefa
-            $diffFimJornada = $termino->diffInMinutes($fim_jornada); //Diferença entre o termino da tarefa com o termino da jornada
+            $diffInicio = $inicio->diffInMinutes($inicio_jornada); //calcula a diferença entre o inicio da tarefa e o inicio da jornada
+            $diffTermino = $termino->diffInMinutes($fim_jornada); //calcula a diferença entre o termino da tarefa e o fim da jornada
 
-            $totalDiff = $diffInicioJornada + $diffFimJornada + ($dias * 90); // soma as diferenças de inicio e termino com o almoço e intervalo dos dias uteis
+            if($termino->lt($horario_almoço)){ //
+                $diffTermino -= 90; //esse tempo é descontado por nao ser "útil" na execução da tarefa, então o 90 é a soma do almoço e café
+            }else if($termino->gt($horario_almoço) && $termino->lt($horario_cafe)){
+                $diffTermino -= 15; //descontado apenas o tempo do café
+            }
 
-            $minutos -= ($totalDiff + $pausa);
-            $tarefa->tempo_total += $minutos;
+            //a lógica é repetida para calcular esse tempo útil e inútil no dia de inicio da tarefa
+            //horario cafe e almoço recebe o dia de inicio para esta comparação
+            $horario_almoço->setYear($inicio->year);
+            $horario_almoço->setMonth($inicio->month);
+            $horario_almoço->setDay($inicio->day);
+
+            $horario_cafe->setYear($inicio->year);
+            $horario_cafe->setMonth($inicio->month);
+            $horario_cafe->setDay($inicio->day);
+
+            if($inicio->gt($horario_almoço)){
+                $diffInicio -= 75;
+            }else if($inicio->lt($horario_cafe) && $inicio->gt($horario_almoço)){
+                $diffInicio -= 90;
+            }
+
+            $diffTotal = $diffInicio + $diffTermino; //soma das diferenças
+            $minutosTotais +=  $min_uteis - $diffTotal; //subtração das diferenças do tempo útil total
         }
 
-        $minutos = $termino->diffInMinutes($inicio) - $intervalo;
-        $tarefa->tempo_total = $minutos;
+        $tarefa->tempo_total = $minutosTotais;
 
         $projeto->tempo_total += $tarefa->tempo_total;
 
