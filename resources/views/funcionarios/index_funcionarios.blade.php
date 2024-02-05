@@ -15,7 +15,7 @@
         <h1>Projetos</h1>
     </div>
     <div class="search-and-add">
-        <form action="{{ url('/tarefas/index') }}" method="GET" class="search-and-add__input">
+        <form action="{{ url('/funcionarios/index') }}" method="GET" class="search-and-add__input">
             <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por projetos...">
         </form>
     </div>

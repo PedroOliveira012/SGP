@@ -18,7 +18,14 @@ class FuncionariosController extends Controller
      */
     public function index(){
         $lista = Project::all();
-        return view('funcionarios.index_funcionarios')->with('lista', $lista);
+        $tarefa = Task::all();
+        $search = request('search');
+        if($search){
+            $lista = Project::where('num_projeto', 'like', '%'.$search.'%')->get();
+        }else{
+            $lista = Project::all();
+        }
+        return view('funcionarios.index_funcionarios', ['lista' => $lista, 'tarefa' => $tarefa]);
     }
 
     public function lista(Request $request, $id){
