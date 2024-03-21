@@ -96,6 +96,7 @@ class TarefasController extends Controller
                 $conjunto->painel = request('painel');
                 $conjunto->tarefa = $tarefa_id; // Ajuste para usar o ID da tarefa, não um array
                 $conjunto->tarefa_conjunta = request('tarefaConjunta');
+                $conjunto->prazo = request('prazo');
                 $conjunto->status = 'aguardo';
                 $conjunto->visualizado = 0;
                 $conjunto->save();

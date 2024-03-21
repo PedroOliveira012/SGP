@@ -97,8 +97,31 @@
             </div>
 
             <div class="row">
+                <label for="" class="col-form-label">Gostaria de adicionar um prazo na tarefa?</label>
+                <div class="col-md-3 form-group mb-3">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="sim_prazo" onclick="Habilita_prazo()">
+                    <label class="form-check-label" for="sim">Sim</label>
+                </div>
+                <div class="col-md-3 form-group mb-3">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="nao_prazo" onclick="Habilita_prazo()">
+                    <label class="form-check-label" for="nao">Não</label>
+                </div>
+            </div>
+
+            <div class="row" id="prazo" hidden>
+                <div class="col-md-12  form-group mb-3">
+                    <label for="" class="col-form-label">Prazo:</label>
+                    <input type="date" class="form-control" name="prazo">
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-md-12 form-group">
-                    <button type="submit" class="btn btn-success adicionar"><i class="fa-solid fa-clipboard-check">  Finalizar</i></button>
+                    <button type="submit" class="btn btn-success adicionar">
+                        <i class="fa-solid fa-clipboard-check">
+                            <span>Finalizar</span>
+                        </i>
+                    </button>
                 </div>
             </div>
         </div>

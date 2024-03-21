@@ -167,9 +167,9 @@ function Habilita_paineis(){
 }
 
 function Habilita_prazo(){
-    sim = document.getElementById('sim')
-    nao = document.getElementById('nao')
-    paineis = document.getElementById('paineis')
+    sim = document.getElementById('sim_prazo')
+    nao = document.getElementById('nao_prazo')
+    prazo = document.getElementById('prazo')
 
     if (sim.checked) {
         prazo.hidden = false

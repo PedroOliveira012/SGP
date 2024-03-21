@@ -117,18 +117,12 @@
         <div class="row">
             <label for="" class="col-form-label">Gostaria de adicionar um prazo na tarefa?</label>
             <div class="col-md-3 form-group mb-3">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="sim" onclick="Habilita_prazo()">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="sim_prazo" onclick="Habilita_prazo()">
                 <label class="form-check-label" for="sim">Sim</label>
             </div>
             <div class="col-md-3 form-group mb-3">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="nao" onclick="Habilita_prazo()">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="nao_prazo" onclick="Habilita_prazo()">
                 <label class="form-check-label" for="nao">Não</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 form-group mb-3 quadro-div">
-            <label for="message" class="col-form-label">Notas / Observações:</label>
-            <textarea class="form-control text-bg-dark" name="obs" cols="30" rows="4" value="{{ old('obs') }}"></textarea>
             </div>
         </div>
 
@@ -136,6 +130,13 @@
             <div class="col-md-12  form-group mb-3">
                 <label for="" class="col-form-label">Prazo:</label>
                 <input type="date" class="form-control" name="prazo">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 form-group mb-3 quadro-div">
+            <label for="message" class="col-form-label">Notas / Observações:</label>
+            <textarea class="form-control text-bg-dark" name="obs" cols="30" rows="4" value="{{ old('obs') }}"></textarea>
             </div>
         </div>
 
