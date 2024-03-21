@@ -30,13 +30,13 @@ class ChamadosController extends Controller
             $lista = Chamados::all();
         }
 
-        return view('Chamados.Chamados_index',compact('lista'));
+        return view('chamados.chamados_index',compact('lista'));
     }
 
 
     public function novo()
     {
-        return view('Chamados.Chamados_form');
+        return view('chamados.chamados_form');
     }
 
     public function adiciona(Request $request)
@@ -63,7 +63,7 @@ class ChamadosController extends Controller
 
     public function mostra($id){
         $chamado = Chamados::find($id);
-        return view('Chamados.Chamados_mostra', compact('chamado'));
+        return view('chamados.chamados_mostra', compact('chamado'));
     }
 
     /**
