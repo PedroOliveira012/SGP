@@ -36,22 +36,7 @@
             </div>
             <div class="offcanvas-body">
                 <div class="accordion accordion-flush text-bg-dark"id="accordionExample">
-                    <!-- @if (Auth::user()->nivel_acesso >= 4)
-                        <div class="accordion-item text-light">
-                            <h2 class="accordion-header text-light">
-                                <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    Diretoria
-                                </button>
-                            </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse bg-dark" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <ul class="list-group">
-                                        <li class="list-group-item text-bg-dark"><a href="{{ url('/diretoria/index') }}">Home</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    @endif -->
+                    
                     @if (Auth::user()->nivel_acesso >=2)
                         <div class="accordion-item text-light">
                             <h2 class="accordion-header text-light">

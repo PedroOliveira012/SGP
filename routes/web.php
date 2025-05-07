@@ -6,7 +6,6 @@ use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\AjudaController;
 use App\Http\Controllers\ChamadosController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\DiretoriaController;
 use App\Http\Controllers\TestesController;
 use App\Http\Controllers\ExcelController;
 use Illuminate\Support\Facades\Route;
@@ -80,10 +79,6 @@ Route::get('/ajuda/lista', [AjudaController::class, 'lista'])->name('ajuda_lista
 Route::get('/ajuda/{id}', [AjudaController::class, 'desc'])->name('index_ajuda')->middleware('auth');//funciona
 // Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('combinacao_ajuda')->middleware(('auth'));
 Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('ajuda_combinacao')->middleware('auth');
-
-//Diretoria - Feito
-Route::get('/diretoria/index', [DiretoriaController::class, 'index'])->name('index_diretoria')->middleware('auth');
-Route::get('/diretoria/lista/{id}', [DiretoriaController::class, 'lista'])->name('lista_diretoria')->middleware('auth');
 
 //Chamados - Feito
 Route::get('/chamados/lista', [ChamadosController::class, 'lista'])->name('lista_chamados')->middleware('auth');//funciona

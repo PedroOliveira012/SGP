@@ -36,8 +36,6 @@ class AuthenticatedSessionController extends Controller
 
         if( $user->cargo == 'Admin'){
             return redirect('/chamados/lista');
-        }elseif($user->cargo == 'Diretor'){
-            return redirect('/diretoria/index');
         }elseif ($user->cargo == 'Coordenador de Engenharia' || $user->cargo == 'Analista' || $user->cargo == 'Consultor técnico / projetista') {
             return redirect('/projeto/andamento');
         }elseif ($user->cargo == 'Coodernador Produção'){
