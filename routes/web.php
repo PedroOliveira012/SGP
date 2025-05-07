@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProjetosController;
 use App\Http\Controllers\TarefasController;
 use App\Http\Controllers\FuncionariosController;
-use App\Http\Controllers\AjudaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExcelController;
 use Illuminate\Support\Facades\Route;
@@ -71,13 +70,6 @@ Route::post('/funcionarios/inicio/{id}', [FuncionariosController::class, 'inicio
 Route::post('/funcionarios/termino/{id}', [FuncionariosController::class, 'termino'])->name('termino_tarefa')->middleware('auth');//funciona
 Route::post('/funcionarios/inicioPausa/{id}', [FuncionariosController::class, 'inicioPausa'])->name('inicio_pausa')->middleware('auth');//funciona
 Route::post('/funcionarios/terminoPausa/{id}', [FuncionariosController::class, 'terminoPausa'])->name('termino_pausa')->middleware('auth');//funciona
-
-//Rotas Ajuda/Fit
-Route::get('/ajuda/lista', [AjudaController::class, 'lista'])->name('ajuda_lista')->middleware('auth');//funciona
-Route::get('/ajuda/{id}', [AjudaController::class, 'desc'])->name('index_ajuda')->middleware('auth');//funciona
-// Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('combinacao_ajuda')->middleware(('auth'));
-Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('ajuda_combinacao')->middleware('auth');
-
 
 //Logout
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');

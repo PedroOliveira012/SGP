@@ -44,7 +44,6 @@
                     <ul>
                         <li><h2>Nome do funcionário: </h2><p><?= $i->funcionario?></p></li>
                         <li><h2>Tarefa do funcionario: </h2><p><?= $i->tarefa?></p></li>
-                        <li><h2>Ajuda: </h2><p>link para a pagina de ajuda</p></li>
                     </ul>
                 </div>
             </div>

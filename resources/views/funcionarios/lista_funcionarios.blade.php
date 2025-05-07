@@ -99,9 +99,7 @@
                     <td class="tarefa">
                         <div class="nome-botao">
                             <div class="tabela__dados--line info-tarefa--nome"><?= $i->tarefa?></div>
-                            <div class="info-tarefa--botao">
-                        <a href="{{ url('/ajuda/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-regular fa-circle-question"></i></button></a>
-                            </div>
+                            
                         </div>
                     </td>
                     <td class="notas">

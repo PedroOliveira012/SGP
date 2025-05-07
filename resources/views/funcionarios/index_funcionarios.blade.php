@@ -57,9 +57,6 @@
                     </td>
                     <td>
                         <div>
-                            {{--<div class="tabela__dados tabela__dados--botoes">
-                                <a href="{{ url('/ajuda/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></button></a>
-                            </div>--}}
                             <div class="tabela__dados tabela__dados--botoes">
                                 <a href="{{ url('/funcionarios/lista/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-bars"></i></button></a>
                             </div>
