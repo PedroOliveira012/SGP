@@ -1,0 +1,27 @@
+/*index*/
+
+.botao{
+    display: inline-block;
+}
+
+.funcionario{
+    width: 14%;
+}
+
+.tarefa{
+    width: 25%;
+}
+
+.inicio +.termino+.envio{
+    width: 12%;
+}
+
+.notas{
+    width: 25%;
+}
+
+.add{
+    height: 40px;
+    margin-top: 20px;
+    margin-right: 40px;
+}

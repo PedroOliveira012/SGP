@@ -1,0 +1,872 @@
+/* projetos */
+body{
+    background-color: #121212;
+    color: #fff;
+}
+
+td, th{
+    color: #fff;
+}
+
+i{
+    background: none;
+    color: #121212  ;
+}
+
+img{
+    margin: 15px;
+    position: relative;
+    left: 0%;
+    margin-left: 5%;
+}
+
+.btn{
+    background-color: #00ACC0;
+    border-color: #02A9B0;
+    color: #121212;
+}
+
+.btn:hover{
+    color: #121212;
+}
+
+.btn:disabled{
+    background-color: #363636;
+    border-color: #02A9B0;
+    color: #fff;
+}
+
+.titulo{
+    margin-left: 35%;
+    padding-top: 25px;
+}
+
+.tabela{
+    margin: auto;
+    width: 95%;
+    margin-bottom: 5%;
+}
+
+.tabela__head{
+    text-align: center;
+}
+
+.tabela__head--esquerda{
+    text-align: left;
+}
+
+.tabela__dados{
+    font-size: 12px;
+    vertical-align: middle;
+    height: 40px;
+}
+
+.centralizado{
+    justify-content: center;
+}
+
+.tabela__dados--line{
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.tabela__dados--botoes{
+    display: inline-flex;
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
+    margin-left: 7px;
+}
+
+.dados_lista{
+    margin-top: 25px;
+}
+
+.topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px;
+    margin-left: 2.5%;
+}
+
+.painel{
+    margin: 15px;
+    margin-left: 2.5%;
+}
+
+.painel-status{
+    margin: 15px;
+    margin-left: 2.5%;
+}
+
+.escolher-status-chamados{
+    display: flex;
+}
+
+.filtro-status{
+    display: inline-flex;
+}
+
+.escolher-painel{
+    margin-right: 15px;
+    width: 100%;
+    display: flex;
+}
+
+.escolher-painel-diretoria{
+    margin-right: 15px;
+    width: 18%;
+    display: flex;
+}
+
+.select-func{
+    margin-right: 15px;
+}
+
+.select-painel{
+    margin-right: 10px;
+}
+
+.escolher-status{
+    margin-right: 15px;
+    width: 100%;
+    display: flex;
+}
+
+.filtros{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 15px;
+}
+
+.select-status{
+    margin-right: 10px;
+}
+
+.div-status{
+    margin-right: 15px;
+}
+
+.search-and-add{
+    display: flex;
+    text-align: right;
+    margin-right: 3%;
+    padding-top: 10px;
+    padding-bottom: none;
+}
+
+.search-and-add__input{
+    margin-right: 50px;
+}
+
+a:link, a:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.add_task, .add_group{
+    font-size: large;
+    margin-right: 5px;
+}
+
+.add_group{
+    width: 130px;
+}
+
+.add_task{
+    width: 95px;
+}
+
+.add_task:hover, .add_group:hover{
+    background-color: #F49F0A !important;
+    color: #121212 !important;
+}
+
+.search-and-add__button:hover{
+    background-color: #F49F0A !important;
+    color: #121212 !important;
+}
+
+
+.numero_projeto + .cliente + .unidade + .valor + .prazo + .botoes{
+    width: 10%;
+    color: red;
+}
+
+.nome_projeto + .obs{
+    width: 20%
+}
+
+/*editar e formulario*/
+.quadro{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.filtro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.filtro-div{
+    width: 500px;
+}
+
+.quadro-div{
+    width: 500px;
+}
+
+.salvar{
+    text-align: center;
+}
+
+/*mostra*/
+.view{
+    width: 65%;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    height: 550px;
+}
+
+#notas{
+    display: block !important;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.solucao-chamado, .conteudo-chamado{
+    display: block !important;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.view_conteudo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    padding: 5px;
+    font-size: x-large;
+}
+
+.view_conteudo--botao{
+    display: flex;
+    justify-content: space-evenly;
+    vertical-align: middle;
+    padding: 10%;
+}
+
+.tarefas{
+    width: 115px;
+    height: 75px;
+}
+
+.itens_lista{
+    margin-bottom: 25px;
+    padding-top: 5px;
+}
+
+.area_comentario{
+    justify-content: center;
+}
+
+.contorno{
+    border-color: #02A9B0;
+    border-style: solid;
+    border-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #02A9B0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-radius: 10px;
+    border-bottom-width: 5px;
+    margin-top: 15px;
+    background-color: #363636;
+}
+
+.write-section{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.write-section__lista{
+    border-right-style: solid;
+    border-right-width: 3px;
+    border-right-color: #02A9B0;
+    padding-right: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    align-content: center;
+}
+
+.write-section__comment--write{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.comment-section{
+    width:100%;
+}
+
+.write-section__button{
+    text-align: center;
+    width: inherit;
+    margin-top: 15px;
+}
+
+.write-section__textarea{
+
+    margin: 5px;
+}
+
+.comment{
+    height: auto;
+    margin: 10px;
+    background-color: #cccccc;
+    color: #000;
+    padding:15px;
+    position:relative;
+    left: 10px;
+    width:97%;
+
+}
+
+.comment:before{
+    content:'';
+    position: absolute;
+    width:20px;
+    height:20px;
+    left:-10px;
+    top:19px;
+    background:#cccccc;
+    -webkit-transform:rotate(45deg);
+}
+
+.comment-section__comment--show{
+    align-items: center;
+    width: 100%;
+    height: 30vh;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    overflow-y:auto;
+}
+
+.timestamp{
+    font-size: 12px;
+    display: inline-block;
+}
+
+.usuario{
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.controle{
+    display: flex;
+    vertical-align: middle;
+}
+
+.liberar{
+    display:flex;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.designar{
+    display:flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    width: 100%;
+}
+
+.descricao{
+    display: inline-block;
+    width: 30%;
+}
+
+.interacao{
+    display: inline-block;
+    width:  30%;
+}
+
+.submit{
+    display: inline-block;
+    width:  30%;
+}
+
+.btn-liberar{
+    height: 100px;
+    width: 200px;
+    font-size: 35px;
+}
+.btn-download{
+    height: 100px;
+    width: 250px;
+    font-size: 35px;
+}
+
+.icone-download{
+    padding-right: 5px;
+}
+
+.btn-download:hover{
+    color: #000 !important;
+}
+
+
+
+.responsavel{
+    display:flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-responsavel{
+    height: 100px;
+    width: 200px;
+    font-size: 25px;
+}
+
+#comentario{
+    resize: none;
+}
+
+.data-vermelha{
+    color: #ff0000;
+}
+
+.data-laranja{
+    color: #f4662d;
+}
+
+.data-amarela{
+    color:#ecbe13;
+}
+
+.data-verde{
+    color: #008000;
+}
+
+/*index*/
+.navbar__div__link{
+    color:white;
+    font-size: 30px;
+}
+
+.navbar__div{
+    height: 100px;
+}
+
+.navbar__div--menu{
+    width: auto;
+    position: absolute;
+    right: 5%;
+}
+
+.navbar__div--img{
+    margin-top: 5px;
+}
+
+/*index tarefas*/
+.botao{
+    display: inline-block;
+}
+
+.funcionario{
+    width: 14%;
+}
+
+.tarefa{
+    width: 21%;
+    text-align: center;
+}
+
+.inicio +.termino+.envio{
+    width: 13%;
+}
+
+.notas{
+    width: 26%;
+}
+
+.add{
+    height: 40px;
+    margin-top: 20px;
+    margin-right: 40px;
+}
+
+.info-tarefa{
+    display: inline-block;
+
+}
+
+/*conjunto tarefas*/
+.grupo-funcionarios{
+    background-color: #212529;
+    border: solid 1px #fff;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.funcionarios{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin: auto;
+}
+
+.adiciona-conjunto{
+    margin-top: 25px;
+}
+
+
+
+/*funcionarios*/
+.info-tarefa--nome{
+    text-align: left;
+    width: 80%;
+}
+
+.info-tarefa--botao{
+    padding-left: 0%;
+    width: 20%;
+    float: right;
+}
+
+.nome-botao{
+    display: flex;
+    justify-content: center;
+
+}
+
+.voltar{
+    background: #121212;
+    font-size: x-large;
+    margin-left: 3%;
+    margin-top: 15px;
+    color: #ffffff;
+}
+
+.voltar-icone{
+    color: #ffffff;
+}
+
+.voltar-tarefas{
+    background: #121212;
+    font-size: x-large;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    color: #ffffff;
+}
+
+
+.voltar-funcionario{
+    background: #121212;
+    font-size: x-large;
+    margin-left: 2.5%;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.voltar-projeto{
+    background: #121212;
+    font-size: x-large;
+    margin-left: 6.25%;
+    margin-top: 15px;
+    color: #ffffff;
+}
+
+.voltar:hover, .voltar-funcionario:hover, .voltar-tarefas:hover, .voltar-projeto{
+    color:white !important;
+}
+
+.alerta{
+    background-color: #f4662d;
+}
+
+.acompanhamento{
+    display: inline-flex;
+    justify-content: space-between;
+    padding-right: 1.75%;
+    padding-left: 1.75%;
+    width: 100%;
+}
+
+.pra_fazer, .fazendo, .feito{
+    width: 30%;
+}
+
+.tempo_total{
+    float: right;
+}
+
+
+.btn-close-white{
+    color: white;
+}
+
+.btn-menu{
+    background-color: #212529 !important;
+    border-color: #212529 !important;
+}
+
+.btn-menu:hover{
+    background-color: #212529 !important;
+    border-color: #00ACC0 !important;
+}
+
+.icone-menu{
+    color: #fff !important;
+    font-size: 45px;
+}
+
+.icone-logout{
+    color: #fff !important;
+    font-size: 25px;
+}
+
+
+.hist-notificacao{
+    height: 65%;
+    background-color: #121212;
+    border: 1px solid #6c757d;
+    padding: 8px;
+    margin-top: 50px;
+    overflow-y:auto;
+}
+
+.rodape{
+    background-color: #161616;
+    border-top: 1px solid #6c757d;
+    height: 6%;
+}
+
+.accordion-body{
+    background-color: #212529;
+    border-radius: none;
+}
+
+.separador{
+    width: 94%;
+    height: 1px;
+    margin: 2px auto;
+    background-color: #343a40;
+}
+
+.notificacao-lida{
+    padding: 4px;
+    height: 16%;
+}
+
+.notificacao-nao-lida{
+    padding: 4px;
+    background-color: #343a40;
+    height: 16%;
+}
+
+.info-progresso{
+    display: flex;
+    align-content: center;
+    margin-top: -34px;
+    position: relative;
+    height: 34px;
+
+}
+
+.progresso {
+    display: inline-grid;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.progresso input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.etapa{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 34px;
+    width: 34px;
+    background-color: #eee;
+    border-radius: 17px;
+    z-index: -11;
+}
+
+.info-etapa{
+    display: flex;
+    flex-direction: row;
+    width: 1320px;
+    justify-content: space-around;
+    height: 34px;
+    margin-top: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: -11;
+}
+
+.progress-form{
+    z-index: 11;
+}
+
+.progress-button{
+    text-decoration: none;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 35px;
+    z-index: 11;
+}
+
+.progress-button-checked{
+    background-color: #00ACC0;
+}
+
+.legenda{
+    width: 1320px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    font-size: larger;
+    margin-bottom: 35px;
+}
+
+.legenda label{
+    width: 102px;
+    text-align: center;
+}
+
+
+/* On mouse-over, add a grey background color */
+.progresso:hover input ~ .etapa{
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.progresso input:checked ~ .etapa{
+    background-color: #00acc0;
+}
+
+/* Create the eta.etapa/indicator (hidden when not checked) */
+.etapa:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the etapawhen checked */
+.progresso input:checked ~ .etapa:after {
+    display: block;
+}
+
+/* Style the eta.etapa/indicator */
+.progresso .etapa:after {
+    left: 12px;
+    top: 6px;
+    width: 10px;
+    height: 17px;
+    border: solid #D9D9D9;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+progress {
+    position: relative;
+    border-radius: 7px;
+    width: 1320px;
+    height: 3px;
+    margin: auto;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #D9D9D9;
+    border-radius: 1.5px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #00acc0;
+    border-radius: 1.5px;
+}
+
+.filtro_e_combinacao{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 66px;
+    flex-wrap: nowrap;
+}
+
+.inicio-fit, .desc-fit, .media-fit{
+    font-size: large;
+    padding: 15px;
+}
+.info-testes{
+    display: flex;
+    justify-content: center;
+    height: 550px;
+    padding-left: 30px;
+}
+
+.div__info--testes{
+    border: 3px solid #02A9B0;
+    padding-right: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    align-content: center;
+    width: 75%;
+}
+
+.div__botoes--testes{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.div__botoes--testes button{
+    padding: 10px;
+    margin: 10px;
+    width: 235px;
+    font-size: larger;
+    margin-right: 15px;
+}

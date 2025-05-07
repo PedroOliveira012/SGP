@@ -1,0 +1,33 @@
+.vertical-menu {
+    width: 100px;
+}
+
+.vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc;
+}
+
+.vertical-menu a.active {
+    background-color: rgb(226, 217, 221);
+    color: white;
+}
+
+h2 {
+    font-family: arial, helvetica, sans-serif;
+}
+
+h3 {
+    font-family: Impact, Charcoal, sans-serif;
+    text-align: center;
+}
+
+p {
+    font-family: serif;
+}
