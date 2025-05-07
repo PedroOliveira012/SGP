@@ -4,7 +4,6 @@ use App\Http\Controllers\ProjetosController;
 use App\Http\Controllers\TarefasController;
 use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\AjudaController;
-use App\Http\Controllers\ChamadosController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TestesController;
 use App\Http\Controllers\ExcelController;
@@ -80,13 +79,7 @@ Route::get('/ajuda/{id}', [AjudaController::class, 'desc'])->name('index_ajuda')
 // Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('combinacao_ajuda')->middleware(('auth'));
 Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('ajuda_combinacao')->middleware('auth');
 
-//Chamados - Feito
-Route::get('/chamados/lista', [ChamadosController::class, 'lista'])->name('lista_chamados')->middleware('auth');//funciona
-Route::get('/chamados/mostra/{id}', [ChamadosController::class, 'mostra'])->name('mostra_chamados')->middleware('auth');
-Route::get('/chamados/novo', [ChamadosController::class, 'novo'])->name('novo_chamado')->middleware('auth');//funciona
-Route::post('/chamados/adiciona', [ChamadosController::class, 'adiciona'])->name('adiciona_chamados')->middleware('auth');//funciona
-Route::put('/chamados/concluir/{id}', [ChamadosController::class, 'concluir'])->name('concluir_chamado')->middleware('auth');//funciona
-
+/
 //Testes
 Route::get('/testes/pendencias/{id}', [TestesController::class, 'pendencia'])->name('testes_pendencias')->middleware('auth');
 Route::get('/testes/pendencia/editar/{id}', [TestesController::class, 'form_pendencia'])->name('form_pendencias')->middleware('auth');
