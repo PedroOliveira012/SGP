@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjetosRequest;
 use App\Models\Project;
-use App\Models\Comments;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -133,13 +132,12 @@ class ProjetosController extends Controller
         $busca = Project::find($id);
         $progresso = $busca->progresso;
         $func = User::where('cargo', 'like', '%'.'Líder'.'%')->get();
-        $comentario = Comments::where('id_projeto', 'like', $id)->get();
         // $espera = request('espera');
 
         if (empty($busca)){
             return "Esse projeto não existe";
         }
-        return view('projetos.show_projetos',['i' => $busca, 'comentario' => $comentario, 'func' => $func, 'progresso' => $progresso]);
+        return view('projetos.show_projetos',['i' => $busca, 'func' => $func, 'progresso' => $progresso]);
     }
 
     public function editar($id){
@@ -214,16 +212,6 @@ class ProjetosController extends Controller
         $projeto->save();
 
         return redirect('projeto/teste');
-    }
-
-    public function add_comentario(Request $request){
-        $comentario = new Comments;
-        $comentario->id_projeto = $request->input('id_projeto');
-        $comentario->comentario = $request->input('comentario');
-        $comentario->usuario = Auth::user()->name;
-        $comentario->save();
-
-        return redirect()->action([ProjetosController::class, 'mostra'],['id' => $comentario->id_projeto]);
     }
 
 }

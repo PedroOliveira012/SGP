@@ -26,7 +26,7 @@
     @endif
 
     <section class="container contorno write-section">
-        <div class="write-section__lista">
+        <div class="info-projeto">
             <h1>Número do Projeto: <?= $i->num_projeto?></h1>
             <h3>Status:
             @if ($i->liberado == 1)
@@ -78,144 +78,8 @@
                 </ul>
             </div>
         </div>
-        <div class="write-section__comment--write">
-            <h2>Comentários sobre o projeto</h2>
-            <form action="{{ url('/projeto/add_comentario/' .$i->id) }}" class="progress-form" method="post">
-                <input hidden name="_token" value="{{{ csrf_token() }}}">
-                <input type="hidden" name="id_projeto" value="{{$i->id}}">
-                <div class="write-section__textarea">
-                    <textarea class="form-control" id="comentario" name="comentario" cols="60" rows="5" maxlength="255" placeholder="Escreva um comentário (máx 255 caracteres)"></textarea>
-                </div>
-                <div class="write-section__button">
-                    <button type="submit" class="btn btn-primary">Publicar</button>
-                </div>
-            </form>
-            <div class="controle">
-                @if ($i->finalizado == 1)
-                    <div class="liberar">
-                        <a href="{{ url('/projeto/export/' .$i->id) }}">
-                            <button type="button" class="btn btn-success btn-download">
-                                <i class="fa-solid fa-file-arrow-down icone-download"></i>Download
-                            </button>
-                        </a>
-                    </div>
-                @endif
-            </div>
-        </div>
     </section>
 
-
-    {{-- <form action="{{ url("/projeto/atualizarProgresso/$i->id/1") }}" class="progress-form" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="info-etapa">
-            <button class="progress-button" type="submit" name="espera" id= id="1" onclick="atualizarProgresso()">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-
-            <button class="progress-button" type="submit" name="andamento" id= id="2" onclick="atualizarProgresso()">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-
-            <button class="progress-button" type="submit" name="analise" id= id="3" onclick="atualizarProgresso()">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-
-            <button class="progress-button" type="submit" name="revisao" id= id="4" onclick="atualizarProgresso()">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-
-            <button class="progress-button" type="submit" name="aprovacao" id= id="5" onclick="atualizarProgresso()">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-
-            <button class="progress-button" type="submit" name="compras" id= id="6" onclick="atualizarProgresso()">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-        </div>
-    </form> --}}
-
-    <div class="info-etapa">
-        {{-- <form action="{{ url("/projeto/atualizarProgresso/$i->id/1") }}" class="progress-form" method="POST">
-            @csrf
-            @method('PUT') --}}
-            @if ($i->progresso >= 1)
-            <button class="progress-button progress-button-checked" type="submit" name="espera" id="1">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-            @else
-            <button class="progress-button" type="submit" name="espera" id="1">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-            @endif
-        {{-- </form> --}}
-        {{-- <form action="{{ url("/projeto/atualizarProgresso/$i->id/2") }}" class="progress-form" method="POST">
-            @csrf
-            @method('PUT') --}}
-            <button class="progress-button" type="submit" name="andamento" id="2">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-        {{-- </form> --}}
-        {{-- <form action="{{ url("/projeto/atualizarProgresso/$i->id/3") }}" class="progress-form" method="POST">
-            @csrf
-            @method('PUT') --}}
-            <button class="progress-button" type="submit" name="analise" id="3">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-        {{-- </form> --}}
-        {{-- <form action="{{ url("/projeto/atualizarProgresso/$i->id/4") }}" class="progress-form" method="POST">
-            @csrf
-            @method('PUT') --}}
-            <button class="progress-button" type="submit" name="revisao" id="4">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-        {{-- </form> --}}
-        {{-- <form action="{{ url("/projeto/atualizarProgresso/$i->id/5") }}" class="progress-form" method="POST">
-            @csrf
-            @method('PUT') --}}
-            <button class="progress-button" type="submit" name="aprovacao" id="5">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-        {{-- </form> --}}
-        {{-- <form action="{{ url("/projeto/atualizarProgresso/$i->id/6") }}" class="progress-form" method="POST">
-            @csrf
-            @method('PUT') --}}
-            <button class="progress-button" type="submit" name="compras" id="6">
-                <i class="fa-solid fa-check" style="color: #f0f0f0;"></i>
-            </button>
-        {{-- </form> --}}
-    </div>
-
-    <div class="info-progresso">
-        <progress id="barra" value="{{ $progresso }}" max="6"></progress>
-    </div>
-
-    <div class="legenda">
-        <label for="espera">Espera</label>
-        <label for="andamento">Andamento</label>
-        <label for="analise">Análise</label>
-        <label for="revisao">Revisão</label>
-        <label for="aprovacao">Aprovação</label>
-        <label for="compras">Compras</label>
-    </div>
-
-    <section class="container contorno comment-section">
-        <div class="comment-section__comment--show">
-            <?php foreach ($comentario as $c): ?>
-                <div class="comment">
-                    <div class="usuario">
-                        <b>{{$c->usuario}}</b>
-                    </div>
-                    <div class="timestamp">
-                        {{Carbon\Carbon::parse($c->created_at)->subHour(3)->isoFormat('DD/MM/YYYY HH:mm')}}
-                    </div>
-                    <div class="conteudo_comentario">
-                        {{$c->comentario}}
-                    </div>
-                </div>
-            <?php endforeach?>
-        </div>
-    </section>
 </body>
 
 <form action="{{ url('/projeto/libera/' .$i->id) }}" class="progress-form" method="POST">
