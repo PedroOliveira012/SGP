@@ -34,8 +34,6 @@ require __DIR__.'/auth.php';
 
 //Projeto - Em andamento
 Route::post('/projeto/adiciona',[ProjetosController::class, 'adiciona'])->name('add_projeto')->middleware('auth');//funciona
-Route::post('/projeto/add_comentario/{id}',[ProjetosController::class, 'add_comentario'])->name('add_comentario')->middleware('auth');//funciona
-// Route::get('/projeto/andamento', [ProjetosController::class, 'andamento'])->name('controle')->middleware('auth');//funciona
 Route::get('/projeto/encerrados', [ProjetosController::class, 'encerrado'])->name('encerrado')->middleware('auth');//funciona
 Route::get('/projeto/liberados', [ProjetosController::class, 'liberado'])->name('liberado')->middleware('auth');//funciona
 Route::get('/projeto/teste', [ProjetosController::class, 'teste'])->name('teste')->middleware('auth');//funciona
