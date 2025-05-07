@@ -69,9 +69,7 @@
                         </div> --}}
                     </td>
                     <td>
-                        <div class="tabela__dados--botoes ">
-                            <a class="tabela__dados--link" href="{{ url('/testes/info/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-bars"></i></button></a>
-                        </div>
+                        
                         <div class="tabela__dados--botoes">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDevolver{{$i->id}}">
                                 <i class="fa-solid fa-arrow-left"></i>

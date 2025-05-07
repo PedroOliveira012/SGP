@@ -119,9 +119,7 @@
           <div class="carousel-item">
             <div class="view_conteudo--botao">
                 @if ($i->tarefa == 'Pendencia')
-                    <div class="tabela__dados--botoes">
-                        <a href="{{ url('/testes/pendencia/editar/' .$i->id) }}"><button type="submit" class="btn tarefas btn-primary"><i class="fa-solid fa-pen-ruler fa-2x"></i></button></a>
-                    </div>
+                    
                 @else
                     <div class="tabela__dados--botoes">
                         <a href="{{ url('/tarefas/editar/' .$i->id) }}"><button type="submit" class="btn tarefas btn-primary"><i class="fa-solid fa-pen-ruler fa-2x"></i></button></a>

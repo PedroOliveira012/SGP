@@ -764,34 +764,3 @@ progress::-webkit-progress-value {
     font-size: large;
     padding: 15px;
 }
-.info-testes{
-    display: flex;
-    justify-content: center;
-    height: 550px;
-    padding-left: 30px;
-}
-
-.div__info--testes{
-    border: 3px solid #02A9B0;
-    padding-right: 50px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    align-content: center;
-    width: 75%;
-}
-
-.div__botoes--testes{
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.div__botoes--testes button{
-    padding: 10px;
-    margin: 10px;
-    width: 235px;
-    font-size: larger;
-    margin-right: 15px;
-}

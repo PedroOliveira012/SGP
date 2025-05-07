@@ -5,7 +5,6 @@ use App\Http\Controllers\TarefasController;
 use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\AjudaController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TestesController;
 use App\Http\Controllers\ExcelController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,16 +78,6 @@ Route::get('/ajuda/{id}', [AjudaController::class, 'desc'])->name('index_ajuda')
 // Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('combinacao_ajuda')->middleware(('auth'));
 Route::get('/ajuda/combinacao', [AjudaController::class, 'combinacao'])->name('ajuda_combinacao')->middleware('auth');
 
-/
-//Testes
-Route::get('/testes/pendencias/{id}', [TestesController::class, 'pendencia'])->name('testes_pendencias')->middleware('auth');
-Route::get('/testes/pendencia/editar/{id}', [TestesController::class, 'form_pendencia'])->name('form_pendencias')->middleware('auth');
-Route::put('/testes/pendencias/atualiza/{id}', [TestesController::class, 'atualiza_pendencia'])->name('atualiza_pendencia')->middleware('auth');
-Route::delete('/testes/pendencias/remover/{id}', [TestesController::class, 'remove_pendencia'])->name('remove_pendencia')->middleware('auth');
-Route::get('/testes/info/{id}', [TestesController::class, 'info'])->name('testes_info')->middleware('auth');//info
-Route::get('/testes/checklist', [TestesController::class, 'checklist'])->name('testes_checklist')->middleware('auth');//checklist
-Route::get('/testes/comissionamento', [TestesController::class, 'comissionamento'])->name('testes_comissionamento')->middleware('auth');//comissionamento
-Route::get('/testes/inspecao', [TestesController::class, 'inspecao'])->name('testes_inspecao')->middleware('auth');//inspeção
 
 //Logout
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');
