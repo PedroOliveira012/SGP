@@ -36,7 +36,7 @@
             </div>
             <div class="offcanvas-body">
                 <div class="accordion accordion-flush text-bg-dark"id="accordionExample">
-                    @if (Auth::user()->nivel_acesso >= 4)
+                    <!-- @if (Auth::user()->nivel_acesso >= 4)
                         <div class="accordion-item text-light">
                             <h2 class="accordion-header text-light">
                                 <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif -->
                     @if (Auth::user()->nivel_acesso >=2)
                         <div class="accordion-item text-light">
                             <h2 class="accordion-header text-light">
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    <!-- <div class="accordion-item">
                         <h2 class="accordion-header text-light">
                             <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
                                 Chamados
@@ -105,11 +105,11 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="accordion-item">
                     </div>
                 </div>
-                <div class="hist-notificacao">
+                <!-- <div class="hist-notificacao">
                     <div class="notificacao-nao-lida">
                         1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </div>
@@ -137,15 +137,17 @@
                     <div class="notificacao-nao-lida">
                         7 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </div>
-                </div>
+                </div> -->
             </div>
             <footer class="rodape">
-                <?=Auth::user()->name?>
-                <a href="{{ url('/sair') }}">
-                    <button class="btn btn-danger btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-                        <i class="fa-solid fa-arrow-right-from-bracket icone-logout"></i>
-                    </button>
-                </a>
+                <div class="rodape_body">
+                    <?=Auth::user()->name?>
+                    <a href="{{ url('/sair') }}">
+                        <button class="btn btn-danger btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                            <i class="fa-solid fa-arrow-right-from-bracket icone-logout"></i>
+                        </button>
+                    </a>
+                </div>
             </footer>
         </div>
         @yield('conteudo')
