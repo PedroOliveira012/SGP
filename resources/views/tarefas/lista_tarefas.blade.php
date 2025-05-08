@@ -67,7 +67,7 @@
 <div>
     <table class="table table-dark table-hover tabela">
         <thead>
-            <tr class="tabela__head">
+            <tr class="">
                 <th>Inicio da Tarefa</th>
                 <th>Termino da Tarefa</th>
                 <th>Funcionario</th>
@@ -115,7 +115,7 @@
                             @else
                                 <div class="tabela__dados--funcionario centralizado data-verde">{{Carbon\Carbon::parse($i->prazo)->isoFormat('DD/MM/YYYY')}}</div>
                             @endif
-                            <?=Carbon\Carbon::today()->diffInDays($i->prazo)?>
+                            <!-- <?=Carbon\Carbon::today()->diffInDays($i->prazo)?> -->
                         @else
                             <div class="tabela__dados--funcionario centralizado">Sem prazo definido</div>
                         @endif

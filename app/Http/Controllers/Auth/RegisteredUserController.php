@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
       
         if ($user->cargo == 'Coordenador de Engenharia') {
-            return redirect('/projeto/andamento');
+            return redirect('/projeto/liberados');
         }elseif ($user->cargo == 'Coodernador Produção'){
             return redirect('/projeto/liberados');
         }elseif ($user->cargo == 'Líder de Oficina mecânica' || $user->cargo == 'Líder de Testes' || $user->cargo == 'Líder de Montagem / Montador') {

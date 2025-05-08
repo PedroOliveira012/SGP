@@ -36,7 +36,6 @@
             </div>
             <div class="offcanvas-body">
                 <div class="accordion accordion-flush text-bg-dark"id="accordionExample">
-                    
                     @if (Auth::user()->nivel_acesso >=2)
                         <div class="accordion-item text-light">
                             <h2 class="accordion-header text-light">
@@ -72,39 +71,9 @@
                             </div>
                         </div>
                     </div>
-                    </div> -->
                     <div class="accordion-item">
                     </div>
                 </div>
-                <!-- <div class="hist-notificacao">
-                    <div class="notificacao-nao-lida">
-                        1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="separador"></div>
-                    <div class="notificacao-lida">
-                        2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="separador"></div>
-                    <div class="notificacao-lida">
-                        3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="separador"></div>
-                    <div class="notificacao-nao-lida">
-                        4 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="separador"></div>
-                    <div class="notificacao-lida">
-                        5 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="separador"></div>
-                    <div class="notificacao-nao-lida">
-                        6 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="separador"></div>
-                    <div class="notificacao-nao-lida">
-                        7 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                </div> -->
             </div>
             <footer class="rodape">
                 <div class="rodape_body">

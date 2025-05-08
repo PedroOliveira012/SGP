@@ -111,7 +111,7 @@ class TarefasController extends Controller
         $projeto = Project::find($id);
         $func = User::where('cargo', 'like', '%Montador%')->get();
         $tarefa = Procedure::all();
-        $opcoes = explode('; ', $projeto->paineis);
+        $opcoes = explode(';', $projeto->paineis);
 
         $tipo = request('tipo');
         $area = request('area');
@@ -136,10 +136,10 @@ class TarefasController extends Controller
 
     public function novo_conjunto($id){
         $projeto = Project::find($id);
-        $opcoes = explode('; ', $projeto->paineis);
+        $opcoes = explode(';', $projeto->paineis);
         $func = User::where('cargo', 'like', '%Montador%')->get();
         $tarefa = Procedure::all();
-        $opcoes = explode('; ', $projeto->paineis);
+        $opcoes = explode(';', $projeto->paineis);
 
         $chaparia = request('chaparia');
         $conjunto = request('conjunto');
@@ -214,7 +214,7 @@ class TarefasController extends Controller
             $status = '--Status da tarefa--';
         }
 
-        $opcoes = explode('; ', $projeto->paineis);
+        $opcoes = explode(';', $projeto->paineis);
 
         return view('tarefas.lista_tarefas', compact('filtro', 'projeto', 'opcoes', 'painel', 'status'));
     }
