@@ -21,15 +21,11 @@
 <div>
     <table class="table table-dark table-hover tabela">
         <thead>
-            <tr class="tabela__head">
+            <tr class="">
                 <th>N° de Projeto</th>
                 <th>Cliente</th>
                 <th>Unidade</th>
                 <th>Nome do Projeto</th>
-                <th>Valor Contratado</th>
-                <th>Prazo de Entrega (dias)</th>
-                <th>Observações</th>
-                <th>Responsável</th>
                 <th></th>
             </tr>
         </thead>
@@ -49,27 +45,7 @@
                     <td>
                         <div class="tabela__dados--line"><?= $i->nome_projeto?></div>
                     </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line">R$ <?=number_format($i->valor_contratado,2,',','.')?></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line"><?= $i->prazo_entrega?></div>
-                    </td>
                     <td>
-                        <div class="tabela__dados--line"><?= $i->observacoes?></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div><?= $i->responsavel?></div>
-                        {{-- <div class="tabela__dados--line">
-                            <select name="lider" class="form-select text-bg-dark">
-                                <option value="Anderson">Anderson</option>
-                                <option value="Ricardo">Ricardo</option>
-                                <option value="Walter">Walter<option>
-                            </select>
-                        </div> --}}
-                    </td>
-                    <td>
-                        
                         <div class="tabela__dados--botoes">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDevolver{{$i->id}}">
                                 <i class="fa-solid fa-arrow-left"></i>

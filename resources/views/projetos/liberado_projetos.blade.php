@@ -27,46 +27,29 @@
 <div>
     <table class="table table-dark table-hover tabela">
         <thead>
-            <tr class="tabela__head">
+            <tr class="">
                 <th>N° de Projeto</th>
                 <th>Cliente</th>
                 <th>Unidade</th>
                 <th>Nome do Projeto</th>
-                <th>Valor Contratado</th>
-                <th>Prazo de Entrega</th>
-                {{-- <th>Observações</th> --}}
-                <th>Responsável</th>
                 <th></th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
-                @if ($i->liberado == 1)
+                @if ($i->status=='Liberado')
                 <tr class="tabela__dados">
                     <td>
-                        <div class="tabela__dados--line centralizado"><p><?= $i->num_projeto?></p></a></div>
+                        <div class="tabela__dados--line"><p><?= $i->num_projeto?></p></a></div>
                     </td>
                     <td>
-                        <div class="tabela__dados--line centralizado"><p><?= $i->cliente?></p></div>
+                        <div class="tabela__dados--line"><p><?= $i->cliente?></p></div>
                     </td>
                     <td>
-                        <div class="tabela__dados--line centralizado"><p><?= $i->unidade?></p></div>
+                        <div class="tabela__dados--line"><p><?= $i->unidade?></p></div>
                     </td>
                     <td>
                         <div class="tabela__dados--line"><p><?= $i->nome_projeto?></p></div>
-                    </td>
-                    <td>
-                        <div class="tabela__dados--line centralizado"><p>R$ <?=number_format($i->valor_contratado,2,',','.')?></p></div>
-                    </td>
-                    <td>
-                        <div class="tabela__dados--line centralizado"><p><?= $i->prazo_entrega?> dias</p></div>
-                    </td>
-                    {{-- <td>
-                        <div class="tabela__dados--line"><p><?= $i->observacoes?></p></div>
-                    </td> --}}
-
-                    <td>
-                        <div class="tabela__dados--line centralizado"><p><?= $i->responsavel?></p></div>
                     </td>
                     <td>
                         <div class="tabela__dados botoes centralizado">

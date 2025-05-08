@@ -11,7 +11,7 @@
 @endif
 
 <body onload="Relembrar()">
-    @if (Auth::user()->cargo == 'Coordenador de Engenharia' or Auth::user()->cargo == 'Analista' or Auth::user()->cargo == 'Diretor' or Auth::user()->cargo == 'Admin')
+    @if (Auth::user()->cargo == 'Coordenador de Engenharia' or Auth::user()->cargo == 'Analista' or Auth::user()->cargo == 'Admin')
         <a href={{ url("/projeto/liberados")}}>
             <button class="btn voltar-projeto">
                 <i class="fa-solid fa-chevron-left voltar-icone"></i> Voltar
@@ -46,13 +46,9 @@
                     <li><b>Unidade: </b><?= $i->unidade?></li>
                     <li><b>Data de fechamento do projeto: </b><?= Carbon\Carbon::parse($i->data_fechamento)->isoFormat('DD/MM/YYYY')?></li>
                     <li><b>Data de entrega: </b><?= Carbon\Carbon::parse($i->data_entrega)->isoFormat('DD/MM/YYYY')?></li>
-                    <li><b>Responsável Técnico (cliente): </b><?= $i->Responsavel_tecnico?></li>
                     <li><b>Analista: </b><?= $i->analista?></li>
                     <li><b>Projetista: </b><?= $i->projetista?></li>
-                    <li><b>Valor contratado: </b>R$ <?=number_format($i->valor_contratado,2,',','.')?></li>
-                    <li><b>Prazo de entrega: </b><?= $i->prazo_entrega?> dias</li>
-                    <li><b>Responsável pelo projeto: </b><?= $i->responsavel?></li>
-                    @if ($i->finalizado == 0)
+                    <!-- @if ($i->finalizado == 0)
                         @if (($i->prazo_entrega * 0.9) <= Carbon\Carbon::today()->diffInDays($i->data_fechamento))
                             <li class="data-vermelha"><b>Status de entrega: </b><?= Carbon\Carbon::today()->diffInDays($i->data_fechamento)?> dias</li>
                         @elseif (( $i->prazo_entrega * 0.7) <= Carbon\Carbon::today()->diffInDays($i->data_fechamento))
@@ -72,9 +68,8 @@
                         @else
                             <li class="data-verde"><b>Status de entrega: </b><?= Carbon\Carbon::parse($i->data_fecahamento)->diffInDays($i->data_finalizacao)?> dias</li>
                         @endif
-                    @endif
-
-                    <li><b>Status de projeto: </b></li>
+                    @endif -->
+                    <li class=""><b>Status de entrega: </b><?= Carbon\Carbon::parse($i->data_fechamento)->diffInDays($i->data_finalizacao)?> dias</li>
                 </ul>
             </div>
         </div>

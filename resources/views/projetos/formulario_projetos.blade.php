@@ -47,33 +47,12 @@
         </div>
         <div class="row">
             <div class="col-md-6 form-group mb-3">
-                <label for="" class="col-form-label">Responsável técnico (cliente):</label>
-                <input type="text" class="form-control" name="responsavel" value="{{ old('responsavel') }}">
-            </div>
-            <div class="col-md-6 form-group mb-3">
-                <label for="" class="col-form-label">Valor contratado:</label>
-                <input type="text" class="form-control" name="valor" step="0,01" lang="pt-BR" value="{{ old('valor') }}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 form-group mb-3">
                 <label for="" class="col-form-label">Fechamento do projeto em:</label>
                 <input type="date" class="form-control" name="data_fechamento" value="{{ old('data_fechamento') }}">
             </div>
             <div class="col-md-6 form-group mb-3">
-                <label for="" class="col-form-label">Prazo de entrega (dias):</label>
-                <input type="text" class="form-control" name="prazo" value="{{ old('prazo') }}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 form-group mb-3">
-                <label for="message" class="col-form-label">Definir responsável pelo projeto</label>
-                <select class="form-select" name="responsavel_select">
-                    <option value="" hidden selected disabled>Selecione um responsável</option>
-                    @foreach ($func as $f)
-                        <option value="{{$f->name}}">{{$f->name}}</option>
-                    @endforeach
-                </select>
+                <label for="" class="col-form-label">Data de entrega:</label>
+                <input type="date" class="form-control" name="data_entrega" value="{{ old('prazo') }}">
             </div>
         </div>
         <div class="row">
@@ -89,14 +68,8 @@
         </div>
         <div class="row" id="paineis" hidden>
             <div class="col-md-12  form-group mb-3">
-                <label for="" class="col-form-label">Nome dos painéis</label>
-                <textarea class="form-control" name="paineis" cols="30" rows="4" placeholder="E01; E02; E03; ..." value="{{ old('paineis') }}"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 form-group mb-3">
-                <label for="" class="col-form-label">Observações:</label>
-                <textarea class="form-control" name="obs" cols="30" rows="4" value="{{ old('observacoes') }}"></textarea>
+                <label for="" class="col-form-label">Quantos painéis serão?</label>
+                <input type="number" class="form-control" name="paineis" value="{{ old('paineis') }}">
             </div>
         </div>
         <div class="row">

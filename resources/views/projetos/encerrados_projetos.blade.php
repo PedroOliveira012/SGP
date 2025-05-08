@@ -21,15 +21,11 @@
 <div>
     <table class="table table-dark table-hover tabela">
         <thead>
-            <tr class="tabela__head">
+            <tr class="">
                 <th>N° de Projeto</th>
                 <th>Cliente</th>
                 <th>Unidade</th>
                 <th>Nome do Projeto</th>
-                <th>Valor Contratado</th>
-                <th>Prazo de Entrega (dias)</th>
-                <th>Observações</th>
-                <th>Responsável</th>
                 <th></th>
             </tr>
         </thead>
@@ -48,18 +44,6 @@
                     </td>
                     <td>
                         <div class="tabela__dados--line"><p><?= $i->nome_projeto?></p></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line"><p>R$ <?=number_format($i->valor_contratado,2,',','.')?></p></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line"><p><?= $i->prazo_entrega?></p></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line"><p><?= $i->observacoes?></p></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line"><p><?= $i->responsavel?></p></div>
                     </td>
                     <td>
                         <div class="tabela__dados--botoes">
