@@ -28,12 +28,10 @@ class ProjetosRequest extends FormRequest
             'cliente' => 'required|max:25',
             'unidade' => 'required|max:25',
             'nome_projeto' => 'required|max:100',
-            'responsavel' => 'required|max:30',
             'analista' => 'required|max:30',
             'projetista' => 'required|max:10',
-            'valor' => 'required|numeric|max:9999999.99',
-            'prazo' => 'required|numeric|max:350',
-            'obs' => 'required|max:255'
+            'data_fechamento' => 'required|date',
+            'data_entrega' => 'required|date',
         ];
     }
 }

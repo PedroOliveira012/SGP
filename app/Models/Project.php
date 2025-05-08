@@ -33,12 +33,10 @@ class Project extends Model
         'cliente',
         'unidade',
         'nome_projeto',
-        'Responsavel_tecnico',
         'analista',
         'projetista',
-        'valor_contratado',
-        'prazo_entrega',
-        'observacoes'
+        'data_fechamento',
+        'data_entrega',
     ];
 
     /**

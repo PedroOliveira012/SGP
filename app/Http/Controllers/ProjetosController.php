@@ -26,8 +26,7 @@ class ProjetosController extends Controller
         if($search){
             $lista = Project::where('num_projeto', 'like', '%'.$search.'%')->get();
         }else{
-            //$lista = Project::all();
-            if($cargo == 'Diretor' || $cargo == 'Coordenador de Engenharia' || $cargo == 'Admin'){
+            if($cargo == 'Coordenador de Engenharia' || $cargo == 'Admin'){
                 $lista = Project::all();
             }else{
                 $lista = Project::where('analista', '=', $nome)->get();
@@ -37,7 +36,7 @@ class ProjetosController extends Controller
     }
 
     public function encerrado(){
-        $lista = Project::where('finalizado', '=', 1)->get();
+        $lista = Project::where('status', '=', 'Finalizado')->get();
         $search = request('search');
         if($search){
             $lista = Project::where('num_projeto', 'like', '%'.$search.'%')->get();
@@ -48,7 +47,7 @@ class ProjetosController extends Controller
     }
 
     public function teste(){
-        $lista = Project::where('fase_teste', '=', 1)->get();
+        $lista = Project::where('status', '=', 'Em teste')->get();
         $search = request('search');
         if($search){
             $lista = Project::where('num_projeto', 'like', '%'.$search.'%')->get();
@@ -78,66 +77,66 @@ class ProjetosController extends Controller
     public function adiciona(ProjetosRequest $request){
         $projeto = new Project;
         $projeto->num_projeto = $request->input('numero_projeto');
-        $projeto->cliente = $request->input('cliente');
-        $projeto->unidade = $request->input('unidade');
-        $projeto->nome_projeto = $request->input('nome_projeto');
-        $projeto->Responsavel_tecnico = $request->input('responsavel');
-        $projeto->analista = $request->input('analista');
-        $projeto->projetista = $request->input('projetista');
-        $projeto->valor_contratado = $request->input('valor');
-        $projeto->prazo_entrega = $request->input('prazo');
-        $projeto->observacoes = $request->input('obs');
+        $projeto->cliente = strtoupper($request->input('cliente'));
+        $projeto->unidade = strtoupper($request->input('unidade'));
+        $projeto->nome_projeto = strtoupper($request->input('nome_projeto'));
+        $projeto->analista = strtoupper($request->input('analista'));
+        $projeto->projetista = strtoupper($request->input('projetista'));
         $projeto->data_fechamento = $request->input('data_fechamento');
-        $projeto->data_entrega = Carbon::parse($projeto->data_fechamento)->addDays($projeto->prazo_entrega);
-        $projeto->liberado = 1;
-        $projeto->finalizado = 0;
-        $projeto->fase_teste = 0;
-        $projeto->responsavel = $request->input('responsavel_select');
-        $projeto->paineis = $request->input('paineis');
+        $projeto->data_entrega = $request->input('data_entrega');
+        $paineis ="";
+        if ($request->input('paineis') != null){
+            for ($i = 1; $i <= $request->input('paineis'); $i++){
+                if ($i <= 9){
+                    $paineis .= 'E0'.$i.';';
+                }else{
+                    $paineis .= 'E'.$i.';';
+                }
+            }
+        }
+        $projeto->paineis = $paineis; //criar um for para fazer a string de paineis
+        $projeto->status = 'Liberado';
         $projeto->save();
 
-        return redirect('projeto/andamento');
+        return redirect('projeto/liberados');
     }
 
     public function remove($id){
         $projeto = Project::find($id);
         $projeto->delete();
-        return redirect('projeto/andamento');
+        return redirect('projeto/liberados');
     }
 
     public function liberar($id){
         $projeto = Project::find($id);
-        $projeto->liberado = 1;
+        $projeto->status = "Liberado";
         $projeto->save();
-        return redirect('/projeto/andamento');
+        return redirect('/projeto/liberados');
     }
 
     public function para_teste($id){
         $projeto = Project::find($id);
-        $projeto->fase_teste = 1;
-        $projeto->liberado = 0;
+        $projeto->status = "Em teste";
         $projeto->save();
         return redirect()->back();
     }
 
     public function concluir($id){
         $projeto = Project::find($id);
-        $projeto->finalizado = 1;
-        $projeto->fase_teste = 0;
+        $projeto->status = "Finalizado";
         $projeto->save();
         return redirect('projeto/teste');
     }
 
     public function mostra($id){
         $busca = Project::find($id);
-        $progresso = $busca->progresso;
         $func = User::where('cargo', 'like', '%'.'Líder'.'%')->get();
         // $espera = request('espera');
 
         if (empty($busca)){
             return "Esse projeto não existe";
         }
-        return view('projetos.show_projetos',['i' => $busca, 'func' => $func, 'progresso' => $progresso]);
+        return view('projetos.show_projetos',['i' => $busca, 'func' => $func]);
     }
 
     public function editar($id){
@@ -148,27 +147,7 @@ class ProjetosController extends Controller
 
     public function atualizar($id){
         $projeto = Project::find($id);
-        if ($projeto->responsavel == ''){
-            $projeto->responsavel = 'nenhum';
-        }else{
-            $projeto->responsavel = request('responsavel_select');
-        }
-        $projeto->save();
         return redirect()->action([ProjetosController::class, 'mostra'],['id' => $projeto->id]);
-    }
-
-    public function atualizarProgresso($id, $idButton){
-        $projeto = Project::find($id);
-
-        if ($projeto->progresso == $idButton){
-            $projeto->progresso -= 1;
-        }else {
-            $projeto->progresso = $idButton;
-        }
-
-        $projeto->save();
-        return redirect()->action([ProjetosController::class, 'mostra'],['progresso'=>$projeto->progresso, 'id' => $projeto->id]);
-
     }
 
     public function atualizarProjeto(Request $request, $id){
@@ -178,18 +157,11 @@ class ProjetosController extends Controller
         $projeto->cliente = $request->input('cliente');
         $projeto->unidade = $request->input('unidade');
         $projeto->nome_projeto = $request->input('nome_projeto');
-        $projeto->Responsavel_tecnico = $request->input('responsavel');
         $projeto->analista = $request->input('analista');
         $projeto->projetista = $request->input('projetista');
-        $projeto->valor_contratado = $request->input('valor');
-        $projeto->prazo_entrega = $request->input('prazo');
-        $projeto->observacoes = $request->input('obs') ?? '';
         $projeto->data_fechamento = $request->input('data_fechamento');
-        $projeto->data_entrega = Carbon::parse($projeto->data_fechamento)->addDays($projeto->prazo_entrega);
-        $projeto->liberado = 1;
-        $projeto->finalizado = 0;
-        $projeto->fase_teste = 0;
-        $projeto->responsavel = $request->input('responsavel_select');
+        $projeto->data_entrega = $request->input('data_entrega');
+        $projeto->status = 'Liberado';
         $projeto->paineis = $request->input('paineis');
         $projeto->save();
 
@@ -198,8 +170,7 @@ class ProjetosController extends Controller
 
     public function devolverLiberado($id){
         $projeto = Project::find($id);
-        $projeto->fase_teste = 0;
-        $projeto->liberado = 1;
+        $projeto->status = "Liberado";
         $projeto->save();
 
         return redirect('projeto/liberados');
@@ -207,8 +178,7 @@ class ProjetosController extends Controller
 
     public function devolverTeste($id){
         $projeto = Project::find($id);
-        $projeto->fase_teste = 1;
-        $projeto->finalizado = 0;
+        $projeto->status = "Em teste";
         $projeto->save();
 
         return redirect('projeto/teste');

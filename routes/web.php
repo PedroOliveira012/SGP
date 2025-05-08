@@ -36,17 +36,15 @@ Route::get('/projeto/teste', [ProjetosController::class, 'teste'])->name('teste'
 Route::get('/projeto/novo', [ProjetosController::class,'novo_registro'])->name('novo_projeto')->middleware('auth');//funciona
 Route::get('/projeto/mostra/{id}', [ProjetosController::class, 'mostra'])->name('mostra_projeto')->middleware('auth');//funciona
 Route::get('/projeto/editar/{id}', [ProjetosController::class, 'editar'])->name('editar_projeto')->middleware('auth');//funciona
-Route::get('/projeto/responsavel/{id}', [ProjetosController::class, 'responsavel'])->name('responsavel')->middleware('auth');//funciona
-Route::get('/projeto/export/{id}', [ExcelController::class, 'export'])->name('excel');
 Route::put('/projeto/concluir/{id}', [ProjetosController::class, 'concluir'])->name('concluir_projeto')->middleware('auth');//funciona
 Route::put('/projeto/moverparateste/{id}', [ProjetosController::class, 'para_teste'])->name('para_teste')->middleware('auth');//funciona
 Route::put('/projeto/libera/{id}', [ProjetosController::class, 'liberar'])->name('liberar_projeto')->middleware('auth');//funciona
 Route::put('/projeto/devolverLiberado/{id}', [ProjetosController::class, 'devolverLiberado'])->name('devolver_liberado')->middleware('auth');//funciona
 Route::put('/projeto/devolverTeste/{id}', [ProjetosController::class, 'devolverTeste'])->name('devolver_teste')->middleware('auth');
 Route::put('/projeto/atualizar/{id}', [ProjetosController::class, 'atualizar'])->name('atualizar')->middleware('auth');//funciona
-Route::put('/projeto/atualizarProgresso/{id}/{idButton}', [ProjetosController::class, 'atualizarProgresso'])->name('atualizar_progresso')->middleware('auth');//funciona
 Route::put('/projeto/atualizarProjeto/{id}', [ProjetosController::class, 'atualizarProjeto'])->name('atualizar_projeto')->middleware('auth');
 Route::delete('/projeto/remove/{id}', [ProjetosController::class, 'remove'])->name('remover_projeto')->middleware('auth');//funciona
+Route::get('/projeto/export/{id}', [ExcelController::class, 'export'])->name('excel');
 
 //Rotas Métodos / Tarefas - Feito
 Route::post('/tarefa/adiciona', [TarefasController::class, 'adiciona'])->name('add_tarefa')->middleware('auth');//funciona
