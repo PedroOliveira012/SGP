@@ -21,7 +21,7 @@
 <div>
     <table class="table table-dark table-hover tabela">
         <thead>
-            <tr class="">
+            <tr>
                 <th>N° de Projeto</th>
                 <th>Cliente</th>
                 <th>Unidade</th>
@@ -31,41 +31,38 @@
         </thead>
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
-                @if ($i->finalizado == 1)
-                <tr class="tabela__dados">
+                @if ($i->status == "Finalizado")
+                <tr class="align-middle">
                     <td>
-                        <div class="tabela__dados--line"><p><?= $i->num_projeto?></p></a></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line"><p><?= $i->cliente?></p></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line"><p><?= $i->unidade?></p></div>
+                        <p><?= $i->num_projeto?></p>
                     </td>
                     <td>
-                        <div class="tabela__dados--line"><p><?= $i->nome_projeto?></p></div>
+                        <p><?= $i->cliente?></p>
+                    </td>
+                    <td>
+                        <p><?= $i->unidade?></p>
+                    </td>
+                    <td>
+                        <p><?= $i->nome_projeto?></p>
                     </td>
                     <td>
                         <div class="tabela__dados--botoes">
-
-                                {{-- <button type="submit" class=""></button> --}}
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropModal{{$i->id}}">
-                                {{-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdropConcluir{{$i->id}}"> --}}
                                     <i class="fa-solid fa-arrow-left"></i>
                                 </button>
                             </form>
                         </div>
                         <div class="tabela__dados--botoes ">
-                            <a class="tabela__dados--link" href="{{ url('/projeto/mostra/' .$i->id) }}">
+                            <a class="tabela__dados--link" href="{{ url('/tarefas/lista/' .$i->id) }}">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa-solid fa-eye"></i>
+                                    <i class="fa-solid fa-bars"></i>
                                 </button>
                             </a>
                         </div>
                         <div class="tabela__dados--botoes ">
-                            <a class="tabela__dados--link" href="{{ url('/tarefas/lista/' .$i->id) }}">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa-solid fa-bars"></i>
+                            <a class="tabela__dados--link" href="{{ url('/projeto/export/' .$i->id) }}">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa-solid fa-download"></i>
                                 </button>
                             </a>
                         </div>

@@ -27,9 +27,15 @@
                 <input type="text" class="form-control" name="cliente" value="{{ old('cliente') }}">
             </div>
         </div>
-        <div class="col-md-12 form-group mb-3">
-            <label for="" class="col-form-label">Unidade:</label>
-            <input type="text" class="form-control" name="unidade" value="{{ old('unidade') }}">
+        <div class="row">
+            <div class="col-md-6 form-group mb-3">
+                <label for="" class="col-form-label">Cidade:</label>
+                <input type="text" class="form-control" name="cidade" value="{{ old('cidade') }}">
+            </div>
+            <div class="col-md-6 form-group mb-3">
+                <label for="" class="col-form-label">UF:</label>
+                <input type="text" class="form-control" name="UF" value="{{ old('UF') }}">
+            </div>
         </div>
         <div class="col-md-12 form-group mb-3">
             <label for="" class="col-form-label">Nome do projeto:</label>
@@ -52,7 +58,7 @@
             </div>
             <div class="col-md-6 form-group mb-3">
                 <label for="" class="col-form-label">Data de entrega:</label>
-                <input type="date" class="form-control" name="data_entrega" value="{{ old('prazo') }}">
+                <input type="date" class="form-control" name="data_entrega" value="{{ old('data_entrega') }}">
             </div>
         </div>
         <div class="row">

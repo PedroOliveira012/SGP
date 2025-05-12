@@ -31,19 +31,19 @@
         </thead>
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
-                @if ($i->fase_teste == 1)
-                <tr class="tabela__dados">
+                @if ($i->status == "Em teste")
+                <tr class="align-middle">
                     <td>
-                        <div class="tabela__dados--line"><?= $i->num_projeto?></a></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line"><?= $i->cliente?></div>
-                    </td>
-                    <td class="tabela__dados centralizado">
-                        <div class="tabela__dados--line"><?= $i->unidade?></div>
+                        <p><?= $i->num_projeto?></p>
                     </td>
                     <td>
-                        <div class="tabela__dados--line"><?= $i->nome_projeto?></div>
+                        <p><?= $i->cliente?></p>
+                    </td>
+                    <td>
+                        <p><?= $i->unidade?></p>
+                    </td>
+                    <td>
+                        <p><?= $i->nome_projeto?></p>
                     </td>
                     <td>
                         <div class="tabela__dados--botoes">

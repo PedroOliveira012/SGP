@@ -25,9 +25,9 @@
     </div>
 </div>
 <div>
-    <table class="table table-dark table-hover tabela">
+    <table class="table table-dark table-hover tabela align-middle">
         <thead>
-            <tr class="">
+            <tr>
                 <th>N° de Projeto</th>
                 <th>Cliente</th>
                 <th>Unidade</th>
@@ -38,18 +38,18 @@
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
                 @if ($i->status=='Liberado')
-                <tr class="tabela__dados">
+                <tr class="align-middle">
                     <td>
-                        <div class="tabela__dados--line"><p><?= $i->num_projeto?></p></a></div>
+                        <p><?= $i->num_projeto?></p>
                     </td>
                     <td>
-                        <div class="tabela__dados--line"><p><?= $i->cliente?></p></div>
+                        <p><?= $i->cliente?></p>
                     </td>
                     <td>
-                        <div class="tabela__dados--line"><p><?= $i->unidade?></p></div>
+                        <p><?= $i->unidade?></p>
                     </td>
                     <td>
-                        <div class="tabela__dados--line"><p><?= $i->nome_projeto?></p></div>
+                        <p><?= $i->nome_projeto?></p>
                     </td>
                     <td>
                         <div class="tabela__dados botoes centralizado">
@@ -59,9 +59,6 @@
                                         <i class="fa-solid fa-list"></i>
                                     </button>
                                 </a>
-                            </div>
-                            <div class="tabela__dados--botoes">
-                                <a href="{{ url('/projeto/editar/' .$i->id) }}"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-ruler"></i></button></a>
                             </div>
                             <div class="tabela__dados--botoes">
                                 {{-- <button type="submit" class="btn btn-danger" onclick="return confirm('Deseja mesmo excluir este projeto?')"><i class="fa-regular fa-trash-can"></i></button> --}}
