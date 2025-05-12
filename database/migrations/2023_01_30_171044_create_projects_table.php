@@ -24,6 +24,7 @@ class CreateProjectsTable extends Migration
             $table->date('data_fechamento');
             $table->date('data_entrega');
             $table->string('status');
+            $table->int('tempo_total')->default(0);
         });
     }
 

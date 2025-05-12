@@ -17,6 +17,8 @@ class Project extends Model
     protected $guarded = [];
 
     protected $dates = ['data_fechamento', 'data_entrega'];
+
+    public $timestamps = false;
 //}
 
 //class User extends Authenticatable

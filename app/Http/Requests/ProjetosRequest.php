@@ -26,7 +26,8 @@ class ProjetosRequest extends FormRequest
         return [
             'numero_projeto' => 'required|max:14',
             'cliente' => 'required|max:25',
-            'unidade' => 'required|max:25',
+            'cidade' => 'required|max:25',
+            'UF' => 'required|max:2',
             'nome_projeto' => 'required|max:100',
             'analista' => 'required|max:30',
             'projetista' => 'required|max:10',
