@@ -11,32 +11,16 @@
 @endif
 
 <body onload="Relembrar()">
-    @if (Auth::user()->cargo == 'Coordenador de Engenharia' or Auth::user()->cargo == 'Analista' or Auth::user()->cargo == 'Admin')
-        <a href={{ url("/projeto/liberados")}}>
-            <button class="btn voltar-projeto">
-                <i class="fa-solid fa-chevron-left voltar-icone"></i> Voltar
-            </button>
-        </a>
-    @else
-        <a href={{ url("/projeto/liberados")}}>
-            <button class="btn voltar-projeto">
-                <i class="fa-solid fa-chevron-left voltar-icone"></i> Voltar
-            </button>
-        </a>
-    @endif
-
     <section class="container contorno write-section">
         <div class="info-projeto">
             <h1>Número do Projeto: <?= $i->num_projeto?></h1>
             <h3>Status:
-            @if ($i->liberado == 1)
+            @if ($i->status == "Liberado")
                 Liberado para a fábrica
-            @elseif ($i->fase_teste == 1)
+            @elseif ($i->status == "Em teste")
                 Projeto em fase de teste
-            @elseif ($i->finalizado == 1)
-                Projeto finalizado
-            @else
-                Em desenvolvimento na engenharia
+            @elseif ($i->status == "Encerrado")
+                Projeto encerrado
             @endif
             </h3>
             <div class="dados_lista">

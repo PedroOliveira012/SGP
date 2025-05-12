@@ -22,28 +22,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
 
 //Projeto - Em andamento
 Route::post('/projeto/adiciona',[ProjetosController::class, 'adiciona'])->name('add_projeto')->middleware('auth');//funciona
-Route::get('/projeto/encerrados', [ProjetosController::class, 'encerrado'])->name('encerrado')->middleware('auth');//funciona
+Route::get('/projeto/novo', [ProjetosController::class,'formAdicionaProjeto'])->name('novo_projeto')->middleware('auth');//funciona
+
 Route::get('/projeto/liberados', [ProjetosController::class, 'liberado'])->name('liberado')->middleware('auth');//funciona
+Route::put('/projeto/moverparateste/{id}', [ProjetosController::class, 'moverParaTeste'])->name('moverParaTeste')->middleware('auth');//funciona
+
 Route::get('/projeto/teste', [ProjetosController::class, 'teste'])->name('teste')->middleware('auth');//funciona
-Route::get('/projeto/novo', [ProjetosController::class,'novo_registro'])->name('novo_projeto')->middleware('auth');//funciona
+Route::put('/projeto/devolverTeste/{id}', [ProjetosController::class, 'devolverParaTeste'])->name('devolverParaTeste')->middleware('auth');
+
+Route::get('/projeto/encerrados', [ProjetosController::class, 'encerrado'])->name('encerrado')->middleware('auth');//funciona
+Route::put('/projeto/concluir/{id}', [ProjetosController::class, 'moverParaEncerrados'])->name('encerrarProjeto')->middleware('auth');//funciona
+
 Route::get('/projeto/mostra/{id}', [ProjetosController::class, 'mostra'])->name('mostra_projeto')->middleware('auth');//funciona
-Route::get('/projeto/editar/{id}', [ProjetosController::class, 'editar'])->name('editar_projeto')->middleware('auth');//funciona
-Route::put('/projeto/concluir/{id}', [ProjetosController::class, 'concluir'])->name('concluir_projeto')->middleware('auth');//funciona
-Route::put('/projeto/moverparateste/{id}', [ProjetosController::class, 'para_teste'])->name('para_teste')->middleware('auth');//funciona
-Route::put('/projeto/libera/{id}', [ProjetosController::class, 'liberar'])->name('liberar_projeto')->middleware('auth');//funciona
-Route::put('/projeto/devolverLiberado/{id}', [ProjetosController::class, 'devolverLiberado'])->name('devolver_liberado')->middleware('auth');//funciona
-Route::put('/projeto/devolverTeste/{id}', [ProjetosController::class, 'devolverTeste'])->name('devolver_teste')->middleware('auth');
-Route::put('/projeto/atualizar/{id}', [ProjetosController::class, 'atualizar'])->name('atualizar')->middleware('auth');//funciona
-Route::put('/projeto/atualizarProjeto/{id}', [ProjetosController::class, 'atualizarProjeto'])->name('atualizar_projeto')->middleware('auth');
 Route::delete('/projeto/remove/{id}', [ProjetosController::class, 'remove'])->name('remover_projeto')->middleware('auth');//funciona
+
 Route::get('/projeto/export/{id}', [ExcelController::class, 'export'])->name('excel');
 
 //Rotas Métodos / Tarefas - Feito
