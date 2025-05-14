@@ -6,6 +6,12 @@ body{
 
 td, th{
     color: #fff;
+    height: fit-content;
+}
+
+p{
+    margin: auto;
+    font-size: small;
 }
 
 i{
@@ -55,21 +61,21 @@ img{
     text-align: left;
 }
 
-.tabela__dados{
+/* .tabela__dados{
     font-size: 12px;
-    vertical-align: middle;
-    height: 40px;
-}
+    /* vertical-align: middle; */
+    /*height: 40px;
+} */
 
 .centralizado{
     justify-content: center;
 }
 
-.tabela__dados--line{
+/* .tabela__dados--line{
     display: flex;
     vertical-align: middle;
     align-items: center;
-}
+} */
 
 .tabela__dados--botoes{
     display: inline-flex;
