@@ -13,18 +13,18 @@ class RemoverColunaProjeto extends Migration
      */
     public function up()
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn("Responsavel_tecnico");
-            $table->dropColumn("valor_contratado");
-            $table->dropColumn("prazo_entrega");
-            $table->dropColumn("observacoes");
-            $table->dropColumn("liberado");
-            $table->dropColumn("fase_teste");
-            $table->dropColumn("finalizado");
-            $table->dropColumn("responsavel");
-            $table->dropColumn("created_at");
-            $table->dropColumn("updated_at");
-        });
+        // Schema::table('projects', function (Blueprint $table) {
+        //     $table->dropColumn("Responsavel_tecnico");
+        //     $table->dropColumn("valor_contratado");
+        //     $table->dropColumn("prazo_entrega");
+        //     $table->dropColumn("observacoes");
+        //     $table->dropColumn("liberado");
+        //     $table->dropColumn("fase_teste");
+        //     $table->dropColumn("finalizado");
+        //     $table->dropColumn("responsavel");
+        //     $table->dropColumn("created_at");
+        //     $table->dropColumn("updated_at");
+        // });
     }
 
     /**

@@ -5,6 +5,7 @@ use App\Http\Controllers\TarefasController;
 use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\ZettawireController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,12 @@ Route::put('/tarefas/atualizar/{id}', [TarefasController::class, 'atualizar'])->
 Route::put('/tarefas/retrabalho/{id}', [TarefasController::class, 'retrabalho'])->name('retrabalho')->middleware('auth');
 Route::get('/tarefas/concluir/{id}', [TarefasController::class, 'concluir'])->name('concluir_tarefa')->middleware('auth');//funciona
 Route::delete('/tarefas/remove/{id}', [TarefasController::class, 'remove'])->name('remover_tarefa')->middleware('auth');//funciona
+
+//Rotas Zettawire
+Route::get('/zettawire/index', [ZettawireController::class, 'index'])->name('index_zettawire')->middleware('auth');
+Route::get('/zettawire/roteamento/{id}', [ZettawireController::class, 'roteamento'])->name('roteamento')->middleware('auth');
+Route::get('/upload', [ZettawireController::class, 'form']);
+Route::post('/upload/{id}', [zettawireController::class, 'upload'])->name('upload');
 
 //Rotas Funcionarios
 Route::get('/funcionarios/index', [FuncionariosController::class, 'index'])->name('index_funcionario')->middleware('auth');//funciona
