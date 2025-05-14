@@ -21,21 +21,20 @@
 <div>
     <table class="table table-dark table-hover tabela">
         <thead>
-            <tr class="tabela__head">
+            <tr>
                 <th>Inicio da Tarefa</th>
                 <th>Termino da Tarefa</th>
                 <th></th>
                 <th>Status da tarefa</th>
                 <th>Funcionario</th>
-                <th class="tabela__head--esquerda">Tarefa</th>
-                <th>Notas / OBS</th>
+                <th>Tarefa</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
-                <tr class="tabela__dados">
-                    <td class="inicio">
-                        <div class="tabela__dados--line centralizado">
+                <tr>
+                    <td>
+                        <div>
                             @if ($i->inicio_tarefa)
                                 <button type="submit" class="btn btn-success" disabled>Horario Gravado</button>
                             @else
@@ -46,8 +45,8 @@
                             @endif
                         </div>
                     </td>
-                    <td class="termino">
-                        <div class="tabela__dados--line centralizado">
+                    <td>
+                        <p>
                             @if ($i->inicio_tarefa == null)
                                 <button type="submit" class="btn btn-success" disabled>Esperando inicio da tarefa</button>
                             @elseif ($i->termino_tarefa)
@@ -58,10 +57,10 @@
                                     <button type="submit" class="btn btn-success">Gravar horario</button>
                                 </form>
                             @endif
-                        </div>
+                        </p>
                     </td>
-                    <td class="pausa">
-                        <div class="tabela__dados--line centralizado">
+                    <td>
+                        <p>
                             @if ($i->termino_tarefa || $i->inicio_tarefa == null)
                                 <button type="submit" class="btn btn-warning" disabled><i class="fa-solid fa-pause"></i></button>
                             @else
@@ -77,8 +76,7 @@
                                     </form>
                                 @endif
                             @endif
-
-                        </div>
+                        </p>
                     </td>
                     <td>
                         <div>
@@ -93,17 +91,11 @@
                             @endif
                         </div>
                     </td>
-                    <td class="funcionario">
-                        <div class="tabela__dados--line centralizado"><?= $i->funcionario?></div>
+                    <td>
+                        <p><?= $i->funcionario?></p>
                     </td>
-                    <td class="tarefa">
-                        <div class="nome-botao">
-                            <div class="tabela__dados--line info-tarefa--nome"><?= $i->tarefa?></div>
-                            
-                        </div>
-                    </td>
-                    <td class="notas">
-                        <div class="tabela__dados--line centralizado"><?= $i->Notas?></div>
+                    <td>
+                        <p><?= $i->tarefa?></p>
                     </td>
                 </tr>
             <?php endforeach?>

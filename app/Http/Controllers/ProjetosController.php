@@ -121,11 +121,6 @@ class ProjetosController extends Controller
 
     public function mostra($id){
         $busca = Project::find($id);
-        $func = User::where('cargo', 'like', '%'.'Líder'.'%')->get();
-
-        if (empty($busca)){
-            return "Esse projeto não existe";
-        }
-        return view('projetos.show_projetos',['i' => $busca, 'func' => $func]);
+        return view('projetos.show_projetos',['i' => $busca]);
     }
 }

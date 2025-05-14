@@ -23,37 +23,29 @@
 <div>
     <table class="table table-dark table-hover tabela">
         <thead>
-            <tr class="tabela__head">
+            <tr>
                 <th>N° de Projeto</th>
                 <th>Cliente</th>
                 <th>Unidade</th>
                 <th>Nome do Projeto</th>
-                <th>Prazo de Entrega</th>
-                <th>Observações</th>
                 <th></th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
-                @if ($i->liberado == 1)
+                @if ($i->status == "Liberado")
                 <tr>
                     <td>
-                        <div class="tabela__dados tabela__dados--line"><p>{{$i->num_projeto}}</p></div>
-                    </td>
-                    <td class="tabela__dados tabela__dados--centralizado">
-                        <div class="tabela__dados--line"><p><?= $i->cliente?></p></div>
-                    </td>
-                    <td class="tabela__dados tabela__dados--centralizado">
-                        <div class="tabela__dados--line"><p><?= $i->unidade?></p></div>
+                        <p>{{$i->num_projeto}}</p>
                     </td>
                     <td>
-                        <div class="tabela__dados tabela__dados--line"><p><?= $i->nome_projeto?></p></div>
-                    </td>
-                    <td class="tabela__dados--centralizado">
-                        <div class="tabela__dados tabela__dados--line"><p><?= $i->prazo_entrega?> dias</p></div>
+                        <p><?= $i->cliente?></p>
                     </td>
                     <td>
-                        <div class="tabela__dados tabela__dados--line"><p><?= $i->observacoes?></p></div>
+                        <p><?= $i->unidade?></p>
+                    </td>
+                    <td>
+                        <p><?= $i->nome_projeto?></p>
                     </td>
                     <td>
                         <div>

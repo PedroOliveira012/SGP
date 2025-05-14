@@ -55,6 +55,14 @@
                     @endif -->
                     <li class=""><b>Status de entrega: </b><?= Carbon\Carbon::parse($i->data_fechamento)->diffInDays($i->data_finalizacao)?> dias</li>
                 </ul>
+                <div>
+                    <form action="{{ url('/upload/' .$i->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <label>Escolha o arquivo:</label>
+                    <input type="file" name="file" required>
+                    <button type="submit">Enviar</button>
+                </form>
+                </div>
             </div>
         </div>
     </section>
