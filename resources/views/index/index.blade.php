@@ -4,12 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-        {{-- <link rel="stylesheet" href="{{ asset('css/index.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('css/backup.css') }}">
+
         <title>SGP</title>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         <script src="https://kit.fontawesome.com/05b56d1101.js" crossorigin="anonymous"></script>
         <script src="{{ asset('js/script.js') }}"></script>
     </head>

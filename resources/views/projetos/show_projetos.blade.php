@@ -55,12 +55,25 @@
                     @endif -->
                     <li class=""><b>Status de entrega: </b><?= Carbon\Carbon::parse($i->data_fechamento)->diffInDays($i->data_finalizacao)?> dias</li>
                 </ul>
-                <div>
-                    <form action="{{ url('/upload/' .$i->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <label>Escolha o arquivo:</label>
-                    <input type="file" name="file" required>
-                    <button type="submit">Enviar</button>
+                <div class="div-gravar-cabos">
+                    
+                    <div class="form-gravar-cabos">
+                        <form action="{{ url('/upload/' .$i->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <!-- <label>Escolha o arquivo:</label>
+                        <input type="file" name="file" required> -->
+                        <label for="file" class="btn custom-file-button">
+                            <i class="fa-solid fa-upload"></i>
+                            <span>Selecionar arquivo</span>
+                        </label>
+                        <input type="file" id="file" name="file">
+                    </div>
+                    <div class="div-btn-gravar-cabos">
+                        <button class="btn btn-gravar-cabos" type="submit">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>Gravar cabos</span>
+                        </button>
+                    </div>
                 </form>
                 </div>
             </div>

@@ -668,3 +668,87 @@ a:link, a:visited{
     font-size: large;
     padding: 15px;
 }
+
+.div-gravar-cabos{
+    /* border: solid 1px yellow; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.form-gravar-cabos{
+    /* border: solid 1px blue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+/* input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+} */
+
+/* Ocultar o input file original */
+input[type="file"] {
+  display: none;
+}
+
+/* Estilizar o botão personalizado */
+.custom-file-button {
+    background-color: #00aac0;
+    /* padding: 8px 12px;
+    border-radius: 4px; */
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+}
+
+/* Estilizar o botão personalizado */
+.custom-file-button {
+    background-color: #00aac0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.custom-file-button:hover {
+    background-color: #00aac0ad !important;
+    color: #000 !important;
+}
+
+/* Estilizar o texto do nome do arquivo */
+.custom-file-name {
+    margin-left: 10px;
+}
+
+/* Estilizar o ícone do botão */
+.custom-file-icon {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+}
+
+.div-btn-gravar-cabos{
+    /* border: solid 1px red; */
+    margin-left: 30px;
+    margin-right: 10px;
+}
+
+.btn-gravar-cabos{
+    width: fit-content;
+    height: fit-content;
+}
+
+.btn-gravar-cabos:hover{
+    background-color: #00aac0ad !important;
+    color: #121212 !important;
+}
+
+
+
