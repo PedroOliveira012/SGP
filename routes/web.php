@@ -63,6 +63,8 @@ Route::get('/zettawire/index', [ZettawireController::class, 'index'])->name('ind
 Route::get('/zettawire/roteamento/{id}', [ZettawireController::class, 'roteamento'])->name('roteamento')->middleware('auth');
 Route::get('/upload', [ZettawireController::class, 'form']);
 Route::post('/upload/{id}', [zettawireController::class, 'upload'])->name('upload');
+Route::post('/zettawire/roteamento/origem/{id}', [ZettawireController::class, 'origem'])->name('origem')->middleware('auth');
+Route::post('/zettawire/roteamento/destino/{id}', [ZettawireController::class, 'destino'])->name('destino')->middleware('auth');
 
 //Rotas Funcionarios
 Route::get('/funcionarios/index', [FuncionariosController::class, 'index'])->name('index_funcionario')->middleware('auth');//funciona

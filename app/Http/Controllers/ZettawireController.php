@@ -73,4 +73,35 @@ class ZettawireController extends Controller
         Storage::delete($path);
         return back();
     }
+
+    public function origem($id){
+        $RequestValue = (int) request()->input('origin_value'); //1 ou -1
+        // Busca o valor atual
+        $cable = DB::table('cable_routing')->find($id);//acha o cabo
+        if ($cable) {
+            $DBOriginValue = $cable->status; //0
+            // Atualiza no banco
+            DB::table('cable_routing')->where('id', $id)->update([
+                'status' => $DBOriginValue + $RequestValue,
+                'origin_value' => $RequestValue = $RequestValue * -1,
+            ]);   
+        }
+
+        return redirect()->back();
+    }
+
+    public function destino($id){
+        $RequestValue = (int) request()->input('target_value'); //1 ou -1
+        // Busca o valor atual
+        $cable = DB::table('cable_routing')->find($id);//acha o cabo
+        if ($cable) {
+            $DBOriginValue = $cable->status; //0
+            // Atualiza no banco
+            DB::table('cable_routing')->where('id', $id)->update([
+                'status' => $DBOriginValue + $RequestValue,
+                'target_value' => $RequestValue = $RequestValue * -1,
+            ]);   
+        }
+        return redirect()->back();
+    }
 }
