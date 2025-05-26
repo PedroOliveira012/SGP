@@ -733,9 +733,18 @@ input[type="file"] {
 
 .collapsedRow_content{
     height: 150px;
-    /* border: solid 1px red ; */
     width: 25%;
     color: #fff;
+    /* border: solid 1px red ; */
+}
+
+.collapsedRow_content_buttons{
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    width: 25%;
+    color: #fff;
+    /* border: solid 1px red ; */
 }
 
 .collapsedRow_div{
