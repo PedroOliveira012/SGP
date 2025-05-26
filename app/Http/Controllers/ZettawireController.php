@@ -26,7 +26,45 @@ class ZettawireController extends Controller
         $cabos = DB::table('cable_routing')
             ->where('project_id', $id)
             ->get();
-        return view('zettawire.roteamento',['projeto' => $projeto, 'cabos' => $cabos]);
+        $colors = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('color');
+        $tags = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('tag');
+        $wire_harness = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('wire_harness');
+        $origins = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('origin');
+        $targets = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('target');
+        $cable_cross_sections = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('cable_cross_section');
+        $status = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('status');
+
+        return view('zettawire.roteamento',[
+            'projeto' => $projeto, 
+            'cabos' => $cabos,
+            'colors' => $colors,
+            'tags' => $tags,
+            'wire_harness' => $wire_harness,
+            'origins' => $origins,
+            'targets' => $targets,
+            'cable_cross_sections' => $cable_cross_sections,
+            'status' => $status,]);
     }
 
     public function upload(Request $request, $id){
@@ -51,17 +89,21 @@ class ZettawireController extends Controller
             if (count($cabecalho) === count($linha)) {
                 $dados = array_combine($cabecalho, $linha);
 
+                $tagValue = strval($dados['ANILHA']);
+
                 $color_and_section = explode('-', $dados['CÓDIGO DO CABO']);
                 $color =  $color_and_section[0];
-                $section =  $color_and_section[1];
+                $section =  $color_and_section[1].' - '.$color_and_section[2];
 
                 DB::table('cable_routing')->insert([
                     'project_id' => $id,
-                    'tag' => $dados['ANILHA'],
+                    'tag' => $tagValue,
                     'origin' => $dados['ALVO'],
                     'origin_direction' => $dados['DIREÇÃO DO CABO (ALVO)'],
+                    'origin_terminal_type' => $dados['TERMINAL FONTE'],
                     'target' => $dados['FONTE'],
                     'target_direction' => $dados['DIREÇÃO DO CABO (FONTE)'],
+                    'target_terminal_type' => $dados['TERMINAL ALVO'],
                     'cable_cross_section' => $section,
                     'color' => $color,
                     'wire_harness' => $dados['CHICOTE'],
@@ -79,10 +121,10 @@ class ZettawireController extends Controller
         // Busca o valor atual
         $cable = DB::table('cable_routing')->find($id);//acha o cabo
         if ($cable) {
-            $DBOriginValue = $cable->status; //0
+            $StatusValue = $cable->status; //0
             // Atualiza no banco
             DB::table('cable_routing')->where('id', $id)->update([
-                'status' => $DBOriginValue + $RequestValue,
+                'status' => $StatusValue + $RequestValue,
                 'origin_value' => $RequestValue = $RequestValue * -1,
             ]);   
         }
@@ -95,12 +137,39 @@ class ZettawireController extends Controller
         // Busca o valor atual
         $cable = DB::table('cable_routing')->find($id);//acha o cabo
         if ($cable) {
-            $DBOriginValue = $cable->status; //0
+            $StatusValue = $cable->status; //0
             // Atualiza no banco
             DB::table('cable_routing')->where('id', $id)->update([
-                'status' => $DBOriginValue + $RequestValue,
+                'status' => $StatusValue + $RequestValue,
                 'target_value' => $RequestValue = $RequestValue * -1,
             ]);   
+        }
+        return redirect()->back();
+    }
+
+    public function buscar(Request $request){
+        $query = $request->get('query');
+
+        $cable_routing = DB::table('cable_routing')->where('origin', 'like', "%{$query}%")->get();
+
+        return response()->json($cable_routing);
+    }
+
+    public function finalizaCabo($id){
+        $cable = DB::table('cable_routing')->find($id);//acha o cabo
+        if ($cable){
+            $originValue = (int) request()->input('origin_value');
+            $targetValue = (int) request()->input('target_value');
+            if($cable->status == 2){
+                $StatusValue = 0;
+            }else{
+                $StatusValue = 2;
+            }
+            DB::table('cable_routing')->where('id', $id)->update([
+                'status' => $StatusValue,
+                'origin_value' => $originValue * -1,
+                'target_value' => $targetValue * -1,
+            ]);
         }
         return redirect()->back();
     }

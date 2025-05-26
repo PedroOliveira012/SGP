@@ -12,6 +12,7 @@
         <title>SGP</title>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         <script src="https://kit.fontawesome.com/05b56d1101.js" crossorigin="anonymous"></script>
         <script src="{{ asset('js/script.js') }}"></script>
