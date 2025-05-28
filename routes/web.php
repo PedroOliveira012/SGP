@@ -67,6 +67,9 @@ Route::post('/zettawire/roteamento/origem/{id}', [ZettawireController::class, 'o
 Route::post('/zettawire/roteamento/destino/{id}', [ZettawireController::class, 'destino'])->name('destino')->middleware('auth');
 Route::post('/zettawire/roteamento/finalizaCabo/{id}', [ZettawireController::class, 'finalizaCabo'])->name('finaliza')->middleware('auth');
 Route::get('/zettawire/buscar/{id}', [ZettawireController::class, 'buscar'])->name('buscar');
+Route::get('/zettawire/buttons/{id}', [ZettawireController::class, 'getButtons'])->name('zettawire.buttons');
+Route::post('/zettawire/roteamento/alterarStatus/{id}', [ZettawireController::class, 'alterarStatus'])->name('alterarStatus');
+
 
 //Rotas Funcionarios
 Route::get('/funcionarios/index', [FuncionariosController::class, 'index'])->name('index_funcionario')->middleware('auth');//funciona

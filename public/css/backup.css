@@ -9,6 +9,10 @@ th, td{
     height: fit-content;
 }
 
+th{
+    border: solid 1px red;
+}
+
 p{
     margin: auto;
     font-size: small;
@@ -752,4 +756,25 @@ input[type="file"] {
     flex-direction: row;
     width: 100%;
     color: #fff;
+}
+
+.dropdown-size{
+    height: 250px;
+    overflow-y: auto;
+}
+
+/* Estiliza a barra de rolagem inteira */
+.dropdown-size::-webkit-scrollbar {
+  width: 6px; /* bem fina */
+}
+
+/* Estiliza a trilha da barra (o fundo) */
+.dropdown-size::-webkit-scrollbar-track {
+  background: #1e1e1e; /* fundo escuro */
+}
+
+/* Estiliza o polegar da barra (a parte que desliza) */
+.dropdown-size::-webkit-scrollbar-thumb {
+  background-color: #5a5a5a; /* cinza médio */
+  border-radius: 3px;        /* arredondamento das extremidades */
 }

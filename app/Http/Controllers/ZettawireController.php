@@ -155,6 +155,12 @@ class ZettawireController extends Controller
         return response()->json($cable_routing);
     }
 
+    public function getButtons($id){
+        $cable_routing = DB::table('cable_routing')->where('id', $id)->first();
+        return view('partials.botao', compact('cable_routing'))->render();
+    }
+
+
     public function finalizaCabo($id){
         $cable = DB::table('cable_routing')->find($id);//acha o cabo
         if ($cable){
@@ -172,5 +178,22 @@ class ZettawireController extends Controller
             ]);
         }
         return redirect()->back();
+    }
+
+    public function alterarStatus(Request $request, $id){
+        $cable = DB::table('cable_routing')->where('id', $id)->first();
+
+        if ($cable) {
+            DB::table('cable_routing')
+                ->where('id', $id)
+                ->update([
+                    'status' => 2,
+                    'origin_value' => -1,
+                    'target_value' => -1
+                ]);
+
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false, 'message' => 'Cabo não encontrado'], 404);
     }
 }
