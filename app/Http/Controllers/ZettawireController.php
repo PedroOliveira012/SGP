@@ -168,13 +168,17 @@ class ZettawireController extends Controller
             $targetValue = (int) request()->input('target_value');
             if($cable->status == 2){
                 $StatusValue = 0;
+                $originValue = 1;
+                $targetValue = 1;
             }else{
                 $StatusValue = 2;
+                $originValue = -1;
+                $targetValue = -1;
             }
             DB::table('cable_routing')->where('id', $id)->update([
                 'status' => $StatusValue,
-                'origin_value' => $originValue * -1,
-                'target_value' => $targetValue * -1,
+                'origin_value' => $originValue,
+                'target_value' => $targetValue,
             ]);
         }
         return redirect()->back();

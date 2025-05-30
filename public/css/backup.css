@@ -9,10 +9,6 @@ th, td{
     height: fit-content;
 }
 
-th{
-    border: solid 1px red;
-}
-
 p{
     margin: auto;
     font-size: small;
@@ -736,17 +732,8 @@ input[type="file"] {
 }
 
 .collapsedRow_content{
-    height: 150px;
-    width: 25%;
-    color: #fff;
-    /* border: solid 1px red ; */
-}
-
-.collapsedRow_content_buttons{
-    display: flex;
-    flex-direction: row;
-    height: 150px;
-    width: 25%;
+    height: 120px;
+    width: 33.33%;
     color: #fff;
     /* border: solid 1px red ; */
 }
@@ -754,6 +741,8 @@ input[type="file"] {
 .collapsedRow_div{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     color: #fff;
 }
@@ -778,3 +767,92 @@ input[type="file"] {
   background-color: #5a5a5a; /* cinza médio */
   border-radius: 3px;        /* arredondamento das extremidades */
 }
+
+.cable-end{
+    width: 7%;
+    height: 20%;
+
+}
+
+.cable-start{
+    width: 7%;
+    height: 20%;
+}
+
+.cable-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 86%;
+    height: 50%;
+}
+
+.cable-button{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    border: none;
+    cursor: pointer;
+}
+
+.finish-button{
+    border: none;
+    background-color: #212529
+}
+
+.black-cable{
+    background-color: #000;
+}
+
+.white-cable{
+    background-color: #fff;
+}
+
+.light-blue-cable{
+    background-color: #00bfff;
+}
+
+.red-cable{
+    background-color: #cd272e;
+}
+
+.yellow-cable{
+    background-color: #fde82d;
+}
+
+.gray-cable{
+    background-color: #696969;
+}
+
+.orange-cable{
+    background-color: #696969;
+}
+
+.dark-blue-cable{
+    background-color: #696969;
+}
+
+.violet-cable{
+    background-color: #696969;
+}
+
+.green-yellow-cable{
+    background: linear-gradient(to bottom, #22c35d 50%, #fde82d 50%);
+}
+
+.copper-cable{
+    background: #c06205;
+}
+
+.terminal-end{
+    background: linear-gradient(to right, #fe0000 50%, #777 50%);
+}
+
+.terminal-start{
+    background: linear-gradient(to left, #fe0000 50%, #777 50%);
+}
+

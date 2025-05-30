@@ -9,7 +9,7 @@
     <div class="search-and-add">
         <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por tag de origem ou destino">
     </div>
-    <button id="alterarStatus" class="btn btn-warning m-2">
+    <button id="alterarStatus" class="btn btn-warning m-2 invisible">
         Concluir cabos
     </button>
 </div>
@@ -30,7 +30,7 @@
                     </ul>
                 </div>
             </th>
-            <th>
+            <th class="text-center align-middle">
                 Anilha
                 <!-- <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,7 +43,7 @@
                     </ul>
                 </div> -->
             </th>
-            <th>
+            <th class="text-center align-middle">
                 Origem
                 <!-- <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,7 +56,7 @@
                     </ul>
                 </div> -->
             </th>
-            <th>
+            <th class="text-center align-middle">
                 Destino
                 <!-- <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,7 +69,7 @@
                     </ul>
                 </div> -->
             </th>
-            <th>
+            <th class="text-center align-middle">
                 Seção transversal
                 <!-- <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -82,7 +82,7 @@
                     </ul>
                 </div> -->
             </th>
-            <th>
+            <th class="text-center align-middle">
                 Cor
                 <!-- <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -95,7 +95,7 @@
                     </ul>
                 </div> -->
             </th>
-            <th>
+            <th class="text-center align-middle">
                 Status
                 <!-- <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -112,7 +112,7 @@
     </thead>
     <tbody class="table-group-divider" id="resultsFound">
         @foreach ($cabos as $cabo)
-        <tr class="align-middle text-center" onclick="toggleCollapse('collapseRow{{ $cabo->id }}')" style="cursor: pointer" data-id="{{ $cabo->id }}">
+        <tr class=" align-middle text-center " onclick="toggleCollapse('collapseRow{{ $cabo->id }}')" style="cursor: pointer" data-id="{{ $cabo->id }}">
             <td class="item-filtro item-visivel {{ $cabo->wire_harness }}" data-id="{{ $cabo->id }}">
                 <p><?= $cabo->wire_harness?></p>
             </td>
@@ -132,60 +132,112 @@
                 <p><?= $cabo->color?></p>
             </td>
             <td>
-                @if($cabo->status == 0)
-                    <p class="text-danger"><i class="fa-solid fa-circle-dot" style="color: #dc3545"></i></p>
-                @elseif($cabo->status == 1)
-                    <p class="text-warning"><i class="fa-solid fa-circle-dot" style="color: #f2b809"></i></p>
-                @else
-                    <p class="text-success"><i class="fa-solid fa-circle-dot" style="color: #198754"></i></p>
-                @endif
+                <div class="d-flex w-100 justify-content-center align-items-start ">
+                    <form action="finalizaCabo/{{$cabo->id}}" method="POST" class="d-flex w-100 justify-content-center">
+                        @csrf
+                        @method('POST')
+                        <button type="submit" onclick="event.stopPropagation();" class="finish-button">
+                            @if($cabo->status == 0)
+                                <p><i class="fa-regular fa-circle fa-xl" style="color: #dc3545"></i></p>
+                            @elseif($cabo->status == 1)
+                                <p><i class="fa-solid fa-circle-half-stroke fa-xl" style="color: #f2b809"></i></p>
+                            @else
+                                <p><i class="fa-solid fa-circle fa-xl" style="color: #198754"></i></p>
+                            @endif
+                        </button>
+                        <input type="hidden" name="origin_value" value="{{ $cabo->origin_value }}">
+                        <input type="hidden" name="target_value" value="{{ $cabo->target_value }}">
+                    </form>
+                </div>
             </td>
         </tr>
         <tr class="collapsedRow">
-            <td colspan="7" class="p-0 border-bottom-1 border-top-0">
-                @if($cabo->status == 0 || $cabo->status == 2)
-                    <div class="collapse collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
-                @elseif($cabo->status == 1)
+            <td colspan="7" class="p-0 bottom-1 top-0">
+                @if($cabo->status == 1)
                     <div class="collapse show collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
+                @else
+                    <div class="collapse collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                 @endif
-                    <div class="p-3 collapsedRow_content">
-                        <p>Comprimento: {{ $cabo->length }}m</p>
-                        <p>Terminal origem: {{ $cabo->origin_terminal_type }}</p>
-                        <p>Terminal destino: {{ $cabo->target_terminal_type }}</p>
-                    </div>
-                    <div class="p-3 collapsedRow_content">
+                    <div class="p-2 collapsedRow_content text-end">
                         <strong>Direção origem</strong><br>
                         <p>{{ $cabo->origin_direction }}</p>
                         @include('partials.cabo_collapse', ['direcao' => $cabo->origin_direction])
+                        <p>Terminal origem: {{ $cabo->origin_terminal_type }}</p>
                     </div>
-                    <div class="p-3 collapsedRow_content">
+                    <div class="d-flex flex-column align-items-center collapsedRow_content">
+                        <div class="d-flex w-100 h-100 justify-content-between align-items-center">
+                            <div>
+                                <form action="origem/{{$cabo->id}}" method="POST" class="d-flex justify-content-center align-items-center">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="cable-button">
+                                        @if($cabo->origin_value == 1)
+                                            <i class="fa-solid fa-circle fa-xl" style="color: #E60026"></i>
+                                        @else
+                                            <i class="fa-solid fa-circle fa-xl" style="color: #138808"></i>
+                                        @endif
+                                    </button>
+                                    <input type="hidden" name="origin_value" value="{{ $cabo->origin_value }}">
+                                </form>
+                            </div>
+                            <div class="d-flex w-100 h-75 p-1 align-items-center">
+                                @if($cabo->origin_terminal_type == 'Pré-Decapado (Sem Terminal)')
+                                    <div class="cable-start m-auto copper-cable">
+                                @else
+                                    <div class="cable-start m-auto terminal-start"> 
+                                @endif
+                                </div>
+                                @if($cabo->color == 'PT')
+                                    <div class="cable-body m-auto black-cable">
+                                @elseif($cabo->color == 'BR')
+                                    <div class="cable-body m-auto white-cable">
+                                @elseif($cabo->color == 'AZ CL')
+                                    <div class="cable-body m-auto light-blue-cable">
+                                @elseif($cabo->color == 'VM')
+                                    <div class="cable-body m-auto red-cable">
+                                @elseif($cabo->color == 'AM')
+                                    <div class="cable-body m-auto yellow-cable">
+                                @elseif($cabo->color == 'CZ')
+                                    <div class="cable-body m-auto gray-cable">
+                                @elseif($cabo->color == 'VD/AM')
+                                    <div class="cable-body m-auto green-yellow-cable">
+                                @elseif($cabo->color == 'AZ ES')
+                                    <div class="cable-body m-auto dark-blue-cable">
+                                @elseif($cabo->color == 'LR')
+                                    <div class="cable-body m-auto orange-cable">
+                                @else($cabo->color == 'VI')
+                                    <div class="cable-body m-auto violet-cable">
+                                @endif
+                                    <p style="background:#fff; color:#000; padding:2px">Comprimento: {{ $cabo->length }}m</p>
+                                </div>
+                                @if($cabo->origin_terminal_type == 'Pré-Decapado (Sem Terminal)')
+                                    <div class="cable-start m-auto copper-cable">
+                                @else
+                                    <div class="cable-start m-auto terminal-end"> 
+                                @endif
+                                </div>
+                            </div>
+                            <div>
+                                <form action="destino/{{$cabo->id}}" method="POST" class="d-flex justify-content-center align-items-center">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="cable-button">
+                                        @if($cabo->target_value == 1)
+                                            <i class="fa-solid fa-circle fa-xl" style="color: #E60026"></i>
+                                        @else
+                                            <i class="fa-solid fa-circle fa-xl" style="color: #138808"></i>
+                                        @endif
+                                    </button>
+                                    <input type="hidden" name="target_value" value="{{ $cabo->target_value }}">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2 collapsedRow_content">
                         <strong>Direção destino</strong>
                         <p>{{ $cabo->target_direction }}</p>
                         @include('partials.cabo_collapse', ['direcao' => $cabo->target_direction])
-                    </div>
-                    <div class="p-3 collapsedRow_content_buttons" id="collapsedRowButtons">
-                        <form action="origem/{{$cabo->id}}" method="POST">
-                            @csrf
-                            @method('POST')
-                            <button type="submit" class="">origem</button>
-                            <input type="hidden" name="origin_value" value="{{ $cabo->origin_value }}">
-                        </form>
-                        <p>{{ $cabo->origin_value }}</p>
-                        <form action="destino/{{$cabo->id}}" method="POST">
-                            @csrf
-                            @method('POST')
-                            <button type="submit" class="">destino</button>
-                            <input type="hidden" name="target_value" value="{{ $cabo->target_value }}">
-                        </form>
-                        <p>{{ $cabo->target_value }}</p>
-                        <form action="finalizaCabo/{{$cabo->id}}" method="POST">
-                            @csrf
-                            @method('POST')
-                            <button type="submit" class="">Finaliza</button>
-                            <input type="hidden" name="origin_value" value="{{ $cabo->origin_value }}">
-                            <input type="hidden" name="target_value" value="{{ $cabo->target_value }}">
-                        </form>
-                        <p>{{ $cabo->status }}</p>
+                        <p>Terminal destino: {{ $cabo->target_terminal_type }}</p>
                     </div>
                 </div>
             </td>
@@ -204,12 +256,19 @@
         e.preventDefault();
 
         var filtro = $(this).data('filtro');
-
+        $('alterarStatus').removeClass('invisible');
         $('table tbody tr').each(function() {
             var categoria = $(this).find('.item-filtro p').text().trim();
 
             if (filtro === 'todos' || categoria === filtro) {
                 $(this).show();
+                if (filtro === 'todos'){
+                    $('#alterarStatus').addClass('invisible')
+                }
+                else {
+                    $('#alterarStatus').removeClass('invisible');
+                }
+                console.log('Exibindo: ' + categoria);
             } else {
                 $(this).hide();
             }
@@ -255,7 +314,7 @@
                 if (query.trim() === '') {
                     $('#resultsFound').empty();
                     $('#resultsNotFound').empty();
-                    $('#resultsFound').html(tabelaOriginal);   // Se quiser, pode comentar essa linha para manter os resultsFound.
+                    $('#resultsFound').html(tabelaOriginal);
                     return;
                 }
                 $.ajax({
@@ -276,11 +335,11 @@
                             $.each(data, function(i, cable_routing){
                                 let statusIcon = '';
                                 if(cable_routing.status == 0){
-                                    statusIcon = '<p class="text-danger"><i class="fa-solid fa-circle-dot" style="color: #dc3545"></i></p>';
+                                    statusIcon = '<p><i class="fa-regular fa-circle fa-xl" style="color: #dc3545"></i></p>';
                                 } else if(cable_routing.status == 1){
-                                    statusIcon = '<p class="text-warning"><i class="fa-solid fa-circle-dot" style="color: #f2b809"></i></p>';
+                                    statusIcon = '<p><i class="fa-solid fa-circle-half-stroke fa-xl" style="color: #f2b809"></i></p>';
                                 } else {
-                                    statusIcon = '<p class="text-success"><i class="fa-solid fa-circle-dot" style="color: #198754"></i></p>';
+                                    statusIcon = '<p><i class="fa-solid fa-circle fa-xl" style="color: #198754"></i></p>';
                                 }
                                 $('#resultsFound').append(
                                     '<tr class="align-middle text-center" onclick="toggleCollapse(\'collapseRow' + cable_routing.id + '\')" style="cursor: pointer">' +
@@ -292,8 +351,9 @@
                                         '<td><p>' + cable_routing.color + '</p></td>' + 
                                         '<td>' + statusIcon + '</td>' +
                                     '</tr>' + 
+                                    '<td colspan="7" class="p-0 bottom-1 top-0">'+
                                     '<tr class="collapsedRow">' +
-                                        '<td colspan="7" class="p-0 border-bottom-1 border-top-0">' +
+                                        '<td colspan="7" class="p-0 bottom-1 top-0">' +
                                             '<div class="collapse collapsedRow_div" id="collapseRow' + cable_routing.id + '">' +
                                                 '<div class="p-3 collapsedRow_content">' +
                                                     '<p>Comprimento: ' + cable_routing.length + 'm</p>' +
