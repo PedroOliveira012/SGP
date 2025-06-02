@@ -10,6 +10,7 @@ use App\Models\Project;
 
 class ZettawireController extends Controller
 {
+
     public function index(){
         $lista = Project::all();
         $search = request('search');
@@ -20,6 +21,8 @@ class ZettawireController extends Controller
         }
         return view('zettawire.index', ['lista' => $lista, 'search' => $search]);
     }
+
+    // ZETTAWIRE CABLE ROUTING
 
     public function roteamento($id){
         $projeto = Project::find($id);
@@ -121,10 +124,10 @@ class ZettawireController extends Controller
         // Busca o valor atual
         $cable = DB::table('cable_routing')->find($id);//acha o cabo
         if ($cable) {
-            $StatusValue = $cable->status; //0
+            $cableDone = $cable->status; //0
             // Atualiza no banco
             DB::table('cable_routing')->where('id', $id)->update([
-                'status' => $StatusValue + $RequestValue,
+                'status' => $cableDone + $RequestValue,
                 'origin_value' => $RequestValue = $RequestValue * -1,
             ]);   
         }
@@ -137,10 +140,10 @@ class ZettawireController extends Controller
         // Busca o valor atual
         $cable = DB::table('cable_routing')->find($id);//acha o cabo
         if ($cable) {
-            $StatusValue = $cable->status; //0
+            $cableDone = $cable->status; //0
             // Atualiza no banco
             DB::table('cable_routing')->where('id', $id)->update([
-                'status' => $StatusValue + $RequestValue,
+                'status' => $cableDone + $RequestValue,
                 'target_value' => $RequestValue = $RequestValue * -1,
             ]);   
         }
@@ -160,23 +163,22 @@ class ZettawireController extends Controller
         return view('partials.botao', compact('cable_routing'))->render();
     }
 
-
     public function finalizaCabo($id){
         $cable = DB::table('cable_routing')->find($id);//acha o cabo
         if ($cable){
             $originValue = (int) request()->input('origin_value');
             $targetValue = (int) request()->input('target_value');
             if($cable->status == 2){
-                $StatusValue = 0;
+                $cableDone = 0;
                 $originValue = 1;
                 $targetValue = 1;
             }else{
-                $StatusValue = 2;
+                $cableDone = 2;
                 $originValue = -1;
                 $targetValue = -1;
             }
             DB::table('cable_routing')->where('id', $id)->update([
-                'status' => $StatusValue,
+                'status' => $cableDone,
                 'origin_value' => $originValue,
                 'target_value' => $targetValue,
             ]);
@@ -199,5 +201,65 @@ class ZettawireController extends Controller
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false, 'message' => 'Cabo não encontrado'], 404);
+    }
+
+    // ZETTAWIRE CABLE CONFECCION
+
+    public function confeccionIndex(){
+        $lista = Project::all();
+        $search = request('search');
+        if($search){
+            $lista = Project::where('num_projeto', 'like', '%'.$search.'%')->get();
+        }else{
+            $lista = Project::all();
+        }
+        return view('zettawire.index_confeccao', ['lista' => $lista, 'search' => $search]);
+    }
+
+    public function confeccao($id){
+        $projeto = Project::find($id);
+        $cabos = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->get();
+        $colors = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('color');
+        $tags = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('tag');
+        $wire_harness = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('wire_harness');
+        $cable_cross_sections = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('cable_cross_section');
+        $status = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->distinct()
+            ->pluck('status');
+
+        return view('zettawire.confeccao',[
+            'projeto' => $projeto, 
+            'cabos' => $cabos,
+            'colors' => $colors,
+            'tags' => $tags,
+            'wire_harness' => $wire_harness,
+            'cable_cross_sections' => $cable_cross_sections,
+            'status' => $status,]);
+    }
+
+    public function cableDone($id){
+        $cable = DB::table('cable_routing')->find($id);//acha o cabo
+        if ($cable) {
+            $cableDone = $cable->isdone ? false : true; // Inverte o valor de isdone
+            DB::table('cable_routing')->where('id', $id)->update([
+                'isdone' => $cableDone,
+            ]);
+        }
+        return redirect()->back();
     }
 }

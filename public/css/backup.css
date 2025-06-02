@@ -787,6 +787,14 @@ input[type="file"] {
     height: 50%;
 }
 
+.cable-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 86%;
+    height: 50%;
+}
+
 .cable-button{
     width: 45px;
     height: 45px;
@@ -799,7 +807,7 @@ input[type="file"] {
     cursor: pointer;
 }
 
-.finish-button{
+.finish-button, .cable-done-button{
     border: none;
     background-color: #212529
 }

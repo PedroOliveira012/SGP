@@ -6,10 +6,10 @@
     <div class="projetos__titulo">
         <h1><?=$projeto->num_projeto?> - <?=$projeto->nome_projeto?></h1>
     </div>
-    <div class="search-and-add">
+    <!-- <div class="search-and-add">
         <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por tag de origem ou destino">
-    </div>
-    <button id="alterarStatus" class="btn btn-warning m-2 invisible">
+    </div> -->
+    <button id="alterarStatus" class="btn btn-warning m-2 d-none">
         Concluir cabos
     </button>
 </div>
@@ -256,17 +256,17 @@
         e.preventDefault();
 
         var filtro = $(this).data('filtro');
-        $('alterarStatus').removeClass('invisible');
+        $('alterarStatus').removeClass('d-none');
         $('table tbody tr').each(function() {
             var categoria = $(this).find('.item-filtro p').text().trim();
 
             if (filtro === 'todos' || categoria === filtro) {
                 $(this).show();
                 if (filtro === 'todos'){
-                    $('#alterarStatus').addClass('invisible')
+                    $('#alterarStatus').addClass('d-none')
                 }
                 else {
-                    $('#alterarStatus').removeClass('invisible');
+                    $('#alterarStatus').removeClass('d-none');
                 }
                 console.log('Exibindo: ' + categoria);
             } else {
@@ -299,7 +299,7 @@
                 });
             }
         });
-        window.location.reload();
+        // window.location.reload();
     });
 
 </script>

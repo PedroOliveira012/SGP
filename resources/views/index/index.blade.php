@@ -86,7 +86,10 @@
                         <div id="flush-collapseThree" class="accordion-collapse collapse bg-dark" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <ul class="list-group">
-                                    <li class="list-group-item text-bg-dark"><a href="{{ url('/zettawire/index') }}">Home</a></li>
+                                    <li class="list-group-item text-bg-dark"><a href="{{ url('/zettawire/index') }}">Conexão de cabos</a></li>
+                                </ul>
+                                <ul class="list-group">
+                                    <li class="list-group-item text-bg-dark"><a href="{{ url('/zettawire/confeccion/index') }}">Confeccção de cabos</a></li>
                                 </ul>
                             </div>
                         </div>
