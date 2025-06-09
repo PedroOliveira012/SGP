@@ -7,6 +7,9 @@
         <h1>Confecção de cabos</h1>
         <h2><?=$projeto->num_projeto?> - <?=$projeto->nome_projeto?></h2>
     </div>
+    <button id="cableDone" class="btn btn-warning m-2 d-none">
+        Concluir cabos
+    </button>
 </div>
 <table class="table table-dark tabela">
     <thead>
@@ -45,7 +48,7 @@
         @foreach ($cabos as $cabo)
         <!-- <tr class=" align-middle text-center"> -->
         <tr class=" align-middle text-center " onclick="toggleCollapse('collapseRow{{ $cabo->id }}')" style="cursor: pointer" data-id="{{ $cabo->id }}">
-            <td class="item-filtro item-visivel {{ $cabo->wire_harness }}" >
+            <td class="item-filtro item-visivel {{ $cabo->wire_harness }}" data-id="{{ $cabo->id }}">
                 <p><?= $cabo->wire_harness?></p>
             </td>
             <td>
@@ -64,8 +67,8 @@
                 <div class="d-flex w-100 justify-content-center align-items-start ">
                     <form action="cableDone/{{$cabo->id}}" method="POST" class="d-flex w-100 justify-content-center">
                         @csrf
-                        @method('PUT')
-                        <button type="submit" id="cableDone" class="cable-done-button">
+                        @method('POST')
+                        <button type="submit" id="cableDone" onclick="event.stopPropagation();" class="cable-done-button">
                             @if($cabo->isdone == 0)
                                 <p><i class="fa-regular fa-circle fa-xl" style="color: #dc3545"></i></p>
                             @else
@@ -81,7 +84,7 @@
                 @if($cabo->status == 1)
                     <div class="collapse show collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                 @else
-                    <div class="collapse collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
+                    <div class="collapse show collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                 @endif
                     <div class="p-2 collapsedRow_content text-end">
                         <strong>Direção origem</strong><br>
@@ -99,7 +102,7 @@
                                     <div class="cable-start m-auto terminal-start"> 
                                 @endif
                                 </div>
-                                @if($cabo->color == 'PT')
+                                @if($cabo->color == 'PT' || $cabo->color == '1' || $cabo->color == '2')
                                     <div class="cable-body m-auto black-cable">
                                 @elseif($cabo->color == 'BR')
                                     <div class="cable-body m-auto white-cable">
@@ -117,11 +120,23 @@
                                     <div class="cable-body m-auto dark-blue-cable">
                                 @elseif($cabo->color == 'LR')
                                     <div class="cable-body m-auto orange-cable">
-                                @else($cabo->color == 'VI')
+                                @elseif($cabo->color == 'VI')
                                     <div class="cable-body m-auto violet-cable">
+                                @elseif($cabo->color == 'VD')
+                                    <div class="cable-body m-auto green-cable">
+                                @else($cabo->color == 'MR')
+                                    <div class="cable-body m-auto brown-cable">
                                 @endif
+                                    @if ($cabo->color == '1' || $cabo->color == '2')
+                                        <p>{{ $cabo->color }}</p>
+                                    @endif
                                     <p style="background:#fff; color:#000; padding:2px">Comprimento: {{ $cabo->length }}m</p>
+                                    @if ($cabo->color == '1' || $cabo->color == '2')
+                                        <p>{{ $cabo->color }}</p>
+                                    @endif
                                 </div>
+
+
                                 @if($cabo->origin_terminal_type == 'Pré-Decapado (Sem Terminal)')
                                     <div class="cable-start m-auto copper-cable">
                                 @else
@@ -134,7 +149,7 @@
                     <div class="p-2 collapsedRow_content">
                         <strong>Direção destino</strong>
                         <p>{{ $cabo->target_direction }}</p>
-                        @include('partials.cabo_collapse', ['direcao' => $cabo->target_direction])
+                        @include('partials.cabo_collapse_reverse', ['direcao' => $cabo->target_direction])
                         <p>Terminal destino: {{ $cabo->target_terminal_type }}</p>
                     </div>
                 </div>
@@ -154,36 +169,58 @@
         e.preventDefault();
 
         var filtro = $(this).data('filtro');
-        $('alterarStatus').removeClass('invisible');
+        $('cableDone').removeClass('invisible');
         $('table tbody tr').each(function() {
             var categoria = $(this).find('.item-filtro p').text().trim();
 
             if (filtro === 'todos' || categoria === filtro) {
                 $(this).show();
+                $('#cableDone').addClass('d-none');
             } else {
                 $(this).hide();
+                $('#cableDone').removeClass('d-none');
             }
         });
     });
     
-    // $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     }
-    // });
-    // $('#cableDone').on('click', function() {
-    //     $.ajax({
-    //         url: 'cableDone/'+ id,
-    //         type: 'PUT',
-    //         success: function(response) {
-    //             console.log('Cabo ' + id + ' atualizado com sucesso.');
-    //         },
-    //         error: function(xhr, status, error) {
-    //             console.error('Erro ao atualizar cabo ' + id + ':', error);
-    //         }
-    //     });
-    //     window.location.reload();
-    // });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('#cableDone').on('click', function(e) {
+        e.preventDefault();
+
+        var total = $('.item-visivel:visible').length;
+        var concluido = 0;
+
+        $('.item-visivel:visible').each(function() {
+            var id = $(this).data('id');
+            console.log(id);
+
+            if (id) {
+                $.ajax({
+                    url: 'cableDone/'+ id,
+                    type: 'POST',
+                    success: function(response) {
+                        console.log('Cabo ' + id + ' atualizado com sucesso.');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erro ao atualizar cabo ' + id + ':', error);
+                    },
+                    complete: function() {
+                        concluido++;
+                        if (concluido === total) {
+                            // Só recarrega quando TODOS terminarem
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        });
+        // location.reload();
+    });
 </script>
 
 @endsection

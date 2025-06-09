@@ -24,11 +24,34 @@ class ZettawireController extends Controller
 
     // ZETTAWIRE CABLE ROUTING
 
-    public function roteamento($id){
-        $projeto = Project::find($id);
-        $cabos = DB::table('cable_routing')
+    public function roteamento(Request $request, $id){
+        $cableType = $request->input('cableType');
+        if ($cableType == 'multivias') {
+            $cabos = DB::table('cable_routing')
             ->where('project_id', $id)
+            ->where('wire_harness', 'not like', '=-'.'%')
             ->get();
+
+            $wire_harness = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->where('wire_harness', 'not like', '=-'.'%')
+            ->distinct()
+            ->pluck('wire_harness');
+        }else{
+            $cabos = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->where('wire_harness', 'like', '=-'.'%')
+            ->get();
+
+            $wire_harness = DB::table('cable_routing')
+            ->where('project_id', $id)
+            ->where('wire_harness', 'like', '=-'.'%')
+            ->distinct()
+            ->pluck('wire_harness');
+        }
+
+        $projeto = Project::find($id);
+        
         $colors = DB::table('cable_routing')
             ->where('project_id', $id)
             ->distinct()
@@ -37,10 +60,6 @@ class ZettawireController extends Controller
             ->where('project_id', $id)
             ->distinct()
             ->pluck('tag');
-        $wire_harness = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->distinct()
-            ->pluck('wire_harness');
         $origins = DB::table('cable_routing')
             ->where('project_id', $id)
             ->distinct()
@@ -57,6 +76,8 @@ class ZettawireController extends Controller
             ->where('project_id', $id)
             ->distinct()
             ->pluck('status');
+
+
 
         return view('zettawire.roteamento',[
             'projeto' => $projeto, 
@@ -80,39 +101,59 @@ class ZettawireController extends Controller
 
         $spreadsheet = IOFactory::load($filepath);
 
-        $worksheet = $spreadsheet->getSheet(0);
-        $linhas = $worksheet->toArray();
+        $worksheetNames = [
+            'Lista de Cabos Singelos',
+            'Lista de Cabos Blindados'
+        ];
 
-        $cabecalho = array_map('trim', $linhas[3] ?? []);
+        for ($i = 0; $i <= 1; $i++){
+            $worksheet = $spreadsheet->getSheetByName($worksheetNames[$i]);
+            $linhas = $worksheet->toArray();
+    
+            $cabecalho = array_map('trim', $linhas[3] ?? []);
+    
+            //O for ignora a ultima linha do arquivo porque la não tem nada
+            for ($j = 4; $j < count($linhas) - 1; $j++) {
+                $linha = array_map('trim', $linhas[$j]);
+                
+                if (count($cabecalho) === count($linha)) {
+                    $dados = array_combine($cabecalho, $linha);
+    
+                    $tagValue = strval($dados['ANILHA']);
 
-        //O for ignora a ultima linha do arquivo porque la não tem nada
-        for ($i = 4; $i < count($linhas) - 1; $i++) {
-            $linha = array_map('trim', $linhas[$i]);
-
-            if (count($cabecalho) === count($linha)) {
-                $dados = array_combine($cabecalho, $linha);
-
-                $tagValue = strval($dados['ANILHA']);
-
-                $color_and_section = explode('-', $dados['CÓDIGO DO CABO']);
-                $color =  $color_and_section[0];
-                $section =  $color_and_section[1].' - '.$color_and_section[2];
-
-                DB::table('cable_routing')->insert([
-                    'project_id' => $id,
-                    'tag' => $tagValue,
-                    'origin' => $dados['ALVO'],
-                    'origin_direction' => $dados['DIREÇÃO DO CABO (ALVO)'],
-                    'origin_terminal_type' => $dados['TERMINAL FONTE'],
-                    'target' => $dados['FONTE'],
-                    'target_direction' => $dados['DIREÇÃO DO CABO (FONTE)'],
-                    'target_terminal_type' => $dados['TERMINAL ALVO'],
-                    'cable_cross_section' => $section,
-                    'color' => $color,
-                    'wire_harness' => $dados['CHICOTE'],
-                    'length' => $dados['COMPRIMENTO'],
-                    'status' => 0,
-                ]);
+                    if ($worksheet->getTitle() == 'Lista de Cabos Singelos') {
+                        // dd($worksheet->getTitle());
+                        $color_and_section = explode('-', $dados['CÓDIGO DO CABO']);
+                        if ($color_and_section !== false && count($color_and_section) >= 3) {
+                            // Verifica se o array tem pelo menos 3 elementos
+                            $color_and_section = array_map('trim', $color_and_section);
+                        } else {
+                            continue;
+                        }
+                        $color =  $color_and_section[0];
+                        $section =  $color_and_section[1].' - '.$color_and_section[2];
+                    }else{
+                        $color = $dados['COR'];
+                        $section = $dados['SEÇÃO TRANSVERSAL'];
+                    }
+    
+    
+                    DB::table('cable_routing')->insert([
+                        'project_id' => $id,
+                        'tag' => $tagValue,
+                        'origin' => $dados['ALVO'],
+                        'origin_direction' => $dados['DIREÇÃO DO CABO (ALVO)'],
+                        'origin_terminal_type' => $dados['TERMINAL FONTE'],
+                        'target' => $dados['FONTE'],
+                        'target_direction' => $dados['DIREÇÃO DO CABO (FONTE)'],
+                        'target_terminal_type' => $dados['TERMINAL ALVO'],
+                        'cable_cross_section' => $section,
+                        'color' => $color,
+                        'wire_harness' => $dados['CHICOTE'],
+                        'length' => $dados['COMPRIMENTO'],
+                        'status' => 0,
+                    ]);
+                }
             }
         }
         Storage::delete($path);
@@ -120,20 +161,26 @@ class ZettawireController extends Controller
     }
 
     public function origem($id){
-        $RequestValue = (int) request()->input('origin_value'); //1 ou -1
-        // Busca o valor atual
-        $cable = DB::table('cable_routing')->find($id);//acha o cabo
-        if ($cable) {
-            $cableDone = $cable->status; //0
-            // Atualiza no banco
-            DB::table('cable_routing')->where('id', $id)->update([
-                'status' => $cableDone + $RequestValue,
-                'origin_value' => $RequestValue = $RequestValue * -1,
-            ]);   
+        $originValue = (int) request()->input('origin_value');
+        $cable = DB::table('cable_routing')->find($id);
+
+        if (!$cable) {
+            return response()->json(['success' => false, 'message' => 'Cabo não encontrado'], 404);
         }
 
-        return redirect()->back();
+        $cableStatus = $cable->status;
+
+        // Calcula o novo status antes de atualizar e usar no retorno
+        $newCalculatedStatus = $cableStatus + $originValue;
+
+        DB::table('cable_routing')->where('id', $id)->update([
+            'status' => $newCalculatedStatus,
+            'origin_value' => $originValue * -1,
+        ]);
+
+        return response()->json(['success' => true, 'new_status' => $newCalculatedStatus]);
     }
+
 
     public function destino($id){
         $RequestValue = (int) request()->input('target_value'); //1 ou -1
@@ -187,7 +234,7 @@ class ZettawireController extends Controller
     }
 
     public function alterarStatus(Request $request, $id){
-        $cable = DB::table('cable_routing')->where('id', $id)->first();
+        $cable = DB::table('cable_routing')->where('id', $id);
 
         if ($cable) {
             DB::table('cable_routing')
@@ -200,7 +247,6 @@ class ZettawireController extends Controller
 
             return response()->json(['success' => true]);
         }
-        return response()->json(['success' => false, 'message' => 'Cabo não encontrado'], 404);
     }
 
     // ZETTAWIRE CABLE CONFECCION

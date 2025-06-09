@@ -55,26 +55,29 @@
                     @endif -->
                     <li class=""><b>Status de entrega: </b><?= Carbon\Carbon::parse($i->data_fechamento)->diffInDays($i->data_finalizacao)?> dias</li>
                 </ul>
-                <div class="div-gravar-cabos">
-                    
-                    <div class="form-gravar-cabos">
-                        <form action="{{ url('/upload/' .$i->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <!-- <label>Escolha o arquivo:</label>
-                        <input type="file" name="file" required> -->
-                        <label for="file" class="btn custom-file-button">
-                            <i class="fa-solid fa-upload"></i>
-                            <span>Selecionar arquivo</span>
-                        </label>
-                        <input type="file" id="file" name="file">
+                <div class="d-flex flex-column align-middle justify-content-center">
+                    <div class="div-gravar-cabos">
+                        <div>
+                            <form action="{{ url('/upload/' .$i->id) }}" method="POST" enctype="multipart/form-data" class="d-flex flex-row">
+                                @csrf
+                                <label for="file" class="btn custom-file-button">
+                                    <i class="fa-solid fa-upload"></i>
+                                    <span>Selecionar arquivo</span>
+                                </label>
+                                <input type="file" id="file" name="file">
+                                
+                                <div class="ms-4">
+                                    <button class="btn btn-gravar-cabos" id="saveCables" type="submit" disabled>
+                                        <i class="fa-solid fa-floppy-disk"></i>
+                                        <span>Gravar cabos</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="div-btn-gravar-cabos">
-                        <button class="btn btn-gravar-cabos" type="submit">
-                            <i class="fa-solid fa-floppy-disk"></i>
-                            <span>Gravar cabos</span>
-                        </button>
+                    <div class="m-auto">
+                        <span class="custom-file-name" id="fileName"></span>
                     </div>
-                </form>
                 </div>
             </div>
         </div>
@@ -101,5 +104,17 @@
         </div>
     </div>
 </form>
+
+<script>
+    $('#file').on('change', function() {
+        const file = this.files[0];
+        if (file) {
+            $('#fileName').text('Arquivo: ' + file.name);
+            $('#saveCables').prop('disabled', false);
+        } else {
+            $('#fileName').text('');
+        }
+    });
+</script>
 
 @endsection

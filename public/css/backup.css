@@ -9,6 +9,11 @@ th, td{
     height: fit-content;
 }
 
+tr{
+    /* border-style: none !important; */
+    border-color: #212529 !important;
+}
+
 p{
     margin: auto;
     font-size: small;
@@ -659,38 +664,23 @@ a:link, a:visited{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    /* margin-top: 50px; */
 }
 
-.form-gravar-cabos{
-    /* border: solid 1px blue; */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-left: 10px;
-}
-/* Ocultar o input file original */
+
 input[type="file"] {
-  display: none;
+    display: none;
 }
 
-/* Estilizar o botão personalizado */
 .custom-file-button {
     background-color: #00aac0;
-    /* padding: 8px 12px;
-    border-radius: 4px; */
+    border-radius: 4px;
     cursor: pointer;
     width: fit-content;
     height: fit-content;
-}
-
-/* Estilizar o botão personalizado */
-.custom-file-button {
-    background-color: #00aac0;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .custom-file-button:hover {
@@ -698,9 +688,10 @@ input[type="file"] {
     color: #000 !important;
 }
 
-/* Estilizar o texto do nome do arquivo */
 .custom-file-name {
-    margin-left: 10px;
+    margin-top: 8px;
+    font-style: italic;
+    color: #fff;
 }
 
 /* Estilizar o ícone do botão */
@@ -709,6 +700,12 @@ input[type="file"] {
     top: 50%;
     right: 8px;
     transform: translateY(-50%);
+}
+
+.custom-file-name {
+    margin-left: 10px;
+    font-style: italic;
+    color: #fff;
 }
 
 .div-btn-gravar-cabos{
@@ -728,7 +725,7 @@ input[type="file"] {
 }
 
 .collapsedRow{
-    border-bottom: solid 1.5px #343a40;
+    border-bottom: solid 1px #343a40 !important;
 }
 
 .collapsedRow_content{
@@ -837,19 +834,27 @@ input[type="file"] {
 }
 
 .orange-cable{
-    background-color: #696969;
+    background-color: #ff5800;
 }
 
 .dark-blue-cable{
-    background-color: #696969;
+    background-color: #002fa7;
 }
 
 .violet-cable{
-    background-color: #696969;
+    background-color: #8a2be2;
 }
 
 .green-yellow-cable{
     background: linear-gradient(to bottom, #22c35d 50%, #fde82d 50%);
+}
+
+.green-cable{
+    background-color: #22c35d;
+}
+
+.brown-cable{
+    background-color: #59260b;
 }
 
 .copper-cable{
@@ -864,3 +869,10 @@ input[type="file"] {
     background: linear-gradient(to left, #fe0000 50%, #777 50%);
 }
 
+.green-icon{
+    color: #138808;
+}
+
+.red-icon{
+    color: #e60026;
+}
