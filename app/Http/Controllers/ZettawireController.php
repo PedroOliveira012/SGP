@@ -155,6 +155,7 @@ class ZettawireController extends Controller
                     ]);
                 }
             }
+            // dd($worksheet->getTitle(), $j);
         }
         Storage::delete($path);
         return back();
@@ -165,22 +166,27 @@ class ZettawireController extends Controller
         $cable = DB::table('cable_routing')->find($id);
 
         if (!$cable) {
-            return response()->json(['success' => false, 'message' => 'Cabo não encontrado'], 404);
+            return response()->json([
+                'success' => false, 
+                'message' => 'Cabo não encontrado'], 404);
         }
 
         $cableStatus = $cable->status;
+        $newCalculatedStatus = $cableStatus + $originValue; 
 
-        // Calcula o novo status antes de atualizar e usar no retorno
-        $newCalculatedStatus = $cableStatus + $originValue;
+        // dd($originValue, $id);
 
         DB::table('cable_routing')->where('id', $id)->update([
             'status' => $newCalculatedStatus,
             'origin_value' => $originValue * -1,
         ]);
 
-        return response()->json(['success' => true, 'new_status' => $newCalculatedStatus]);
+        return response()->json([
+            'success' => true,
+            'new_status' => $newCalculatedStatus,
+            'origin_value' => $originValue
+        ]);
     }
-
 
     public function destino($id){
         $RequestValue = (int) request()->input('target_value'); //1 ou -1

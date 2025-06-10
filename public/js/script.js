@@ -189,3 +189,128 @@ function Habilita_prazo_pendencia(){
         prazo.hidden = true
     }
 }
+
+document.getElementById('cableType').addEventListener('change', function() {
+    $.ajax({
+        url: "{{ route('roteamento', ['id'=> $projeto->id]) }}",
+        type: "GET",
+    })
+});
+
+function toggleCollapse(id) {
+    const element = document.getElementById(id);
+    const collapse = bootstrap.Collapse.getOrCreateInstance(element);
+    collapse.toggle();
+}
+
+$('.filtro-opcao').click(function(e) {
+    e.preventDefault();
+
+    var filtro = $(this).data('filtro');
+    $('alterarStatus').removeClass('d-none');
+    $('table tbody tr').each(function() {
+        var categoria = $(this).find('.item-filtro p').text().trim();
+
+        if (filtro === 'todos' || categoria === filtro) {
+            $(this).show();
+            if (filtro === 'todos'){
+                $('#alterarStatus').addClass('d-none')
+            }
+            else {
+                $('#alterarStatus').removeClass('d-none');
+            }
+            console.log('Exibindo: ' + categoria);
+        } else {
+            $(this).hide();
+        }
+    });
+});
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$('#alterarStatus').on('click', function() {
+    var total = $('.item-visivel:visible').length;
+    var concluido = 0;
+    $('.item-visivel:visible').each(function() {
+        var id = $(this).data('id');
+        console.log(id);
+
+        if (id) {
+            $.ajax({
+                url: 'alterarStatus/'+ id,
+                type: 'POST',
+                success: function(response) {
+                    console.log('Cabo ' + id + ' atualizado com sucesso.');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro ao atualizar cabo ' + id + ':', error);
+                },
+                complete: function() {
+                    concluido++;
+                    if (concluido === total) {
+                        // Só recarrega quando TODOS terminarem
+                        location.reload();
+                    }
+                }
+            });
+        }
+    });
+    window.location.reload();
+});
+
+$('.cable-start-button').on('click', function(e) {
+    e.preventDefault();
+    const $button = $(this); 
+    const id = $button.data('id');
+    const $startIcon = $button.find('.cable-start-button-icon'); 
+
+    const iconId = 'cableId' + id;
+    const $statusIcon = $('#' + iconId);
+    
+    let originValueFromButton = $button.data('origin-value');
+    
+    let valueToSend;
+    if (originValueFromButton == "1") {
+        valueToSend = 1; 
+    } else {
+        valueToSend = -1; 
+    }
+
+    if (id) {
+        $.ajax({
+            url: "origem/{id}".replace('{id}', id),
+            type: 'POST',
+            data: {
+                origin_value: valueToSend,  
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                console.log('Alteração feita:', response);
+                if(response.success){
+                    const newStatus = response.new_status;
+                    $startIcon.toggleClass('red-icon green-icon');
+                    console.log(newStatus);
+                    $statusIcon.removeClass('fa-regular fa-solid fa-circle fa-circle-half-stroke red-icon yellow-icon green-icon');
+
+                    if (newStatus === 0) {
+                        $statusIcon.addClass('fa-regular fa-circle red-icon');
+                    } else if (newStatus === 1) {
+                        $statusIcon.addClass('fa-solid fa-circle-half-stroke yellow-icon');
+                    } else {
+                        $statusIcon.addClass('fa-solid fa-circle green-icon');
+                    }
+
+                    $button.data('origin-value', valueToSend * -1);
+                    console.log('Novo data-origin-value do botão (após update):', $button.data('origin-value'));
+                }
+            },
+            error: function(xhr) {
+                console.log('Erro:', xhr);
+            }
+        });
+    }
+});

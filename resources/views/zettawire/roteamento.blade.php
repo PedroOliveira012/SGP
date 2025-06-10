@@ -9,6 +9,12 @@
     <!-- <div class="search-and-add">
         <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por tag de origem ou destino">
     </div> -->
+    <div>
+        <select class="form-select" id="cableType" name="cableType">
+            <option selected value="singelos">Cabos singelos</option>
+            <option  value="multivias">Cabos multivias</option>
+        </select>
+    </div>
     <button id="alterarStatus" class="btn btn-warning m-2 d-none">
         Concluir cabos
     </button>
@@ -133,21 +139,20 @@
             </td>
             <td>
                 <div class="d-flex w-100 justify-content-center align-items-start ">
-                    <form action="finalizaCabo/{{$cabo->id}}" method="POST" class="d-flex w-100 justify-content-center">
-                        @csrf
-                        @method('POST')
-                        <button type="submit" onclick="event.stopPropagation();" class="finish-button">
-                            @if($cabo->status == 0)
-                                <p><i class="fa-regular fa-circle fa-xl" style="color: #dc3545"></i></p>
-                            @elseif($cabo->status == 1)
-                                <p><i class="fa-solid fa-circle-half-stroke fa-xl" style="color: #f2b809"></i></p>
-                            @else
-                                <p><i class="fa-solid fa-circle fa-xl" style="color: #198754"></i></p>
-                            @endif
-                        </button>
-                        <input type="hidden" name="origin_value" value="{{ $cabo->origin_value }}">
-                        <input type="hidden" name="target_value" value="{{ $cabo->target_value }}">
-                    </form>
+                    <button onclick="event.stopPropagation();" class="finish-button">
+                        @if($cabo->status == 0)
+                            <p><i id="cableId{{ $cabo->id }}" class="fa-regular fa-circle fa-xl red-icon status-icon"></i></p>
+                        @elseif($cabo->status == 1)
+                            <p><i id="cableId{{ $cabo->id }}" class="fa-solid fa-circle-half-stroke fa-xl yellow-icon status-icon"></i></p>
+                        @else
+                            <p><i id="cableId{{ $cabo->id }}" class="fa-solid fa-circle fa-xl green-icon status-icon"></i></p>
+                        @endif
+                        <!-- <i   class="fa-xl status-icon
+                            @if($cabo->status == 0) fa-regular fa-circle red-icon
+                            @elseif($cabo->status == 1) fa-solid fa-circle-half-stroke yellow-icon
+                            @else fa-solid fa-circle green-icon
+                            @endif"></i> -->
+                    </button>
                 </div>
             </td>
         </tr>
@@ -156,29 +161,23 @@
                 @if($cabo->status == 1)
                     <div class="collapse show collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                 @else
-                    <div class="collapse collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
+                    <div class="collapse show collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                 @endif
-                    <div class="p-2 collapsedRow_content text-end">
-                        <strong>Direção origem</strong><br>
-                        <p>{{ $cabo->origin_direction }}</p>
+                    <div class="p-2 me-3 collapsedRow_content text-end">
+                        <p class="py-2 fw-bold">Direção origem</p>
                         @include('partials.cabo_collapse', ['direcao' => $cabo->origin_direction])
-                        <p>Terminal origem: {{ $cabo->origin_terminal_type }}</p>
+                        <p class="py-2">Terminal origem: {{ $cabo->origin_terminal_type }}</p>
                     </div>
                     <div class="d-flex flex-column align-items-center collapsedRow_content">
                         <div class="d-flex w-100 h-100 justify-content-between align-items-center">
                             <div>
-                                <form action="origem/{{$cabo->id}}" method="POST" class="d-flex justify-content-center align-items-center">
-                                    @csrf
-                                    @method('POST')
-                                    <button type="submit" class="cable-button">
-                                        @if($cabo->origin_value == 1)
-                                            <i class="fa-solid fa-circle fa-xl" style="color: #E60026"></i>
-                                        @else
-                                            <i class="fa-solid fa-circle fa-xl" style="color: #138808"></i>
-                                        @endif
-                                    </button>
-                                    <input type="hidden" name="origin_value" value="{{ $cabo->origin_value }}">
-                                </form>
+                                <button data-id="{{$cabo->id}}" class="cable-button cable-start-button"  data-origin-value="{{ $cabo->origin_value }}">
+                                    @if($cabo->origin_value == 1)
+                                        <i class="fa-solid fa-circle fa-xl red-icon cable-start-button-icon"></i>
+                                    @else
+                                        <i class="fa-solid fa-circle fa-xl green-icon cable-start-button-icon"></i>
+                                    @endif
+                                </button>
                             </div>
                             <div class="d-flex w-100 h-75 p-1 align-items-center">
                                 @if($cabo->origin_terminal_type == 'Pré-Decapado (Sem Terminal)')
@@ -187,7 +186,7 @@
                                     <div class="cable-start m-auto terminal-start"> 
                                 @endif
                                 </div>
-                                @if($cabo->color == 'PT')
+                                @if($cabo->color == 'PT' || $cabo->color == '1' || $cabo->color == '2')
                                     <div class="cable-body m-auto black-cable">
                                 @elseif($cabo->color == 'BR')
                                     <div class="cable-body m-auto white-cable">
@@ -205,10 +204,20 @@
                                     <div class="cable-body m-auto dark-blue-cable">
                                 @elseif($cabo->color == 'LR')
                                     <div class="cable-body m-auto orange-cable">
-                                @else($cabo->color == 'VI')
+                                @elseif($cabo->color == 'VI')
                                     <div class="cable-body m-auto violet-cable">
+                                @elseif($cabo->color == 'VD')
+                                    <div class="cable-body m-auto green-cable">
+                                @else($cabo->color == 'MR')
+                                    <div class="cable-body m-auto brown-cable">
                                 @endif
+                                    @if ($cabo->color == '1' || $cabo->color == '2')
+                                        <p>{{ $cabo->color }}</p>
+                                    @endif
                                     <p style="background:#fff; color:#000; padding:2px">Comprimento: {{ $cabo->length }}m</p>
+                                    @if ($cabo->color == '1' || $cabo->color == '2')
+                                        <p>{{ $cabo->color }}</p>
+                                    @endif
                                 </div>
                                 @if($cabo->origin_terminal_type == 'Pré-Decapado (Sem Terminal)')
                                     <div class="cable-start m-auto copper-cable">
@@ -221,11 +230,11 @@
                                 <form action="destino/{{$cabo->id}}" method="POST" class="d-flex justify-content-center align-items-center">
                                     @csrf
                                     @method('POST')
-                                    <button type="submit" class="cable-button">
+                                    <button id="cableEndButton" type="submit" class="cable-button">
                                         @if($cabo->target_value == 1)
-                                            <i class="fa-solid fa-circle fa-xl" style="color: #E60026"></i>
+                                            <i id="cableEndButtonIcon" class="fa-solid fa-circle fa-xl red-icon"></i>
                                         @else
-                                            <i class="fa-solid fa-circle fa-xl" style="color: #138808"></i>
+                                            <i id="cableEndButtonIcon" class="fa-solid fa-circle fa-xl green-icon"></i>
                                         @endif
                                     </button>
                                     <input type="hidden" name="target_value" value="{{ $cabo->target_value }}">
@@ -233,11 +242,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-2 collapsedRow_content">
-                        <strong>Direção destino</strong>
-                        <p>{{ $cabo->target_direction }}</p>
-                        @include('partials.cabo_collapse', ['direcao' => $cabo->target_direction])
-                        <p>Terminal destino: {{ $cabo->target_terminal_type }}</p>
+                    <div class="p-2 ms-3 collapsedRow_content text-start">
+                        <p class="py-2 fw-bold">Direção destino</p>
+                        @include('partials.cabo_collapse_reverse', ['direcao' => $cabo->target_direction])
+                        <p class="py-2">Terminal destino: {{ $cabo->target_terminal_type }}</p>
                     </div>
                 </div>
             </td>
@@ -245,64 +253,6 @@
         @endforeach
     <tbody>
 </table>
-<script>
-    function toggleCollapse(id) {
-        const element = document.getElementById(id);
-        const collapse = bootstrap.Collapse.getOrCreateInstance(element);
-        collapse.toggle();
-    }
-
-    $('.filtro-opcao').click(function(e) {
-        e.preventDefault();
-
-        var filtro = $(this).data('filtro');
-        $('alterarStatus').removeClass('d-none');
-        $('table tbody tr').each(function() {
-            var categoria = $(this).find('.item-filtro p').text().trim();
-
-            if (filtro === 'todos' || categoria === filtro) {
-                $(this).show();
-                if (filtro === 'todos'){
-                    $('#alterarStatus').addClass('d-none')
-                }
-                else {
-                    $('#alterarStatus').removeClass('d-none');
-                }
-                console.log('Exibindo: ' + categoria);
-            } else {
-                $(this).hide();
-            }
-        });
-    });
-    
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $('#alterarStatus').on('click', function() {
-        // Pega todos os cabos visíveis com data-id
-        $('.item-visivel:visible').each(function() {
-            var id = $(this).data('id');
-            console.log(id);
-
-            if (id) {
-                $.ajax({
-                    url: 'alterarStatus/'+ id,
-                    type: 'POST',
-                    success: function(response) {
-                        console.log('Cabo ' + id + ' atualizado com sucesso.');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Erro ao atualizar cabo ' + id + ':', error);
-                    }
-                });
-            }
-        });
-        // window.location.reload();
-    });
-
-</script>
 <script>
     let debounceTimer;
     let tabelaOriginal = $('#resultsFound').html();

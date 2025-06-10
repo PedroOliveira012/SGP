@@ -73,7 +73,7 @@ Route::post('/zettawire/roteamento/alterarStatus/{id}', [ZettawireController::cl
 // Rotas Zettawire Cable Confeccion
 Route::get('/zettawire/confeccion/index', [ZettawireController::class, 'confeccionIndex'])->name('index_confeccion')->middleware('auth');
 Route::get('/zettawire/confeccion/{id}', [ZettawireController::class, 'confeccao'])->name('confeccion')->middleware('auth');
-Route::put('/zettawire/confeccion/cableDone/{id}', [ZettawireController::class, 'cableDone'])->name('cableDone')->middleware('auth');
+Route::post('/zettawire/confeccion/cableDone/{id}', [ZettawireController::class, 'cableDone'])->name('cableDone')->middleware('auth');
 
 //Rotas Funcionarios
 Route::get('/funcionarios/index', [FuncionariosController::class, 'index'])->name('index_funcionario')->middleware('auth');//funciona

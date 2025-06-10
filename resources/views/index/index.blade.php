@@ -17,7 +17,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         <script src="https://kit.fontawesome.com/05b56d1101.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/script.js') }}"></script>
+        
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -111,4 +111,5 @@
         </div>
         @yield('conteudo')
     </body>
+    <script src="{{ asset('js/script.js') }}"></script>
 </html>

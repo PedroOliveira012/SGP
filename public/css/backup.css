@@ -873,6 +873,10 @@ input[type="file"] {
     color: #138808;
 }
 
+.yellow-icon{
+    color: #f2b809;
+}
+
 .red-icon{
     color: #e60026;
 }
