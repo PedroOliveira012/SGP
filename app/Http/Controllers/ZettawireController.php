@@ -229,8 +229,11 @@ class ZettawireController extends Controller
     public function finalizaCabo($id){
         $cable = DB::table('cable_routing')->find($id);//acha o cabo
         if ($cable){
-            $originValue = (int) request()->input('origin_value');
-            $targetValue = (int) request()->input('target_value');
+            // $originValue = (int) request()->input('origin_value');
+            // $originValue = 0;
+            // $targetValue = (int) request()->input('target_value');
+            // $targetValue = 0;
+
             if($cable->status == 2){
                 $cableDone = 0;
                 $originValue = 1;
@@ -246,7 +249,12 @@ class ZettawireController extends Controller
                 'target_value' => $targetValue,
             ]);
         }
-        return redirect()->back();
+        return response()->json([
+            'success' => true,
+            'new_status' => $cableDone,
+            'origin_value' => $originValue,
+            'target_value' => $targetValue,
+        ]);
     }
 
     public function alterarStatus(Request $request, $id){

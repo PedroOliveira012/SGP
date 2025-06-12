@@ -139,7 +139,7 @@
             </td>
             <td>
                 <div class="d-flex w-100 justify-content-center align-items-start ">
-                    <button onclick="event.stopPropagation();" class="finish-button">
+                    <button data-id="{{ $cabo->id }}" onclick="event.stopPropagation();" class="finish-button">
                         @if($cabo->status == 0)
                             <p><i id="cableId{{ $cabo->id }}" class="fa-regular fa-circle fa-xl red-icon status-icon"></i></p>
                         @elseif($cabo->status == 1)
