@@ -314,3 +314,56 @@ $('.cable-start-button').on('click', function(e) {
         });
     }
 });
+
+$('.cable-end-button').on('click', function(e) {
+    e.preventDefault();
+    const $button = $(this); 
+    const id = $button.data('id');
+    const $endIcon = $button.find('.cable-end-button-icon'); 
+
+    const iconId = 'cableId' + id;
+    const $statusIcon = $('#' + iconId);
+    
+    let targetValueFromButton = $button.data('target-value');
+    
+    let valueToSend;
+    if (targetValueFromButton == "1") {
+        valueToSend = 1; 
+    } else {
+        valueToSend = -1; 
+    }
+
+    if (id) {
+        $.ajax({
+            url: "destino/{id}".replace('{id}', id),
+            type: 'POST',
+            data: {
+                target_value: valueToSend,  
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                console.log('Alteração feita:', response);
+                if(response.success){
+                    const newStatus = response.new_status;
+                    $endIcon.toggleClass('red-icon green-icon');
+                    console.log(newStatus);
+                    $statusIcon.removeClass('fa-regular fa-solid fa-circle fa-circle-half-stroke red-icon yellow-icon green-icon');
+
+                    if (newStatus === 0) {
+                        $statusIcon.addClass('fa-regular fa-circle red-icon');
+                    } else if (newStatus === 1) {
+                        $statusIcon.addClass('fa-solid fa-circle-half-stroke yellow-icon');
+                    } else {
+                        $statusIcon.addClass('fa-solid fa-circle green-icon');
+                    }
+
+                    $button.data('target-value', valueToSend * -1);
+                    console.log('Novo data-target-value do botão (após update):', $button.data('target-value'));
+                }
+            },
+            error: function(xhr) {
+                console.log('Erro:', xhr);
+            }
+        });
+    }
+});

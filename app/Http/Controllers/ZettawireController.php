@@ -189,18 +189,28 @@ class ZettawireController extends Controller
     }
 
     public function destino($id){
-        $RequestValue = (int) request()->input('target_value'); //1 ou -1
-        // Busca o valor atual
-        $cable = DB::table('cable_routing')->find($id);//acha o cabo
-        if ($cable) {
-            $cableDone = $cable->status; //0
-            // Atualiza no banco
-            DB::table('cable_routing')->where('id', $id)->update([
-                'status' => $cableDone + $RequestValue,
-                'target_value' => $RequestValue = $RequestValue * -1,
-            ]);   
+        $targetValue = (int) request()->input('target_value');
+        $cable = DB::table('cable_routing')->find($id);
+
+        if (!$cable) {
+            return response()->json([
+                'success' => false, 
+                'message' => 'Cabo não encontrado'], 404);
         }
-        return redirect()->back();
+
+        $cableStatus = $cable->status;
+        $newCalculatedStatus = $cableStatus + $targetValue; 
+
+        DB::table('cable_routing')->where('id', $id)->update([
+            'status' => $newCalculatedStatus,
+            'target_value' => $targetValue * -1,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'new_status' => $newCalculatedStatus,
+            'target_value' => $targetValue
+        ]);
     }
 
     public function buscar(Request $request){

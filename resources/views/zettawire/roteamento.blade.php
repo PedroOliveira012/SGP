@@ -227,18 +227,13 @@
                                 </div>
                             </div>
                             <div>
-                                <form action="destino/{{$cabo->id}}" method="POST" class="d-flex justify-content-center align-items-center">
-                                    @csrf
-                                    @method('POST')
-                                    <button id="cableEndButton" type="submit" class="cable-button">
-                                        @if($cabo->target_value == 1)
-                                            <i id="cableEndButtonIcon" class="fa-solid fa-circle fa-xl red-icon"></i>
-                                        @else
-                                            <i id="cableEndButtonIcon" class="fa-solid fa-circle fa-xl green-icon"></i>
-                                        @endif
-                                    </button>
-                                    <input type="hidden" name="target_value" value="{{ $cabo->target_value }}">
-                                </form>
+                                <button data-id="{{$cabo->id}}" class="cable-button cable-end-button"  data-target-value="{{ $cabo->target_value }}">
+                                    @if($cabo->target_value == 1)
+                                        <i class="fa-solid fa-circle fa-xl red-icon cable-end-button-icon"></i>
+                                    @else
+                                        <i class="fa-solid fa-circle fa-xl green-icon cable-end-button-icon"></i>
+                                    @endif
+                                </button>
                             </div>
                         </div>
                     </div>
