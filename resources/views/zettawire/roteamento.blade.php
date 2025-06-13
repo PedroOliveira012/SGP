@@ -15,9 +15,12 @@
             <option  value="multivias">Cabos multivias</option>
         </select>
     </div>
-    <button id="alterarStatus" class="btn btn-warning m-2 d-none">
-        Concluir cabos
-    </button>
+    <div>
+        concluir Cabos
+        <button id="alterarStatus" class="btn btn-warning m-2 d-none">
+            Concluir cabos
+        </button>
+    </div>
 </div>
 <div id="resultsNotFound"></div>
 <table class="table table-dark tabela">
@@ -158,11 +161,7 @@
         </tr>
         <tr class="collapsedRow">
             <td colspan="7" class="p-0 bottom-1 top-0">
-                @if($cabo->status == 1)
-                    <div class="collapse show collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
-                @else
-                    <div class="collapse show collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
-                @endif
+                <div class="collapse  collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                     <div class="p-2 me-3 collapsedRow_content text-end">
                         <p class="py-2 fw-bold">Direção origem</p>
                         @include('partials.cabo_collapse', ['direcao' => $cabo->origin_direction])

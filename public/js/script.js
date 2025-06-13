@@ -404,14 +404,16 @@ $('.finish-button').on('click', function(e) {
                 if(response.success){
                     const newStatus = response.new_status;
                     $finishIcon.removeClass('fa-regular fa-solid fa-circle fa-circle-half-stroke red-icon yellow-icon green-icon');
+                    $startIcon.removeClass('red-icon green-icon');
+                    $endIcon.removeClass('red-icon green-icon');
                     if (newStatus === 0) {
                         $finishIcon.addClass('fa-regular fa-circle red-icon');
-                        $startIcon.toggleClass('red-icon green-icon');
-                        $endIcon.toggleClass('red-icon green-icon');
+                        $startIcon.addClass('red-icon');
+                        $endIcon.addClass('red-icon');
                     } else {
                         $finishIcon.addClass('fa-solid fa-circle green-icon');
-                        $startIcon.toggleClass('red-icon green-icon');
-                        $endIcon.toggleClass('red-icon green-icon');
+                        $startIcon.addClass('green-icon');
+                        $endIcon.addClass('green-icon');
                     }
                 }
             },
