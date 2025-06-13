@@ -3,12 +3,14 @@
 @section('conteudo')
 
 <div class="topo">
-    <div class="projetos__titulo">
-        <h1><?=$projeto->num_projeto?> - <?=$projeto->nome_projeto?></h1>
+    <div class="w-100 m-auto">
+        <h1 class="text-center"><?=$projeto->num_projeto?> - <?=$projeto->nome_projeto?></h1>
     </div>
     <!-- <div class="search-and-add">
         <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por tag de origem ou destino">
     </div> -->
+</div>
+<div>
     <div>
         <select class="form-select" id="cableType" name="cableType">
             <option selected value="singelos">Cabos singelos</option>

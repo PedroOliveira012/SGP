@@ -190,12 +190,15 @@ function Habilita_prazo_pendencia(){
     }
 }
 
-document.getElementById('cableType').addEventListener('change', function() {
-    $.ajax({
-        url: "{{ route('roteamento', ['id'=> $projeto->id]) }}",
-        type: "GET",
-    })
-});
+const isCabletype = document.getElementById('cableType')
+if (isCabletype) {
+    isCabletype.addEventListener('change', function() {
+        $.ajax({
+            url: "{{ route('roteamento', ['id'=> $projeto->id]) }}",
+            type: "GET",
+        })
+    });
+}
 
 function toggleCollapse(id) {
     const element = document.getElementById(id);
@@ -414,6 +417,39 @@ $('.finish-button').on('click', function(e) {
                         $finishIcon.addClass('fa-solid fa-circle green-icon');
                         $startIcon.addClass('green-icon');
                         $endIcon.addClass('green-icon');
+                    }
+                }
+            },
+            error: function(xhr) {
+                console.log('Erro:', xhr);
+            }
+        });
+    }
+});
+
+$('.cable-done-button').on('click', function() {
+    const $button = $(this);
+    const id = $button.data('id');
+    const $icon = $button.find('.cable-done-icon');
+    const $statusIcon = $('#cableId' + id);
+
+    if (id) {
+        $.ajax({
+            url: "cableDone/{id}".replace('{id}', id),
+            type: 'POST',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                console.log('Cabo feito:', response);
+                if(response.success){
+                    const doneStatus = response.done_status;
+                    $icon.removeClass('fa-regular fa-solid fa-circle fa-circle-half-stroke red-icon yellow-icon green-icon');
+
+                    if (doneStatus === 0) {
+                        $icon.addClass('fa-regular fa-circle red-icon');
+                    } else {
+                        $icon.addClass('fa-solid fa-circle green-icon');
                     }
                 }
             },

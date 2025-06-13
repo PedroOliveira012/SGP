@@ -325,11 +325,20 @@ class ZettawireController extends Controller
     public function cableDone($id){
         $cable = DB::table('cable_routing')->find($id);//acha o cabo
         if ($cable) {
-            $cableDone = $cable->isdone ? false : true; // Inverte o valor de isdone
+            $cableDone = $cable->isdone; //== 0 ? 0 : 1; // Inverte o valor de isdone
+            if ($cableDone == 0){
+                $cableDone = 1;
+            }else{
+                $cableDone = 0;
+            }
+            // dd($cable->isdone, $id, $cableDone);
             DB::table('cable_routing')->where('id', $id)->update([
                 'isdone' => $cableDone,
             ]);
         }
-        return redirect()->back();
+        return response()->json([
+            'success' => true,
+            'done_status' => $cableDone,
+        ]);
     }
 }

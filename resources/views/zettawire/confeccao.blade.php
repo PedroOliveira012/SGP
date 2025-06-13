@@ -65,27 +65,19 @@
             </td>
             <td>
                 <div class="d-flex w-100 justify-content-center align-items-start ">
-                    <form action="cableDone/{{$cabo->id}}" method="POST" class="d-flex w-100 justify-content-center">
-                        @csrf
-                        @method('POST')
-                        <button type="submit" id="cableDone" onclick="event.stopPropagation();" class="cable-done-button">
-                            @if($cabo->isdone == 0)
-                                <p><i class="fa-regular fa-circle fa-xl" style="color: #dc3545"></i></p>
-                            @else
-                                <p><i class="fa-solid fa-circle fa-xl" style="color: #198754"></i></p>
-                            @endif
-                        </button>
-                    </form>
+                    <button type="submit" onclick="event.stopPropagation();" class="cable-done-button" data-id="{{ $cabo->id }}" id="cableId{{ $cabo->id }}">
+                        @if($cabo->isdone == 0)
+                            <p><i class="fa-regular fa-circle fa-xl red-icon cable-done-icon"></i></p>
+                        @else
+                            <p><i class="fa-solid fa-circle fa-xl green-icon cable-done-icon"></i></p>
+                        @endif
+                    </button
                 </div>
             </td>
         </tr>
         <tr class="collapsedRow">
             <td colspan="7" class="p-0 bottom-1 top-0">
-                @if($cabo->status == 1)
-                    <div class="collapse show collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
-                @else
-                    <div class="collapse show collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
-                @endif
+                <div class="collapse collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                     <div class="p-2 collapsedRow_content text-end">
                         <strong>Direção origem</strong><br>
                         <p>{{ $cabo->origin_direction }}</p>
