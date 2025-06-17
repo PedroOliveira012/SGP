@@ -461,12 +461,29 @@ $('.cable-done-button').on('click', function() {
 });
 
 $('.single').click(function() {
+
     const single = $(this);
     const toolbar = single.closest('.toolbar');
     const multi = toolbar.find('.multi');
-
+    
     single.attr('disabled', 'disabled');
     multi.removeAttr('disabled'); 
+    
+    const charactere = '=-';
+    
+    $('table tbody tr').each(function() {
+        let cableType = $(this).find('td:nth-child(1)').text();
+
+        console.log($collapsedRow);
+
+        if (cableType.includes(charactere) || $collapsedRow) {
+            $(this).hide();
+            $collapsedRow.hide(); // Esconde a linha colapsada
+        }else {
+            $(this).show();
+            $collapsedRow.show(); // Mostra a linha colapsada
+        }
+    });
 });
 
 $('.multi').click(function() {
@@ -476,4 +493,16 @@ $('.multi').click(function() {
 
     multi.attr('disabled', 'disabled');
     single.removeAttr('disabled'); 
+
+    const charactere = '=-';
+
+    $('table tbody tr').each(function() {
+        console.log('teste')
+        let cableType = $(this).find('td:nth-child(1)').text();
+        if (cableType.includes(charactere)) {
+            $(this).show();
+        }else {
+            $(this).hide();
+        }
+    });
 });
