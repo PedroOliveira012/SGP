@@ -78,11 +78,10 @@
         <tr class="collapsedRow">
             <td colspan="7" class="p-0 bottom-1 top-0">
                 <div class="collapse collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
-                    <div class="p-2 collapsedRow_content text-end">
-                        <strong>Direção origem</strong><br>
-                        <p>{{ $cabo->origin_direction }}</p>
+                    <div class="p-2 me-3 collapsedRow_content text-end">
+                        <p class="py-2 fw-bold">Direção origem</p>
                         @include('partials.cabo_collapse', ['direcao' => $cabo->origin_direction])
-                        <p>Terminal origem: {{ $cabo->origin_terminal_type }}</p>
+                        <p class="py-2">Terminal origem: {{ $cabo->origin_terminal_type }}</p>
                     </div>
                     <div class="d-flex flex-column align-items-center collapsedRow_content">
                         <div class="d-flex w-100 h-100 justify-content-between align-items-center">
@@ -138,11 +137,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-2 collapsedRow_content">
-                        <strong>Direção destino</strong>
-                        <p>{{ $cabo->target_direction }}</p>
+                    <div class="p-2 ms-3 collapsedRow_content text-start">
+                        <p class="py-2 fw-bold">Direção destino</p>
                         @include('partials.cabo_collapse_reverse', ['direcao' => $cabo->target_direction])
-                        <p>Terminal destino: {{ $cabo->target_terminal_type }}</p>
+                        <p class="py-2">Terminal destino: {{ $cabo->target_terminal_type }}</p>
                     </div>
                 </div>
             </td>

@@ -459,3 +459,21 @@ $('.cable-done-button').on('click', function() {
         });
     }
 });
+
+$('.single').click(function() {
+    const single = $(this);
+    const toolbar = single.closest('.toolbar');
+    const multi = toolbar.find('.multi');
+
+    single.attr('disabled', 'disabled');
+    multi.removeAttr('disabled'); 
+});
+
+$('.multi').click(function() {
+    const multi = $(this);
+    const toolbar = multi.closest('.toolbar');
+    const single = toolbar.find('.single');
+
+    multi.attr('disabled', 'disabled');
+    single.removeAttr('disabled'); 
+});

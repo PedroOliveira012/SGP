@@ -10,15 +10,10 @@
         <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por tag de origem ou destino">
     </div> -->
 </div>
-<div>
-    <div>
-        <select class="form-select" id="cableType" name="cableType">
-            <option selected value="singelos">Cabos singelos</option>
-            <option  value="multivias">Cabos multivias</option>
-        </select>
-    </div>
-    <div>
-        concluir Cabos
+<div class="toolbar">
+    <div><button class="btn toolbar-button single" disabled><i class="fa-solid fa-slash fa-rotate-270 fa-xl"></i></button></div>
+    <div><button class="btn toolbar-button multi"><i class="fa-solid fa-lines-leaning fa-rotate-by rotate-icon fa-xl"></i></button></div>
+    <div class="d-none">
         <button id="alterarStatus" class="btn btn-warning m-2 d-none">
             Concluir cabos
         </button>
@@ -140,7 +135,11 @@
                 <p><?= $cabo->cable_cross_section?></p>
             </td>
             <td>
-                <p><?= $cabo->color?></p>
+                @if ($cabo->color == '1' || $cabo->color == '2')
+                    <p>PT</p>
+                @else
+                    <p><?= $cabo->color?></p>
+                @endif
             </td>
             <td>
                 <div class="d-flex w-100 justify-content-center align-items-start ">

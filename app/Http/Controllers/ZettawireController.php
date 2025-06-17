@@ -25,30 +25,15 @@ class ZettawireController extends Controller
     // ZETTAWIRE CABLE ROUTING
 
     public function roteamento(Request $request, $id){
-        $cableType = $request->input('cableType');
-        if ($cableType == 'multivias') {
-            $cabos = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->where('wire_harness', 'not like', '=-'.'%')
-            ->get();
+        
+        $cabos = DB::table('cable_routing')
+        ->where('project_id', $id)
+        ->get();
 
-            $wire_harness = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->where('wire_harness', 'not like', '=-'.'%')
-            ->distinct()
-            ->pluck('wire_harness');
-        }else{
-            $cabos = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->where('wire_harness', 'like', '=-'.'%')
-            ->get();
-
-            $wire_harness = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->where('wire_harness', 'like', '=-'.'%')
-            ->distinct()
-            ->pluck('wire_harness');
-        }
+        $wire_harness = DB::table('cable_routing')
+        ->where('project_id', $id)
+        ->distinct()
+        ->pluck('wire_harness');
 
         $projeto = Project::find($id);
         
