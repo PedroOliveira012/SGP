@@ -889,10 +889,9 @@ input[type="file"] {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 100%;
-    height: 80px;
-    border: red solid 1px;
-    margin: 20px 0px;
+    width: 90%;
+    height: 90px;
+    margin: 20px auto;
     background-color: #212529;
 }
 
@@ -909,4 +908,37 @@ input[type="file"] {
 .toolbar-button:hover{
     background-color: #00aac0ad !important;
     color: #121212 !important;
+}
+
+.toolbar-cable-buttons{
+    width: 10%;
+    
+}
+
+.toolbar-progress{
+    width: 10%;
+}
+
+.progress-p{
+    font-size: large;
+}
+
+.progress-count{
+    font-size: medium;
+}
+
+.toolbar-search{
+    width: 25%;
+}
+
+.toolbar-buttons{
+    display: flex;
+    justify-content: space-evenly;
+    width: 10%;
+}
+
+.toolbar-finish-cable{
+    display: flex;
+    justify-content:flex-end;
+    width: fit-content;
 }

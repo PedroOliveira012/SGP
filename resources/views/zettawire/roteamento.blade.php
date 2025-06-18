@@ -10,15 +10,7 @@
         <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por tag de origem ou destino">
     </div> -->
 </div>
-<div class="toolbar">
-    <div><button class="btn toolbar-button single" disabled><i class="fa-solid fa-slash fa-rotate-270 fa-xl"></i></button></div>
-    <div><button class="btn toolbar-button multi"><i class="fa-solid fa-lines-leaning fa-rotate-by rotate-icon fa-xl"></i></button></div>
-    <div class="d-none">
-        <button id="alterarStatus" class="btn btn-warning m-2 d-none">
-            Concluir cabos
-        </button>
-    </div>
-</div>
+@include('partials.toolbar')
 <div id="resultsNotFound"></div>
 <table class="table table-dark tabela">
     <thead>

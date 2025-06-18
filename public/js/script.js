@@ -486,6 +486,7 @@ $('.single').click(function() {
     const single = $(this);
     const toolbar = single.closest('.toolbar');
     const multi = toolbar.find('.multi');
+    const charactere = '=-';
     
     single.attr('disabled', 'disabled');
     multi.removeAttr('disabled'); 
