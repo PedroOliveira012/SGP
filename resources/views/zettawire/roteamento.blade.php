@@ -160,7 +160,7 @@
                 </div>
             </td>
         </tr>
-        <tr class="collapsedRow">
+        <tr class="collapsedRow" data-child-id="{{ $cabo->id }}">
             <td colspan="7" class="p-0 bottom-1 top-0">
                 <div class="collapse  collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                     <div class="p-2 me-3 collapsedRow_content text-end">

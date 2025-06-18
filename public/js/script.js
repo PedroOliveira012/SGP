@@ -206,6 +206,28 @@ function toggleCollapse(id) {
     collapse.toggle();
 }
 
+$('document').ready(function() {
+    const charactere = '=-';
+    $('table tbody tr[data-id]').each(function() {
+        const $mainRow = $(this);
+        const mainRowId = $mainRow.data('id');
+        const cableType = $mainRow.find('td:nth-child(1) p').text();
+        const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
+
+        const shouldHideRow = cableType.includes(charactere);
+
+        if (shouldHideRow) {
+            $mainRow.hide();
+            if ($detailRow.length) {
+                $detailRow.hide();
+            }
+        } else {
+            $mainRow.show();
+            $detailRow.show();
+        }
+    });
+});
+
 $('.filtro-opcao').click(function(e) {
     e.preventDefault();
 
@@ -461,27 +483,29 @@ $('.cable-done-button').on('click', function() {
 });
 
 $('.single').click(function() {
-
     const single = $(this);
     const toolbar = single.closest('.toolbar');
     const multi = toolbar.find('.multi');
     
     single.attr('disabled', 'disabled');
     multi.removeAttr('disabled'); 
-    
-    const charactere = '=-';
-    
-    $('table tbody tr').each(function() {
-        let cableType = $(this).find('td:nth-child(1)').text();
 
-        console.log($collapsedRow);
+    $('table tbody tr[data-id]').each(function() {
+        const $mainRow = $(this);
+        const mainRowId = $mainRow.data('id');
+        const cableType = $mainRow.find('td:nth-child(1) p').text();
+        const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
 
-        if (cableType.includes(charactere) || $collapsedRow) {
-            $(this).hide();
-            $collapsedRow.hide(); // Esconde a linha colapsada
-        }else {
-            $(this).show();
-            $collapsedRow.show(); // Mostra a linha colapsada
+        const shouldHideRow = cableType.includes(charactere);
+
+        if (shouldHideRow) {
+            $mainRow.hide();
+            if ($detailRow.length) {
+                $detailRow.hide();
+            }
+        } else {
+            $mainRow.show();
+            $detailRow.show();
         }
     });
 });
@@ -496,13 +520,21 @@ $('.multi').click(function() {
 
     const charactere = '=-';
 
-    $('table tbody tr').each(function() {
-        console.log('teste')
-        let cableType = $(this).find('td:nth-child(1)').text();
-        if (cableType.includes(charactere)) {
-            $(this).show();
-        }else {
-            $(this).hide();
+    $('table tbody tr[data-id]').each(function() {
+        const $mainRow = $(this);
+        const mainRowId = $mainRow.data('id');
+        const cableType = $mainRow.find('td:nth-child(1) p').text(); 
+
+        const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
+
+        const shouldHideRow = cableType.includes(charactere);
+
+        if (!shouldHideRow) {
+            $mainRow.hide(); 
+            $detailRow.hide();
+        } else {
+            $mainRow.show();
+            $detailRow.show();
         }
     });
 });
