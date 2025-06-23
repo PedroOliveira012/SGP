@@ -6,9 +6,6 @@
     <div class="w-100 m-auto">
         <h1 class="text-center"><?=$projeto->num_projeto?> - <?=$projeto->nome_projeto?></h1>
     </div>
-    <!-- <div class="search-and-add">
-        <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por tag de origem ou destino">
-    </div> -->
 </div>
 @include('partials.toolbar')
 <div id="resultsNotFound"></div>

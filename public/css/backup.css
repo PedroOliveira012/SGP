@@ -934,7 +934,7 @@ input[type="file"] {
 .toolbar-buttons{
     display: flex;
     justify-content: space-evenly;
-    width: 10%;
+    width: 16%;
 }
 
 .toolbar-finish-cable{

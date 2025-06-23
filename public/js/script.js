@@ -232,21 +232,25 @@ $('.filtro-opcao').click(function(e) {
     e.preventDefault();
 
     var filtro = $(this).data('filtro');
-    $('alterarStatus').removeClass('d-none');
-    $('table tbody tr').each(function() {
-        var categoria = $(this).find('.item-filtro p').text().trim();
+    $('table tbody tr[data-id]').each(function() {
+        const $mainRow = $(this);
+        const mainRowId = $mainRow.data('id');
+        const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
+
+        var categoria = $(this).find('.item-filtro p').text();
 
         if (filtro === 'todos' || categoria === filtro) {
-            $(this).show();
+            $mainRow.show();
+            $detailRow.show();
             if (filtro === 'todos'){
-                $('#alterarStatus').addClass('d-none')
-            }
-            else {
+                $('#alterarStatus').addClass('d-none');
+            } else {
                 $('#alterarStatus').removeClass('d-none');
             }
             console.log('Exibindo: ' + categoria);
         } else {
-            $(this).hide();
+            $mainRow.hide();
+            $detailRow.hide();
         }
     });
 });
@@ -258,33 +262,25 @@ $.ajaxSetup({
 });
 
 $('#alterarStatus').on('click', function() {
-    var total = $('.item-visivel:visible').length;
-    var concluido = 0;
-    $('.item-visivel:visible').each(function() {
-        var id = $(this).data('id');
-        console.log(id);
+    $('table tbody tr:visible').each(function() {
+        const icon = $(this).find('.status-icon');
+        const id = $(this).data('id');
 
         if (id) {
             $.ajax({
                 url: 'alterarStatus/'+ id,
                 type: 'POST',
-                success: function(response) {
+                success: function() {
                     console.log('Cabo ' + id + ' atualizado com sucesso.');
+                    icon.removeClass('fa-regular red-icon');
+                    icon.addClass('fa-solid green-icon');
                 },
-                error: function(xhr, status, error) {
+                error: function(error) {
                     console.error('Erro ao atualizar cabo ' + id + ':', error);
                 },
-                complete: function() {
-                    concluido++;
-                    if (concluido === total) {
-                        // Só recarrega quando TODOS terminarem
-                        location.reload();
-                    }
-                }
             });
         }
     });
-    window.location.reload();
 });
 
 $('.cable-start-button').on('click', function(e) {
@@ -453,7 +449,6 @@ $('.cable-done-button').on('click', function() {
     const $button = $(this);
     const id = $button.data('id');
     const $icon = $button.find('.cable-done-icon');
-    const $statusIcon = $('#cableId' + id);
 
     if (id) {
         $.ajax({

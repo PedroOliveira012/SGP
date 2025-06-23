@@ -8,12 +8,12 @@
         <p class="progress-count">X/Y</p>
     </div>
     <div class="toolbar-search">
-        <input type="text" placeholder="Buscar" class="form-control search-input">
+        <input type="text" id="search" name="search" placeholder="Buscar" class="form-control search-input">
     </div>
     <div class="toolbar-buttons">
-        <button class="btn"><i class="fa-solid fa-file-pdf"></i></button>
-        <button class="btn"><i class="fa-regular fa-message"></i></button>
-        <button class="btn"><i class="fa-solid fa-filter"></i></button>
+        <button class="btn toolbar-button"><i class="fa-solid fa-file-pdf fa-xl"></i></button>
+        <button class="btn toolbar-button"><i class="fa-regular fa-message fa-xl"></i></button>
+        <button class="btn toolbar-button"><i class="fa-solid fa-filter fa-xl"></i></button>
     </div>
     <div class="toolbar-finish-cable">
         <button id="alterarStatus" class="btn btn-warning m-2">
