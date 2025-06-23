@@ -534,3 +534,34 @@ $('.multi').click(function() {
         }
     });
 });
+
+let debounceTimer;
+$(document).ready(function(){
+    $('#search').on('keyup', function(){
+        clearTimeout(debounceTimer);
+        let query = $(this).val();
+        debounceTimer = setTimeout(function() {
+            if (query){
+                $('table tbody tr[data-id]').each(function() {
+                    const $mainRow = $(this);
+                    const mainRowId = $mainRow.data('id');
+                    const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
+
+                    const wireHarness = $mainRow.find('td:nth-child(1) p').text().toUpperCase();
+                    const searchQuery = query.toUpperCase();
+
+                    if (wireHarness.includes(searchQuery)) {
+                        $mainRow.show();
+                        $detailRow.show();
+                    } else {
+                        $mainRow.hide();
+                        $detailRow.hide();
+                    }
+                });
+            }else{
+                $('table tbody tr[data-id]').show();
+                $('table tbody tr[data-child-id]').show();
+            }
+        }, 500);
+    });
+});

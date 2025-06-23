@@ -198,14 +198,6 @@ class ZettawireController extends Controller
         ]);
     }
 
-    public function buscar(Request $request){
-        $query = $request->get('query');
-
-        $cable_routing = DB::table('cable_routing')->where('origin', 'like', "%{$query}%")->get();
-
-        return response()->json($cable_routing);
-    }
-
     public function getButtons($id){
         $cable_routing = DB::table('cable_routing')->where('id', $id)->first();
         return view('partials.botao', compact('cable_routing'))->render();
