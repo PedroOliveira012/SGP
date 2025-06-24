@@ -207,6 +207,17 @@ function toggleCollapse(id) {
 }
 
 $('document').ready(function() {
+    let countTotal = 0;
+    let countDone = 0;
+    $('table tbody tr[data-id]').each(function() {
+        countTotal++;
+    });
+    $('table tbody tr[data-id]').each(function() {
+        if ($(this).find('.status-icon').hasClass('green-icon')) {
+            countDone++;
+        }
+    });
+    $('.progress-count').text(countDone + '/' + countTotal);
     const charactere = '=-';
     $('table tbody tr[data-id]').each(function() {
         const $mainRow = $(this);
@@ -281,6 +292,7 @@ $('#alterarStatus').on('click', function() {
             });
         }
     });
+    
 });
 
 $('.cable-start-button').on('click', function(e) {
@@ -323,6 +335,17 @@ $('.cable-start-button').on('click', function(e) {
                         $statusIcon.addClass('fa-solid fa-circle-half-stroke yellow-icon');
                     } else {
                         $statusIcon.addClass('fa-solid fa-circle green-icon');
+                        let countTotal = 0;
+                        let countDone = 0;
+                        $('table tbody tr[data-id]').each(function() {
+                            countTotal++;
+                        });
+                        $('table tbody tr[data-id]').each(function() {
+                            if ($(this).find('.status-icon').hasClass('green-icon')) {
+                                countDone++;
+                            }
+                        });
+                        $('.progress-count').text(countDone + '/' + countTotal);
                     }
 
                     $button.data('origin-value', valueToSend * -1);
@@ -334,6 +357,7 @@ $('.cable-start-button').on('click', function(e) {
             }
         });
     }
+
 });
 
 $('.cable-end-button').on('click', function(e) {
@@ -376,6 +400,17 @@ $('.cable-end-button').on('click', function(e) {
                         $statusIcon.addClass('fa-solid fa-circle-half-stroke yellow-icon');
                     } else {
                         $statusIcon.addClass('fa-solid fa-circle green-icon');
+                        let countTotal = 0;
+                        let countDone = 0;
+                        $('table tbody tr[data-id]').each(function() {
+                            countTotal++;
+                        });
+                        $('table tbody tr[data-id]').each(function() {
+                            if ($(this).find('.status-icon').hasClass('green-icon')) {
+                                countDone++;
+                            }
+                        });
+                        $('.progress-count').text(countDone + '/' + countTotal);
                     }
 
                     $button.data('target-value', valueToSend * -1);
@@ -431,10 +466,34 @@ $('.finish-button').on('click', function(e) {
                         $finishIcon.addClass('fa-regular fa-circle red-icon');
                         $startIcon.addClass('red-icon');
                         $endIcon.addClass('red-icon');
+                        let countTotal = 0;
+                        let countDone = 0;
+                        $('table tbody tr[data-id]').each(function() {
+                            countTotal++;
+                        });
+                        $('table tbody tr[data-id]').each(function() {
+                            if ($(this).find('.status-icon').hasClass('green-icon')) {
+                                countDone++;
+                            }
+                        });
+                        console.log(countDone + '/' + countTotal)
+                        $('.progress-count').text(countDone + '/' + countTotal);
                     } else {
                         $finishIcon.addClass('fa-solid fa-circle green-icon');
                         $startIcon.addClass('green-icon');
                         $endIcon.addClass('green-icon');
+                        let countTotal = 0;
+                        let countDone = 0;
+                        $('table tbody tr[data-id]').each(function() {
+                            countTotal++;
+                        });
+                        $('table tbody tr[data-id]').each(function() {
+                            if ($(this).find('.status-icon').hasClass('green-icon')) {
+                                countDone++;
+                            }
+                        });
+                        console.log(countDone + '/' + countTotal)
+                        $('.progress-count').text(countDone + '/' + countTotal);
                     }
                 }
             },
@@ -535,8 +594,8 @@ $('.multi').click(function() {
     });
 });
 
-let debounceTimer;
 $(document).ready(function(){
+    let debounceTimer;
     $('#search').on('keyup', function(){
         clearTimeout(debounceTimer);
         let query = $(this).val();
