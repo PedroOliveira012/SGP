@@ -44,6 +44,13 @@
     </thead>
     <tbody class="table-group-divider" id="resultsFound">
         @foreach ($cabos as $cabo)
+        @php
+            // Remove 'mm²' e converte para inteiro
+            $valorNumerico = (int) str_replace('mm²', '', $cabo->cable_cross_section);
+        @endphp
+
+        @if ($valorNumerico < 16 || ($cabo->tag == 'PE' && str_contains($cabo->target, '=-l.')))
+
         <tr class=" align-middle text-center " onclick="toggleCollapse('collapseRow{{ $cabo->id }}')" style="cursor: pointer" data-id="{{ $cabo->id }}">
             <td class="item-filtro item-visivel {{ $cabo->wire_harness }}" data-id="{{ $cabo->id }}">
                 <p><?= $cabo->wire_harness?></p>
@@ -72,6 +79,7 @@
                 </div>
             </td>
         </tr>
+        
         <tr class="collapsedRow" data-child-id="{{ $cabo->id }}">
             <td colspan="7" class="p-0 bottom-1 top-0">
                 <div class="collapse collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
@@ -140,6 +148,7 @@
                 </div>
             </td>
         </tr>
+        @endif
         @endforeach
     <tbody>
 </table>
