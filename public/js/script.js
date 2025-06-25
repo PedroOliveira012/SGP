@@ -213,7 +213,7 @@ $('document').ready(function() {
         countTotal++;
     });
     $('table tbody tr[data-id]').each(function() {
-        if ($(this).find('.status-icon').hasClass('green-icon')) {
+        if ($(this).find('.status-icon').hasClass('green-icon') || $(this).find('.cable-done-icon').hasClass('green-icon')) {
             countDone++;
         }
     });
@@ -335,18 +335,18 @@ $('.cable-start-button').on('click', function(e) {
                         $statusIcon.addClass('fa-solid fa-circle-half-stroke yellow-icon');
                     } else {
                         $statusIcon.addClass('fa-solid fa-circle green-icon');
-                        let countTotal = 0;
-                        let countDone = 0;
-                        $('table tbody tr[data-id]').each(function() {
-                            countTotal++;
-                        });
-                        $('table tbody tr[data-id]').each(function() {
-                            if ($(this).find('.status-icon').hasClass('green-icon')) {
-                                countDone++;
-                            }
-                        });
-                        $('.progress-count').text(countDone + '/' + countTotal);
                     }
+                    let countTotal = 0;
+                    let countDone = 0;
+                    $('table tbody tr[data-id]').each(function() {
+                        countTotal++;
+                    });
+                    $('table tbody tr[data-id]').each(function() {
+                        if ($(this).find('.status-icon').hasClass('green-icon')) {
+                            countDone++;
+                        }
+                    });
+                    $('.progress-count').text(countDone + '/' + countTotal);
 
                     $button.data('origin-value', valueToSend * -1);
                     console.log('Novo data-origin-value do botão (após update):', $button.data('origin-value'));
@@ -400,18 +400,16 @@ $('.cable-end-button').on('click', function(e) {
                         $statusIcon.addClass('fa-solid fa-circle-half-stroke yellow-icon');
                     } else {
                         $statusIcon.addClass('fa-solid fa-circle green-icon');
-                        let countTotal = 0;
-                        let countDone = 0;
-                        $('table tbody tr[data-id]').each(function() {
-                            countTotal++;
-                        });
-                        $('table tbody tr[data-id]').each(function() {
-                            if ($(this).find('.status-icon').hasClass('green-icon')) {
-                                countDone++;
-                            }
-                        });
-                        $('.progress-count').text(countDone + '/' + countTotal);
                     }
+                    let countTotal = 0;
+                    let countDone = 0;
+                    $('table tbody tr[data-id]').each(function() {
+                        countTotal++;
+                        if ($(this).find('.status-icon').hasClass('green-icon')) {
+                            countDone++;
+                        }
+                    });
+                    $('.progress-count').text(countDone + '/' + countTotal);
 
                     $button.data('target-value', valueToSend * -1);
                     console.log('Novo data-target-value do botão (após update):', $button.data('target-value'));
@@ -466,35 +464,21 @@ $('.finish-button').on('click', function(e) {
                         $finishIcon.addClass('fa-regular fa-circle red-icon');
                         $startIcon.addClass('red-icon');
                         $endIcon.addClass('red-icon');
-                        let countTotal = 0;
-                        let countDone = 0;
-                        $('table tbody tr[data-id]').each(function() {
-                            countTotal++;
-                        });
-                        $('table tbody tr[data-id]').each(function() {
-                            if ($(this).find('.status-icon').hasClass('green-icon')) {
-                                countDone++;
-                            }
-                        });
-                        console.log(countDone + '/' + countTotal)
-                        $('.progress-count').text(countDone + '/' + countTotal);
                     } else {
                         $finishIcon.addClass('fa-solid fa-circle green-icon');
                         $startIcon.addClass('green-icon');
                         $endIcon.addClass('green-icon');
-                        let countTotal = 0;
-                        let countDone = 0;
-                        $('table tbody tr[data-id]').each(function() {
-                            countTotal++;
-                        });
-                        $('table tbody tr[data-id]').each(function() {
-                            if ($(this).find('.status-icon').hasClass('green-icon')) {
-                                countDone++;
-                            }
-                        });
-                        console.log(countDone + '/' + countTotal)
-                        $('.progress-count').text(countDone + '/' + countTotal);
                     }
+                    let countTotal = 0;
+                    let countDone = 0;
+                    $('table tbody tr[data-id]').each(function() {
+                        countTotal++;
+                        if ($(this).find('.status-icon').hasClass('green-icon')) {
+                            countDone++;
+                        }
+                    });
+                    console.log(countDone + '/' + countTotal)
+                    $('.progress-count').text(countDone + '/' + countTotal);
                 }
             },
             error: function(xhr) {
@@ -520,13 +504,24 @@ $('.cable-done-button').on('click', function() {
                 console.log('Cabo feito:', response);
                 if(response.success){
                     const doneStatus = response.done_status;
-                    $icon.removeClass('fa-regular fa-solid fa-circle fa-circle-half-stroke red-icon yellow-icon green-icon');
+                    $icon.removeClass('fa-solid red-icon green-icon');
 
                     if (doneStatus === 0) {
                         $icon.addClass('fa-regular fa-circle red-icon');
                     } else {
                         $icon.addClass('fa-solid fa-circle green-icon');
                     }
+                    let countTotal = 0;
+                    let countDone = 0;
+                    
+                    $('table tbody tr[data-id]').each(function() {
+                        countTotal++;
+                        if ($(this).find('.cable-done-icon').hasClass('green-icon')) {
+                            countDone++;
+                        }
+                    });
+                    console.log(countDone, countTotal);
+                    $('.progress-count').text(countDone + '/' + countTotal);
                 }
             },
             error: function(xhr) {

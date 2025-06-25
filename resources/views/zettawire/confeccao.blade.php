@@ -3,14 +3,12 @@
 @section('conteudo')
 
 <div class="topo">
-    <div class="projetos__titulo">
-        <h1>Confecção de cabos</h1>
-        <h2><?=$projeto->num_projeto?> - <?=$projeto->nome_projeto?></h2>
+    <div class="w-100 m-auto">
+        <h1 class="text-center">Confecção de cabos</h1>
+        <h2 class="text-center"><?=$projeto->num_projeto?> - <?=$projeto->nome_projeto?></h2>
     </div>
-    <button id="cableDone" class="btn btn-warning m-2 d-none">
-        Concluir cabos
-    </button>
 </div>
+@include('partials.toolbar')
 <table class="table table-dark tabela">
     <thead>
         <tr class="tabela__head">
@@ -46,7 +44,6 @@
     </thead>
     <tbody class="table-group-divider" id="resultsFound">
         @foreach ($cabos as $cabo)
-        <!-- <tr class=" align-middle text-center"> -->
         <tr class=" align-middle text-center " onclick="toggleCollapse('collapseRow{{ $cabo->id }}')" style="cursor: pointer" data-id="{{ $cabo->id }}">
             <td class="item-filtro item-visivel {{ $cabo->wire_harness }}" data-id="{{ $cabo->id }}">
                 <p><?= $cabo->wire_harness?></p>
@@ -75,7 +72,7 @@
                 </div>
             </td>
         </tr>
-        <tr class="collapsedRow">
+        <tr class="collapsedRow" data-child-id="{{ $cabo->id }}">
             <td colspan="7" class="p-0 bottom-1 top-0">
                 <div class="collapse collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                     <div class="p-2 me-3 collapsedRow_content text-end">
@@ -126,8 +123,6 @@
                                         <p>{{ $cabo->color }}</p>
                                     @endif
                                 </div>
-
-
                                 @if($cabo->origin_terminal_type == 'Pré-Decapado (Sem Terminal)')
                                     <div class="cable-start m-auto copper-cable">
                                 @else
@@ -148,69 +143,4 @@
         @endforeach
     <tbody>
 </table>
-<script>
-    function toggleCollapse(id) {
-        const element = document.getElementById(id);
-        const collapse = bootstrap.Collapse.getOrCreateInstance(element);
-        collapse.toggle();
-    }
-
-    $('.filtro-opcao').click(function(e) {
-        e.preventDefault();
-
-        var filtro = $(this).data('filtro');
-        $('cableDone').removeClass('invisible');
-        $('table tbody tr').each(function() {
-            var categoria = $(this).find('.item-filtro p').text().trim();
-
-            if (filtro === 'todos' || categoria === filtro) {
-                $(this).show();
-                $('#cableDone').addClass('d-none');
-            } else {
-                $(this).hide();
-                $('#cableDone').removeClass('d-none');
-            }
-        });
-    });
-    
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $('#cableDone').on('click', function(e) {
-        e.preventDefault();
-
-        var total = $('.item-visivel:visible').length;
-        var concluido = 0;
-
-        $('.item-visivel:visible').each(function() {
-            var id = $(this).data('id');
-            console.log(id);
-
-            if (id) {
-                $.ajax({
-                    url: 'cableDone/'+ id,
-                    type: 'POST',
-                    success: function(response) {
-                        console.log('Cabo ' + id + ' atualizado com sucesso.');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Erro ao atualizar cabo ' + id + ':', error);
-                    },
-                    complete: function() {
-                        concluido++;
-                        if (concluido === total) {
-                            // Só recarrega quando TODOS terminarem
-                            location.reload();
-                        }
-                    }
-                });
-            }
-        });
-        // location.reload();
-    });
-</script>
-
 @endsection
