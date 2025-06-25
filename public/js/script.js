@@ -273,13 +273,18 @@ $.ajaxSetup({
 });
 
 $('#alterarStatus').on('click', function() {
-    $('table tbody tr:visible').each(function() {
-        const icon = $(this).find('.status-icon');
+    $('table tbody tr[data-id]:visible').each(function() {
+        let icon = $(this).find('.status-icon');
+        let url = 'alterarStatus/';
+        if (icon.length === 0) {
+            icon = $(this).find('.cable-done-icon');
+            url = "cableDone/";
+        }
         const id = $(this).data('id');
 
         if (id) {
             $.ajax({
-                url: 'alterarStatus/'+ id,
+                url: url+ id,
                 type: 'POST',
                 success: function() {
                     console.log('Cabo ' + id + ' atualizado com sucesso.');

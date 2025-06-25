@@ -16,7 +16,7 @@
         <button class="btn toolbar-button"><i class="fa-solid fa-filter fa-xl"></i></button>
     </div>
     <div class="toolbar-finish-cable">
-        <button id="alterarStatus" class="btn btn-warning m-2" disabled>
+        <button id="alterarStatus" class="btn btn-warning m-2 d-none">
             Concluir cabos
         </button>
     </div>
