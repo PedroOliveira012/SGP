@@ -211,12 +211,11 @@ $('document').ready(function() {
     let countDone = 0;
     $('table tbody tr[data-id]').each(function() {
         countTotal++;
-    });
-    $('table tbody tr[data-id]').each(function() {
         if ($(this).find('.status-icon').hasClass('green-icon') || $(this).find('.cable-done-icon').hasClass('green-icon')) {
             countDone++;
         }
     });
+
     $('.progress-count').text(countDone + '/' + countTotal);
     const charactere = '=-';
     $('table tbody tr[data-id]').each(function() {
@@ -235,6 +234,16 @@ $('document').ready(function() {
         } else {
             $mainRow.show();
             $detailRow.show();
+        }
+    });
+
+    $('table tbody tr[data-id]:visible').each(function() {
+        const chicote = $(this).find('.item-filtro p').text();
+        if (chicote) {
+            const $option = $('.pluck-option[data-filtro="' + chicote + '"]');
+            if ($option.text() === chicote) {
+                $option.removeClass('d-none');
+            }
         }
     });
 });
@@ -563,6 +572,29 @@ $('.single').click(function() {
             $detailRow.show();
         }
     });
+    
+    const chicotesVisiveis = new Set();
+    $('table tbody tr[data-id]:visible').each(function() {
+        const $chicote = $(this).find('.item-filtro p');
+        if ($chicote.length > 0) {
+            const chicoteText = $chicote.text().trim(); // Pega o texto e remove espaços em branco
+
+            if (chicoteText) { // Verifica se o texto não está vazio
+                chicotesVisiveis.add(chicoteText); // Adiciona o TEXTO ao Set
+            }
+        }
+    });
+    $('.pluck-option').each(function() {
+        const $pluckOption = $(this);
+        for (const chicoteUnico of chicotesVisiveis) {
+            if ($pluckOption.text().includes(chicoteUnico)) {
+                $pluckOption.removeClass('d-none');
+                break;
+            } else {
+                $pluckOption.addClass('d-none');
+            }
+        }
+    });
 });
 
 $('.multi').click(function() {
@@ -590,6 +622,29 @@ $('.multi').click(function() {
         } else {
             $mainRow.show();
             $detailRow.show();
+        }
+    });
+
+    const chicotesVisiveis = new Set();
+    $('table tbody tr[data-id]:visible').each(function() {
+        const $chicote = $(this).find('.item-filtro p');
+        if ($chicote.length > 0) {
+            const chicoteText = $chicote.text().trim(); // Pega o texto e remove espaços em branco
+
+            if (chicoteText) { // Verifica se o texto não está vazio
+                chicotesVisiveis.add(chicoteText); // Adiciona o TEXTO ao Set
+            }
+        }
+    });
+    $('.pluck-option').each(function() {
+        const $pluckOption = $(this);
+        for (const chicoteUnico of chicotesVisiveis) {
+            if ($pluckOption.text().includes(chicoteUnico)) {
+                $pluckOption.removeClass('d-none');
+                break;
+            } else {
+                $pluckOption.addClass('d-none');
+            }
         }
     });
 });

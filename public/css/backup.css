@@ -745,7 +745,8 @@ input[type="file"] {
 }
 
 .dropdown-size{
-    height: 250px;
+    height: fit-content;
+    max-height: 250px;
     overflow-y: auto;
 }
 

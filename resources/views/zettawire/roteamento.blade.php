@@ -20,7 +20,7 @@
                     <ul class="dropdown-menu dropdown-menu-dark dropdown-size">
                         <li><a class="dropdown-item filtro-opcao" data-filtro="todos" href="#">Mostrar todos</a></li>
                     @foreach ($wire_harness as $wire_harness)
-                        <li><a class="dropdown-item filtro-opcao" data-filtro="{{ $wire_harness }}" href="#">{{ $wire_harness }}</a></li>
+                        <li><a class="dropdown-item filtro-opcao pluck-option d-none" data-filtro="{{ $wire_harness }}" href="#">{{ $wire_harness }}</a></li>
                     @endforeach
                     </ul>
                 </div>
