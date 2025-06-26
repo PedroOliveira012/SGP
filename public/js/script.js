@@ -206,7 +206,15 @@ function toggleCollapse(id) {
     collapse.toggle();
 }
 
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 $('document').ready(function() {
+    //logica do mostrador de progresso dos cabos
     let countTotal = 0;
     let countDone = 0;
     $('table tbody tr[data-id]').each(function() {
@@ -215,8 +223,9 @@ $('document').ready(function() {
             countDone++;
         }
     });
-
     $('.progress-count').text(countDone + '/' + countTotal);
+
+    //lógica para carregar a visualização dos cabos singelos
     const charactere = '=-';
     $('table tbody tr[data-id]').each(function() {
         const $mainRow = $(this);
@@ -275,12 +284,7 @@ $('.filtro-opcao').click(function(e) {
     });
 });
 
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
+// Lógica do botão para concluir o status de mais de um cabo (seja como confeccionado ou conectado)
 $('#alterarStatus').on('click', function() {
     $('table tbody tr[data-id]:visible').each(function() {
         let icon = $(this).find('.status-icon');
@@ -309,6 +313,7 @@ $('#alterarStatus').on('click', function() {
     
 });
 
+// Lógica do botão para marcar que o início foi conectada
 $('.cable-start-button').on('click', function(e) {
     e.preventDefault();
     const $button = $(this); 
@@ -374,6 +379,7 @@ $('.cable-start-button').on('click', function(e) {
 
 });
 
+// Lógica do botão para marcar que a ponta do cabo foi conectada
 $('.cable-end-button').on('click', function(e) {
     e.preventDefault();
     const $button = $(this); 
@@ -436,6 +442,7 @@ $('.cable-end-button').on('click', function(e) {
     }
 });
 
+// Lógica do botão para marcar cabo como finalizado
 $('.finish-button').on('click', function(e) {
     e.preventDefault();
     const $button = $(this); 
@@ -502,6 +509,7 @@ $('.finish-button').on('click', function(e) {
     }
 });
 
+// Lógica do botão para marcar cabo como confeccionado
 $('.cable-done-button').on('click', function() {
     const $button = $(this);
     const id = $button.data('id');
@@ -545,6 +553,7 @@ $('.cable-done-button').on('click', function() {
     }
 });
 
+// Lógica do botão para mostrar chicotes de cabos singelos
 $('.single').click(function() {
     const single = $(this);
     const toolbar = single.closest('.toolbar');
@@ -597,6 +606,7 @@ $('.single').click(function() {
     });
 });
 
+// Lógica do botão para mostrar chicotes de cabos multivias
 $('.multi').click(function() {
     const multi = $(this);
     const toolbar = multi.closest('.toolbar');
@@ -649,6 +659,7 @@ $('.multi').click(function() {
     });
 });
 
+//Lógica da barra de pesquisa
 $(document).ready(function(){
     let debounceTimer;
     $('#search').on('keyup', function(){
@@ -679,3 +690,4 @@ $(document).ready(function(){
         }, 500);
     });
 });
+

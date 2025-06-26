@@ -250,6 +250,18 @@ class ZettawireController extends Controller
         }
     }
 
+    public function finishProject($id){
+        // $project = Project::find($id);
+        $project_cables = DB::table('cable_routing')->find($id);
+        if ($project_cables) {
+            // Exclui todos os cabos do projeto
+            DB::table('cable_routing')->where('project_id', $id)->delete();
+            // Marca o projeto como concluído
+            $project_cables->save();
+        }
+        return redirect()->route('index_zettawire')->with('success', 'Projeto concluído com sucesso!');
+    }
+
     // ZETTAWIRE CABLE CONFECCION
 
     public function confeccionIndex(){

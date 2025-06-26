@@ -61,7 +61,6 @@
                                 </a>
                             </div>
                             <div class="tabela__dados--botoes">
-                                {{-- <button type="submit" class="btn btn-danger" onclick="return confirm('Deseja mesmo excluir este projeto?')"><i class="fa-regular fa-trash-can"></i></button> --}}
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropModal{{$i->id}}">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
