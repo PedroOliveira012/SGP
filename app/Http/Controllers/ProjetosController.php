@@ -121,6 +121,6 @@ class ProjetosController extends Controller
 
     public function mostra($id){
         $busca = Project::find($id);
-        return view('projetos.show_projetos',['i' => $busca]);
+        return view('projetos.show_projetos',['i' => $busca, 'paineis' => explode(';', $busca->paineis)]);
     }
 }

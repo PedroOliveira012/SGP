@@ -74,10 +74,19 @@
                                 </div>
                             </form>
                         </div>
+                        <div>
+                        <select name="painel" id="painel">
+                            <option selected hidden>Selecione o painel</option>
+                            @foreach ($paineis as $painel)
+                                <option value="{{ $painel }}">{{ $painel }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     </div>
                     <div class="m-auto">
                         <span class="custom-file-name" id="fileName"></span>
                     </div>
+                    
                 </div>
             </div>
         </div>
