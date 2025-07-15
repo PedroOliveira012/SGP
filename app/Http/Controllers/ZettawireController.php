@@ -91,6 +91,8 @@ class ZettawireController extends Controller
             'Lista de Cabos Blindados'
         ];
 
+        $painel = $request->input('painel');
+
         for ($i = 0; $i <= 1; $i++){
             $worksheet = $spreadsheet->getSheetByName($worksheetNames[$i]);
             $linhas = $worksheet->toArray();
@@ -125,6 +127,7 @@ class ZettawireController extends Controller
     
                     DB::table('cable_routing')->insert([
                         'project_id' => $id,
+                        'panel' => $painel,
                         'tag' => $tagValue,
                         'origin' => $dados['ALVO'],
                         'origin_direction' => $dados['DIREÇÃO DO CABO (ALVO)'],
