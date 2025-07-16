@@ -1,4 +1,13 @@
 <div class="toolbar">
+    <div class="ms-4">
+        <label for="painel">Selecione o painel</label>
+        <select class="form-select text-bg-dark panel-cables" name="painel" id="painel">
+            <option value="E01" selected hidden>E01</option>
+            @foreach ($paineis as $painel)
+                <option value="{{ $painel }}">{{ $painel }}</option>
+            @endforeach
+        </select>
+    </div>
     <div class="d-flex justify-content-between align-items-center toolbar-cable-buttons">
         <button class="btn toolbar-button single" disabled><i class="fa-solid fa-slash fa-rotate-270 fa-xl"></i></button>
         <button class="btn toolbar-button multi"><i class="fa-solid fa-lines-leaning fa-rotate-by rotate-icon fa-xl"></i></button>

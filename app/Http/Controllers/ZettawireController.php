@@ -61,11 +61,12 @@ class ZettawireController extends Controller
             ->where('project_id', $id)
             ->distinct()
             ->pluck('status');
-
+        $paineis = explode(';', $projeto->paineis);
 
 
         return view('zettawire.roteamento',[
-            'projeto' => $projeto, 
+            'projeto' => $projeto,
+            'paineis' => $paineis,
             'cabos' => $cabos,
             'colors' => $colors,
             'tags' => $tags,

@@ -17,7 +17,7 @@
                 <div class="dropdown m-2">
                     <button class="btn dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-dark dropdown-size">
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-size custom-sidebar">
                         <li><a class="dropdown-item filtro-opcao" data-filtro="todos" href="#">Mostrar todos</a></li>
                     @foreach ($wire_harness as $wire_harness)
                         <li><a class="dropdown-item filtro-opcao pluck-option d-none" data-filtro="{{ $wire_harness }}" href="#">{{ $wire_harness }}</a></li>
@@ -103,6 +103,9 @@
                     </ul>
                 </div> -->
             </th>
+            <th class="text-center align-middle" hidden>
+                Painel
+            </th>
         </tr>
     </thead>
     <tbody class="table-group-divider" id="resultsFound">
@@ -146,6 +149,11 @@
                             @else fa-solid fa-circle green-icon
                             @endif"></i> -->
                     </button>
+                </div>
+            </td>
+            <td hidden>
+                <div class="d-flex w-100 justify-content-center align-items-start ">
+                    <p class="panel-text">{{ $cabo->panel }}</p>
                 </div>
             </td>
         </tr>

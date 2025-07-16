@@ -691,3 +691,23 @@ $(document).ready(function(){
     });
 });
 
+//Filtro de cabos por painel 
+$('.panel-cables').on('change', function() {
+    const selectedPanel = $(this).val();
+    console.log('Painel selecionado:', selectedPanel);
+    $('table tbody tr[data-id]').each(function() {
+        const $mainRow = $(this);
+        const mainRowId = $mainRow.data('id');
+        const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
+
+        const panelText = $mainRow.find('.panel-text').text();
+
+        if (panelText.includes(selectedPanel)) {
+            $mainRow.show();
+            $detailRow.show();
+        } else {
+            $mainRow.hide();
+            $detailRow.hide();
+        }
+    });
+});
