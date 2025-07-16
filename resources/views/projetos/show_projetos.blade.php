@@ -57,33 +57,31 @@
                 </ul>
                 <div class="d-flex flex-column align-middle justify-content-center">
                     <div class="div-gravar-cabos">
-                        <!-- <div> -->
-                            <form action="{{ url('/upload/' .$i->id) }}" method="POST" enctype="multipart/form-data" class="d-flex flex-row">
-                                @csrf
-                                <label for="file" class="btn custom-file-button">
-                                    <i class="fa-solid fa-upload"></i>
-                                    <span>Selecionar arquivo</span>
-                                </label>
-                                <input type="file" id="file" name="file">
-                                
-                                <div class="ms-4">
-                                    <select class="form-select text-bg-dark" name="painel" id="painel">
-                                        <option selected hidden>Selecione o painel</option>
-                                        @foreach ($paineis as $painel)
-                                            <option value="{{ $painel }}">{{ $painel }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <form action="{{ url('/upload/' .$i->id) }}" method="POST" enctype="multipart/form-data" class="d-flex flex-row">
+                            @csrf
+                            <label for="file" class="btn custom-file-button">
+                                <i class="fa-solid fa-upload"></i>
+                                <span>Selecionar arquivo</span>
+                            </label>
+                            <input type="file" id="file" name="file">
+                            
+                            <div class="ms-4">
+                                <select class="form-select text-bg-dark" name="painel" id="painel">
+                                    <option selected hidden>Selecione o painel</option>
+                                    @foreach ($paineis as $painel)
+                                        <option value="{{ $painel }}">{{ $painel }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                                <div class="ms-4">
-                                    <button class="btn btn-gravar-cabos" id="saveCables" type="submit" disabled>
-                                        <i class="fa-solid fa-floppy-disk"></i>
-                                        <span>Gravar cabos</span>
-                                    </button>
-                                </div>
-                                
-                            </form>
-                        <!-- </div> -->
+                            <div class="ms-4">
+                                <button class="btn btn-gravar-cabos" id="saveCables" type="submit" disabled>
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    <span>Gravar cabos</span>
+                                </button>
+                            </div>
+                            
+                        </form>
                     </div>
                     <div class="m-auto">
                         <span class="custom-file-name" id="fileName"></span>

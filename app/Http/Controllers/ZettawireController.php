@@ -124,6 +124,24 @@ class ZettawireController extends Controller
                         $color = $dados['COR'];
                         $section = $dados['SEÇÃO TRANSVERSAL'];
                     }
+
+                    if ($id == '' ||
+                    $painel == '' ||
+                    $tagValue == '' ||
+                    $dados['ALVO'] == '' ||
+                    $dados['DIREÇÃO DO CABO (ALVO)'] == '' ||
+                    $dados['TERMINAL FONTE'] == '' ||
+                    $dados['FONTE'] == '' ||
+                    $dados['DIREÇÃO DO CABO (FONTE)'] == '' ||
+                    $dados['TERMINAL ALVO'] == '' ||
+                    $dados['CHICOTE'] == '' ||
+                    $dados['COMPRIMENTO'] == '' ||
+                    $section == '' ||
+                    $color == '' ||
+                    $dados['ANILHA'] == '')
+                    {
+                        continue; // Pula para a próxima iteração se algum campo obrigatório estiver vazio
+                    }
     
     
                     DB::table('cable_routing')->insert([
