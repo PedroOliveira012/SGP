@@ -96,8 +96,13 @@ class ZettawireController extends Controller
 
         for ($i = 0; $i <= 1; $i++){
             $worksheet = $spreadsheet->getSheetByName($worksheetNames[$i]);
+
+            if ($worksheet === null) {
+                continue;
+            }
+
             $linhas = $worksheet->toArray();
-    
+
             $cabecalho = array_map('trim', $linhas[3] ?? []);
     
             //O for ignora a ultima linha do arquivo porque la não tem nada
@@ -140,7 +145,7 @@ class ZettawireController extends Controller
                     $color == '' ||
                     $dados['ANILHA'] == '')
                     {
-                        continue; // Pula para a próxima iteração se algum campo obrigatório estiver vazio
+                        continue;
                     }
     
     
