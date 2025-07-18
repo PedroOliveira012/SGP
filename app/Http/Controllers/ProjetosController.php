@@ -98,12 +98,11 @@ class ProjetosController extends Controller
         $projeto->data_entrega = $request->input('data_entrega');
         $paineis ="";
         if ($request->input('paineis') != null){
-            for ($i = 1; $i <= $request->input('paineis'); $i++){
-                if ($i <= 9){
-                    $paineis .= 'E0'.$i.';';
-                }else{
-                    $paineis .= 'E'.$i.';';
+            for ($i = 1; $i <= $request->input('paineis'); $i++) {
+                if ($i > 1) {
+                    $paineis .= ';';
                 }
+                $paineis .= 'E' . str_pad($i, 2, '0', STR_PAD_LEFT);
             }
         }
         $projeto->paineis = $paineis;
