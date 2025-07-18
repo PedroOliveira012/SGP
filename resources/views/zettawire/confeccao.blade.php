@@ -40,6 +40,9 @@
             <th class="text-center align-middle">
                 Status
             </th>
+            <th class="text-center align-middle" hidden>
+                Painel
+            </th>
         </tr>
     </thead>
     <tbody class="table-group-divider" id="resultsFound">
@@ -75,7 +78,12 @@
                         @else
                             <p><i class="fa-solid fa-circle fa-xl green-icon cable-done-icon"></i></p>
                         @endif
-                    </button
+                    </button>
+                </div>
+            </td>
+            <td hidden>
+                <div class="d-flex w-100 justify-content-center align-items-start ">
+                    <p class="panel-text">{{ $cabo->panel }}</p>
                 </div>
             </td>
         </tr>
