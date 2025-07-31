@@ -1,158 +1,62 @@
-function escolher_tipo(){
-    var escolha = document.getElementById('tipo')
-    if (escolha.value == 'Armário'){
-        teto.disabled = false
-        teto.hidden = false
-        flange.disabled = true
-        flange.hidden = true
-        // console.log(escolha.value)
-    }
-    else if (escolha.value == 'Quadro'){
-        flange.disabled = false
-        flange.hidden = false
-        teto.disabled = true
-        teto.hidden = true
-        // console.log(escolha.value)
-    }
-    else{
-        flange.disabled = true
-        flange.hidden = true
-        teto.disabled = true
-        teto.hidden = true
-    }
+let currentFilters = {
+    tipo: null,
+    area: null,
+    processo: null
+};
 
-    var proximo_campo = document.getElementById('area')
-    proximo_campo.disabled = false
+// Função única para aplicar todos os filtros
+function applyFilters() {
+    // Itera sobre TODOS os elementos
+    $('div .resultado-tarefas label').each(function() {
+        const task = $(this);
+        const taskType = task.data('tipo');
+        const taskArea = task.data('area');
+        const taskProcess = task.data('process');
+        
+        let shouldShow = true;
+
+        // Verifica o filtro de tipo
+        if (currentFilters.tipo && currentFilters.tipo !== taskType) {
+            shouldShow = false;
+        }
+
+        // Verifica o filtro de área
+        if (currentFilters.area && currentFilters.area !== taskArea) {
+            shouldShow = false;
+        }
+
+        // Verifica o filtro de processo
+        if (currentFilters.processo && currentFilters.processo !== taskProcess) {
+            shouldShow = false;
+        }
+
+        // Exibe ou esconde o elemento com base na verificação
+        if (shouldShow) {
+            task.show();
+        } else {
+            task.hide();
+        }
+    });
 }
 
-function escolher_area(){
-    var processo = document.getElementById('processo')
-    processo.disabled = false
+// Event Listeners para atualizar os filtros e chamar a função principal
+$('#tipo').on('change', function() {
+    currentFilters.tipo = $(this).val();
+    console.log('Tipo selecionado:', currentFilters.tipo);
+    applyFilters();
+});
 
-    var valor_area = document.getElementById('area')
+$('#area').on('change', function() {
+    currentFilters.area = $(this).val();
+    console.log('Area selecionada:', currentFilters.area);
+    applyFilters();
+});
 
-    var pre = document.getElementById('Pre')
-    var inicio = document.getElementById('Inicio')
-    var final = document.getElementById('Final')
-    var placa = document.getElementById('Placa')
-    var flange = document.getElementById('flange')
-    var teto = document.getElementById('teto')
-    var porta = document.getElementById('Porta')
-    var escolha = document.getElementById('tipo')
-    var fabricacao = document.getElementById('Fabricacao')
-    var instalacao = document.getElementById('Instalacao')
-    var pendencia = document.getElementById('Pendencia')
-    var teste = document.getElementById('Teste')
-
-
-    switch(valor_area.value){
-
-        case "Estrutura":
-            pre.disabled = true
-            pre.hidden = true
-            inicio.hidden = false
-            inicio.disabled = false
-            final.hidden = false
-            final.disabled = false
-            placa.hidden = true
-            placa.disabled = true
-            porta.hidden = true
-            porta.disabled = true
-            teto.disabled = true
-            teto.hidden = true
-            flange.disabled = true
-            flange.hidden = true
-            fabricacao.hidden = true
-            fabricacao.disabled = true
-            instalacao.hidden = true
-            instalacao.disabled = true
-            pendencia.hidden = true
-            pendencia.disabled = true
-            teste.hidden = true
-            teste.disabled = true
-            break
-
-        case "Oficina":
-            pre.disabled = true
-            pre.hidden = true
-            inicio.hidden = true
-            inicio.disabled = true
-            final.hidden = true
-            final.disabled = true
-            placa.hidden = false
-            placa.disabled = false
-            porta.hidden = false
-            porta.disabled = false
-            fabricacao.hidden = true
-            fabricacao.disabled = true
-            instalacao.hidden = true
-            instalacao.disabled = true
-            pendencia.hidden = true
-            pendencia.disabled = true
-            teste.hidden = true
-            teste.disabled = true
-            break
-
-        case "Produção":
-            pre.disabled = true
-            pre.hidden = true
-            inicio.hidden = true
-            inicio.disabled = true
-            final.hidden = true
-            final.disabled = true
-            placa.hidden = true
-            placa.disabled = true
-            porta.hidden = true
-            porta.disabled = true
-            teto.disabled = true
-            teto.hidden = true
-            flange.disabled = true
-            flange.hidden = true
-            fabricacao.hidden = false
-            fabricacao.disabled = false
-            instalacao.hidden = false
-            instalacao.disabled = false
-            pendencia.hidden = false
-            pendencia.disabled = false
-            teste.hidden = false
-            teste.disabled = false
-            break
-
-        case "Almoxarifado":
-            pre.disabled = false
-            pre.hidden = false
-            inicio.hidden = true
-            inicio.disabled = true
-            final.hidden = true
-            final.disabled = true
-            placa.hidden = true
-            placa.disabled = true
-            porta.hidden = true
-            porta.disabled = true
-            teto.disabled = true
-            teto.hidden = true
-            flange.disabled = true
-            flange.hidden = true
-            fabricacao.hidden = true
-            fabricacao.disabled = true
-            instalacao.hidden = true
-            instalacao.disabled = true
-            pendencia.hidden = true
-            pendencia.disabled = true
-            teste.hidden = true
-            teste.disabled = true
-            break
-    }
-}
-
-function limpar_input_tarefa(){
-    document.getElementById('id_projeto').value = ''
-}
-
-function limpar_div(){
-    let div = document.getElementById('tarefas')
-    div.innerText = ""
-}
+$('#processo').on('change', function() {
+    currentFilters.processo = $(this).val();
+    console.log('Processo selecionado:', currentFilters.processo);
+    applyFilters();
+});
 
 function Habilita_paineis(){
     sim = document.getElementById('sim')
@@ -166,22 +70,42 @@ function Habilita_paineis(){
     }
 }
 
+
+function escolher_area(){
+    switch(valor_area.value){
+
+        case "Estrutura":
+            inicio.hidden = false
+            final.hidden = false
+            break
+
+        case "Oficina":
+            placa.hidden = false
+            porta.hidden = false
+            break
+
+        case "Produção":
+            fabricacao.hidden = false
+            instalacao.hidden = false
+            pendencia.hidden = false
+            teste.hidden = false
+            break
+
+        case "Almoxarifado":
+            pre.hidden = false
+            break
+    }
+}
+
+function limpar_div(){
+    let div = document.getElementById('tarefas')
+    div.innerText = ""
+}
+
 function Habilita_prazo(){
     sim = document.getElementById('sim_prazo')
     nao = document.getElementById('nao_prazo')
     prazo = document.getElementById('prazo')
-
-    if (sim.checked) {
-        prazo.hidden = false
-    }else{
-        prazo.hidden = true
-    }
-}
-
-function Habilita_prazo_pendencia(){
-    sim = document.getElementById('sim')
-    nao = document.getElementById('nao')
-    paineis = document.getElementById('paineis')
 
     if (sim.checked) {
         prazo.hidden = false
@@ -205,7 +129,6 @@ function toggleCollapse(id) {
     const collapse = bootstrap.Collapse.getOrCreateInstance(element);
     collapse.toggle();
 }
-
 
 $.ajaxSetup({
     headers: {

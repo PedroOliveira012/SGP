@@ -10,37 +10,15 @@
     </ul>
 @endif
 
-<div class="topo">
-    <h1>Tarefas do Projeto {{$projeto->num_projeto}} - {{$projeto->nome_projeto}}</h1>
-    <div class="btn-group add">
-        <a href="{{ url('/tarefas/novo/' .$projeto->id) }}">
-            <button type="button" class="btn add_task">
-                <i class="fa-solid fa-plus" aria-hidden="true"></i>
-                Tarefa
-            </button>
-        </a>
-        <a href="{{ url('/tarefas/conjunto/' .$projeto->id) }}">
-            <button type="button" class="btn add_group">
-                <i class="fa-solid fa-plus" aria-hidden="true"></i>
-                Conjunto
-            </button>
-        </a>
-    </div>
+<div class="topo my-4">
+    <h1 class="text-center">Tarefas do Projeto {{$projeto->num_projeto}} - {{$projeto->nome_projeto}}</h1>
 </div>
 <div class="painel">
-    <div>
-        <a href="{{ url('/tarefas/index/') }}">
-            <button class="btn voltar-tarefas">
-                <i class="fa-solid fa-chevron-left voltar-icone"></i>
-                Voltar
-            </button>
-        </a>
-    </div>
     <div class="filtros">
         <div class="div-paineis">
             <form action="{{ url('tarefas/lista/' .$projeto->id)}}" method="get" class="escolher-painel">
-                <select class="form-select select-painel" name="escolher-painel">
-                    <option value="" selected disabled hidden>{{$painel}}</option>
+                <select class="form-select text-bg-dark select-painel " name="escolher-painel">
+                    <option value="" selected hidden>{{$painel}}</option>
                     @foreach ($opcoes as $opcao)
                     <option value="{{ $opcao }}">{{ $opcao }}</option>
                     @endforeach
@@ -48,9 +26,17 @@
                 <button type="submit" class="btn btn-primary botao-painel"><i class="fa-solid fa-filter"></i></button>
             </form>
         </div>
-        <div class="div-status">
+        <div class="div-status d-flex">
+            <div class="btn-group add me-3">
+                <a href="{{ url('/tarefas/conjunto/' .$projeto->id) }}">
+                    <button type="button" class="btn add_group">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        Tarefa
+                    </button>
+                </a>
+            </div>
             <form action="{{ url('tarefas/lista/' .$projeto->id)}}" method="GET" class="escolher-status">
-                <select class="form-select select-status" name="escolher-status">
+                <select class="form-select text-bg-dark select-status" name="escolher-status">
                     <option value="" selected disabled hidden>--Status da tarefa--</option>
                     <option value="concluido">Concluído</option>
                     <option value="aguardo">Aguardando revisão</option>

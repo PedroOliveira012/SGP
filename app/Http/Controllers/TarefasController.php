@@ -79,27 +79,30 @@ class TarefasController extends Controller
         ])->get();
 
         $id_projeto = request('id_projeto');
-        $itensSelecionados = request('tarefas', []);
-
-        foreach ($itensSelecionados as $tarefa_id) {
-            // Verifica se o ID da tarefa está nos resultados da busca
-            $tarefaEncontrada = $busca->contains('id_tarefa', $tarefa_id);
-
-            // Cria a nova Task apenas se a tarefa não for encontrada na busca
-            if (!$tarefaEncontrada) {
-                $funcionarios = implode('/', request('funcionarios', []));
-
-                $conjunto = new Task;
-                $conjunto->id_projeto = $id_projeto;
-                $conjunto->funcionario = $funcionarios;
-                $conjunto->envio_tarefa = Carbon::now()->subHour(3);
-                $conjunto->painel = request('painel');
-                $conjunto->tarefa = $tarefa_id; // Ajuste para usar o ID da tarefa, não um array
-                $conjunto->tarefa_conjunta = request('tarefaConjunta');
-                $conjunto->prazo = request('prazo');
-                $conjunto->status = 'aguardo';
-                $conjunto->visualizado = 0;
-                $conjunto->save();
+        $selectedTasks = request('tarefas', []);
+        $selectedWorkers = request('funcionarios', []);
+        $selectedPanel = request('panel', []);
+        foreach ($selectedTasks as $tasks) {
+            foreach ($selectedPanel as $panel) {
+                // Verifica se o ID da tarefa está nos resultados da busca
+                $tarefaEncontrada = $busca->contains('id_tarefa', $tasks);
+    
+                // Cria a nova Task apenas se a tarefa não for encontrada na busca
+                if (!$tarefaEncontrada) {
+                    $funcionarios = implode('/', $selectedWorkers);
+    
+                    $conjunto = new Task;
+                    $conjunto->id_projeto = $id_projeto;
+                    $conjunto->funcionario = $funcionarios;
+                    $conjunto->envio_tarefa = Carbon::now()->subHour(3);
+                    $conjunto->painel = $panel; // Ajuste para usar o primeiro painel selecionado
+                    $conjunto->tarefa = $tasks; // Ajuste para usar o ID da tarefa, não um array
+                    $conjunto->tarefa_conjunta = request('tarefaConjunta');
+                    $conjunto->prazo = request('prazo');
+                    $conjunto->status = 'aguardo';
+                    $conjunto->visualizado = 0;
+                    $conjunto->save();
+                }
             }
         }
 
@@ -139,23 +142,6 @@ class TarefasController extends Controller
         $opcoes = explode(';', $projeto->paineis);
         $func = User::where('cargo', 'like', '%Montador%')->get();
         $tarefa = Procedure::all();
-        $opcoes = explode(';', $projeto->paineis);
-
-        $chaparia = request('chaparia');
-        $conjunto = request('conjunto');
-
-        if ($chaparia == '' && $conjunto == ''){
-            $chaparia = '--Selecione o tipo de painel--';
-            $conjunto = '--Selecione a área da produção--';
-            $painel = '--Selecione um processo--';
-        }
-
-        if ($chaparia and $conjunto){
-            $tarefa = Procedure::where([
-            ['tipo', '=', $chaparia],
-            ['processo', '=', $conjunto],
-            ])->get();
-        }
 
         return view('tarefas.conjunto_tarefas', ['func' => $func, 'tarefa' => $tarefa,'projeto' => $projeto->id, 'opcoes' => $opcoes, 'opcoes' => $opcoes]);
     }

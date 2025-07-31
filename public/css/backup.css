@@ -48,7 +48,6 @@ img{
 }
 
 .titulo{
-    margin-left: 35%;
     padding-top: 25px;
 }
 
@@ -80,10 +79,17 @@ img{
 
 .topo{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    width: 80%;
+}
+
+.topo-tarefas{
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin: 15px;
-    margin-left: 2.5%;
+    margin: auto;
+    margin-bottom: 2.5%;
+    max-width: 1200px;
 }
 
 .painel{
@@ -410,8 +416,7 @@ a:link, a:visited{
 
 .add{
     height: 40px;
-    margin-top: 20px;
-    margin-right: 40px;
+    margin: auto;
 }
 
 .info-tarefa{
@@ -973,8 +978,8 @@ input[type="file"] {
     width: 50%;
     height: 100%;
     background-color: #212529;
-    border: 1px solid white;
     border-radius: 10px;
+    overflow-y: scroll;
 }
 
 .panel-board{

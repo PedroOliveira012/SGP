@@ -51,7 +51,7 @@ Route::get('/tarefas/mostra/{id}', [TarefasController::class, 'mostra'])->name('
 Route::get('/tarefas/index', [TarefasController::class, 'index'])->name('index_tarefas')->middleware('auth');//funciona
 Route::get('/tarefas/lista/{id}', [TarefasController::class, 'lista'])->name('lista_tarefas')->middleware('auth');//funciona
 Route::get('/tarefas/novo/{id}', [TarefasController::class, 'nova_tarefa'])->name('nova_tarefa')->middleware('auth');//funciona
-Route::get('/tarefas/conjunto/{id}', [TarefasController::class, 'novo_conjunto'])->name('nova_tarefa')->middleware('auth');
+Route::get('/tarefas/conjunto/{id}', [TarefasController::class, 'novo_conjunto'])->name('novo_conjunto')->middleware('auth');
 Route::get('/tarefas/editar/{id}', [TarefasController::class, 'editar'])->name('editar_tarefa')->middleware('auth');//funciona
 Route::put('/tarefas/atualizar/{id}', [TarefasController::class, 'atualizar'])->name('atualizar_tarefa')->middleware('auth');//funciona
 Route::put('/tarefas/retrabalho/{id}', [TarefasController::class, 'retrabalho'])->name('retrabalho')->middleware('auth');
