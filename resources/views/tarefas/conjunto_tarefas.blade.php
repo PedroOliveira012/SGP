@@ -145,14 +145,14 @@
                                         <label class="col-form-label">Gostaria de adicionar um prazo na tarefa?</label>
                                         <div class="yes-no-options">
                                             <div class="radio-button-container d-flex">
-                                                <label class="radio-button">
-                                                    <input type="radio" name="example-radio" value="option1">
+                                                <label class="radio-button deadline-radio">
+                                                    <input type="radio" class="deadline-radio-yes" name="example-radio" value="sim">
                                                     <span class="radio"></span>
                                                     Sim
                                                 </label>
 
-                                                <label class="radio-button">
-                                                    <input type="radio" name="example-radio" value="option2">
+                                                <label class="radio-button deadline-radio">
+                                                    <input type="radio" class="deadline-radio-no" name="example-radio" value="nao">
                                                     <span class="radio"></span>
                                                     Não
                                                 </label>
