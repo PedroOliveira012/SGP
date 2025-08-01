@@ -58,15 +58,27 @@ $('#processo').on('change', function() {
     applyFilters();
 });
 
-function Habilita_paineis(){
-    sim = document.getElementById('sim')
-    nao = document.getElementById('nao')
-    paineis = document.getElementById('paineis')
+$('.deadline-radio').on('click', function() {
+    // Encontra o input de rádio que está marcado dentro de .yes-no-options
+    const selectedInput = $('.yes-no-options input[name="example-radio"]:checked');
+    const selectedValue = selectedInput.val();
+
+    if (selectedValue === 'sim') {
+        $('#prazo').removeClass('invisible');
+    } else {
+        $('#prazo').addClass('invisible');
+    }
+});
+
+function Habilita_prazo(){
+    sim = document.getElementById('sim_prazo')
+    nao = document.getElementById('nao_prazo')
+    prazo = document.getElementById('prazo')
 
     if (sim.checked) {
-        paineis.hidden = false
+        prazo.hidden = false
     }else{
-        paineis.hidden = true
+        prazo.hidden = true
     }
 }
 
