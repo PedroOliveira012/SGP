@@ -75,7 +75,7 @@
         <div class="row" id="paineis" hidden>
             <div class="col-md-12  form-group mb-3">
                 <label for="" class="col-form-label">Quantos painéis serão?</label>
-                <input type="number" class="form-control" name="paineis" value="{{ old('paineis') }}">
+                <input type="text" class="form-control" name="paineis" value="{{ old('paineis') }}">
             </div>
         </div>
         <div class="row">
