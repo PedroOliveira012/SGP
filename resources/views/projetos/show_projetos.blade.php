@@ -10,7 +10,7 @@
     </ul>
 @endif
 
-<body onload="Relembrar()">
+<body>
     <section class="container contorno write-section">
         <div class="info-projeto">
             <h1>Número do Projeto: <?= $i->num_projeto?></h1>

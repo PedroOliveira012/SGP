@@ -10,7 +10,7 @@
     </ul>
 @endif
 
-<div class="topo">
+<div class="topo-projetos">
     <h1>Projetos liberados para a fábrica</h1>
     <div class="search-and-add">
         <form action="{{ url('/projeto/liberados') }}" method="GET" class="search-and-add__input">

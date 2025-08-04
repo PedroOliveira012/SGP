@@ -80,6 +80,15 @@ img{
 .topo{
     display: flex;
     justify-content: center;
+    margin: auto;
+    width: 80%;
+}
+
+.topo-projetos{
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    padding: 15px 0px;
     width: 80%;
 }
 
