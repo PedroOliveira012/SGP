@@ -92,6 +92,26 @@
         </div>
     </section>
 
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header text-bg-success">
+                <strong class="me-auto">Sucesso</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body ">
+                Cabos gravados com sucesso.
+            </div>
+        </div>
+    </div>
+    @if (session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toastLiveExample = document.getElementById('liveToast');
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+            toastBootstrap.show();
+        });
+    </script>
+    @endif
 </body>
 
 <form action="{{ url('/projeto/libera/' .$i->id) }}" class="progress-form" method="POST">
@@ -115,6 +135,17 @@
 </form>
 
 <script>
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+
+    if (toastTrigger) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastTrigger.addEventListener('click', () => {
+            toastBootstrap.show()
+        })
+    }
+
+
     $('#file').on('change', function() {
         const file = this.files[0];
         if (file) {

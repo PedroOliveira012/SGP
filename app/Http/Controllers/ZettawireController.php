@@ -170,7 +170,7 @@ class ZettawireController extends Controller
             // dd($worksheet->getTitle(), $j);
         }
         Storage::delete($path);
-        return back();
+        return back()->with('success', 'Cabos gravados com sucesso.');
     }
 
     public function origem($id){
