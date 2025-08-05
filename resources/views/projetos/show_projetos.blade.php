@@ -119,9 +119,18 @@
         const file = this.files[0];
         if (file) {
             $('#fileName').text('Arquivo: ' + file.name);
-            $('#saveCables').prop('disabled', false);
         } else {
             $('#fileName').text('');
+        }
+    });
+
+    $('#painel').on('change', function() {
+        const painel = this.value;
+        const file = $('#file')[0].files[0];
+        if (painel && file) {
+            $('#saveCables').prop('disabled', false);
+        } else {
+            $('#saveCables').prop('disabled', true);
         }
     });
 </script>
