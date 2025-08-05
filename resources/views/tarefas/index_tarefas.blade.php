@@ -10,7 +10,7 @@
     </ul>
 @endif
 
-<div class="topo">
+<div class="topo-tarefas">
     <h1>Projetos</h1>
     <div class="search-and-add">
         <form action="{{ url('/tarefas/index') }}" method="GET" class="search-and-add__input">

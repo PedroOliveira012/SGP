@@ -9,8 +9,8 @@
     </ul>
 @endif
 
-<div class="topo">
-    <h1>Tarefas do Projeto {{$projeto->num_projeto}} - {{$projeto->nome_projeto}}</h1>
+<div>
+    <h1 class="text-center">Tarefas do Projeto {{$projeto->num_projeto}} - {{$projeto->nome_projeto}}</h1>
 </div>
 <a href="{{ url('/funcionarios/index/') }}">
     <button class="btn voltar-funcionario">

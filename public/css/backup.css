@@ -77,28 +77,12 @@ img{
     margin-top: 25px;
 }
 
-.topo{
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    width: 80%;
-}
-
-.topo-projetos{
+.topo-projetos, .topo-zettawire, .topo-tarefas{
     display: flex;
     justify-content: space-between;
     margin: auto;
     padding: 15px 0px;
     width: 80%;
-}
-
-.topo-tarefas{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    margin-bottom: 2.5%;
-    max-width: 1200px;
 }
 
 .painel{

@@ -53,7 +53,7 @@ class ProjetosController extends Controller
         return view('projetos.teste_projetos', ['lista' => $lista, 'search' => $search]);
     }
 
-   public function devolverParaLiberados($id){
+    public function devolverParaLiberados($id){
         $projeto = Project::find($id);
         $projeto->status = "Liberado";
         $projeto->save();

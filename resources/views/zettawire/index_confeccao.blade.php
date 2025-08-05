@@ -10,7 +10,7 @@
     </ul>
 @endif
 
-<div class="topo">
+<div class="topo-zettawire">
     <h1>Zettawire - Projetos</h1>
     <div class="search-and-add">
         <form action="{{ url('/zettawire/inde') }}" method="GET" class="search-and-add__input">

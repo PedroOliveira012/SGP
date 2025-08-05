@@ -1,8 +1,8 @@
 @extends('index.index')
 
 @section('conteudo')
-<div class="topo-tarefas">
-    <h1 class="titulo">Nova tarefa</h1>
+<div>
+    <h1 class="text-center py-4">Nova tarefa</h1>
 </div>
 
 @if ($errors->any())
