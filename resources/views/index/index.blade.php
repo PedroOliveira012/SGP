@@ -20,6 +20,8 @@
         <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         <script src="https://kit.fontawesome.com/05b56d1101.js" crossorigin="anonymous"></script>
         <script src="{{ asset('js/modernizr.custom.js') }}"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+        <script src="{{ asset('js/cbpFWTabs.js') }}"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -113,8 +115,6 @@
         </div>
         @yield('conteudo')
     </body>
-    <script src="{{ asset('js/script.js') }}"></script>
-    <script src="{{ asset('js/cbpFWTabs.js') }}"></script>
     <script>
         (function() {
 

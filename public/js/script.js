@@ -82,6 +82,18 @@ function Habilita_prazo(){
     }
 }
 
+function Habilita_paineis(){
+    sim = document.getElementById('sim_painel')
+    nao = document.getElementById('nao_painel')
+    painel = document.getElementById('paineis')
+
+    if (sim.checked) {
+        painel.hidden = false
+    }else{
+        painel.hidden = true
+    }
+}
+
 
 function escolher_area(){
     switch(valor_area.value){

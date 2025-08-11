@@ -104,6 +104,8 @@ class ProjetosController extends Controller
                 }
                 $paineis .= 'E' . str_pad($i, 2, '0', STR_PAD_LEFT);
             }
+        }else{
+            $paineis = 'E01';
         }
         $projeto->paineis = $paineis;
         $projeto->status = 'Liberado';

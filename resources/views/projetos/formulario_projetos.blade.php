@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-<div class="topo">
+<div class="topo-formulario">
     <h1 class="titulo">Novo Projeto</h1>
 </div>
 
@@ -64,11 +64,11 @@
         <div class="row">
             <label for="">O projeto terá mais de um painel?</label>
             <div class="col-md-3 form-group mb-3">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="sim" onclick="Habilita_paineis()">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="sim_painel" onclick="Habilita_paineis()">
                 <label class="form-check-label" for="sim">Sim</label>
             </div>
             <div class="col-md-3 form-group mb-3">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="nao" onclick="Habilita_paineis()">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="nao_painel" onclick="Habilita_paineis()">
                 <label class="form-check-label" for="nao">Não</label>
             </div>
         </div>

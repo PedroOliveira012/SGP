@@ -85,6 +85,14 @@ img{
     width: 80%;
 }
 
+.topo-formulario{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 15px 0px;
+    width: 80%;
+}
+
 .painel{
     margin: 15px;
     margin-left: 2.5%;
