@@ -35,7 +35,13 @@
                 Terminal Origem
             </th>
             <th class="text-center align-middle">
+                Componente Origem
+            </th>
+            <th class="text-center align-middle">
                 Terminal Destino
+            </th>
+            <th class="text-center align-middle">
+                Componente Destino
             </th>
             <th class="text-center align-middle">
                 Status
@@ -68,7 +74,13 @@
                 <p><?= $cabo->origin_terminal_type?></p>
             </td>
             <td>
+                <p><?= $cabo->origin?></p>
+            </td>
+            <td>
                 <p><?= $cabo->target_terminal_type?></p>
+            </td>
+            <td>
+                <p><?= $cabo->target?></p>
             </td>
             <td>
                 <div class="d-flex w-100 justify-content-center align-items-start ">
@@ -89,7 +101,7 @@
         </tr>
         
         <tr class="collapsedRow" data-child-id="{{ $cabo->id }}">
-            <td colspan="7" class="p-0 bottom-1 top-0">
+            <td colspan="8" class="p-0 bottom-1 top-0">
                 <div class="collapse collapsedRow_div" data-bs-toggle="collapse" id="collapseRow{{$cabo->id}}">
                     <div class="p-2 me-3 collapsedRow_content text-end">
                         <p class="py-2 fw-bold">Direção origem</p>
