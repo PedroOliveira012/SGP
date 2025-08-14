@@ -77,7 +77,7 @@ class ZettawireController extends Controller
             'status' => $status,]);
     }
 
-    public function upload(Request $request, $id){
+    public function uploadXlsx(Request $request, $id){
         $request->validate([
             'file' => 'file|mimes:xlsx,csv,xls|max:2048',
         ]);
@@ -171,6 +171,19 @@ class ZettawireController extends Controller
         }
         Storage::delete($path);
         return back()->with('success', 'Cabos gravados com sucesso.');
+    }
+
+    public function uploadPdf(Request $request, $id){
+        $request->validate([
+            'file' => 'file|mimes:pdf|max:15360',
+        ]);
+
+        $file = $request->file('pdfFile');
+        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $directoryName = 'uploads/' . $fileName;
+        $path = $file->storeAs($directoryName, $file->getClientOriginalName(), 'local');
+
+        return back()->with('success', 'Arquivo enviado e salvo com sucesso em: ' . $path);
     }
 
     public function origem($id){

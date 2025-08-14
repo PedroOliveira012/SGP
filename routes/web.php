@@ -62,7 +62,8 @@ Route::delete('/tarefas/remove/{id}', [TarefasController::class, 'remove'])->nam
 Route::get('/zettawire/index', [ZettawireController::class, 'index'])->name('index_zettawire')->middleware('auth');
 Route::get('/zettawire/roteamento/{id}', [ZettawireController::class, 'roteamento'])->name('roteamento')->middleware('auth');
 Route::get('/upload', [ZettawireController::class, 'form']);
-Route::post('/upload/{id}', [zettawireController::class, 'upload'])->name('upload');
+Route::post('/upload-xlsx/{id}', [zettawireController::class, 'uploadXlsx'])->name('uploadXlsx');
+Route::post('/upload-pdf/{id}', [zettawireController::class, 'uploadPdf'])->name('uploadPdf');
 Route::post('/zettawire/roteamento/origem/{id}', [ZettawireController::class, 'origem'])->name('origem')->middleware('auth');
 Route::post('/zettawire/roteamento/destino/{id}', [ZettawireController::class, 'destino'])->name('destino')->middleware('auth');
 Route::post('/zettawire/roteamento/finalizaCabo/{id}', [ZettawireController::class, 'finalizaCabo'])->name('finaliza')->middleware('auth');
