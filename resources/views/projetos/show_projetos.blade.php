@@ -57,16 +57,16 @@
                 </ul>
                 <div class="d-flex flex-column align-middle justify-content-center">
                     <div class="div-gravar-cabos">
-                        <form action="{{ url('/upload/' .$i->id) }}" method="POST" enctype="multipart/form-data" class="d-flex flex-row">
+                        <form action="{{ url('/upload-xlsx/' .$i->id) }}" method="POST" enctype="multipart/form-data" class="d-flex flex-row">
                             @csrf
-                            <label for="file" class="btn custom-file-button">
+                            <label for="xlsxFile" class="btn custom-file-button">
                                 <i class="fa-solid fa-upload"></i>
                                 <span>Selecionar arquivo</span>
                             </label>
-                            <input type="file" id="file" name="file">
+                            <input type="file" id="xlsxFile" name="xlsxFile">
                             
                             <div class="ms-4">
-                                <select class="form-select text-bg-dark" name="painel" id="painel">
+                                <select class="form-select text-bg-dark" name="painel" id="painel-xlsx">
                                     <option selected hidden>Selecione o painel</option>
                                     @foreach ($paineis as $painel)
                                         <option value="{{ $painel }}">{{ $painel }}</option>
@@ -80,13 +80,43 @@
                                     <span>Gravar cabos</span>
                                 </button>
                             </div>
+                        </form>
+                    </div>
+                    <div class="xlsx-file-name">
+                        <span class="custom-file-name" id="xlsxFileName"></span>
+                    </div>
+                </div>
+                <div class="d-flex flex-column align-middle justify-content-center">
+                    <div class="div-gravar-pdf">
+                        <form action="{{ url('/upload-pdf/' .$i->id) }}" method="POST" enctype="multipart/form-data" class="d-flex flex-row">
+                            @csrf
+                            <label for="pdfFile" class="btn custom-file-button">
+                                <i class="fa-solid fa-upload"></i>
+                                <span>Selecionar arquivo</span>
+                            </label>
+                            <input type="file" id="pdfFile" name="pdfFile">
+                            
+                            <div class="ms-4">
+                                <select class="form-select text-bg-dark" name="painel" id="painel-pdf">
+                                    <option selected hidden>Selecione o painel</option>
+                                    @foreach ($paineis as $painel)
+                                        <option value="{{ $painel }}">{{ $painel }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="ms-4">
+                                <button class="btn btn-gravar-pdf" id="savePdf" type="submit" disabled>
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    <span>Salvar PDF</span>
+                                </button>
+                            </div>
                             
                         </form>
                     </div>
-                    <div class="m-auto">
-                        <span class="custom-file-name" id="fileName"></span>
+                    <div class="pdf-file-name">
+                        <span class="custom-file-name" id="pdfFileName"></span>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -114,26 +144,6 @@
     @endif
 </body>
 
-<form action="{{ url('/projeto/libera/' .$i->id) }}" class="progress-form" method="POST">
-    @csrf
-    @method('PUT')
-    <div class="modal fade" id="staticBackdropModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Liberar projeto</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">Deseja mesmo liberar este projeto?</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Liberar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
 <script>
     const toastTrigger = document.getElementById('liveToastBtn')
     const toastLiveExample = document.getElementById('liveToast')
@@ -146,22 +156,41 @@
     }
 
 
-    $('#file').on('change', function() {
+    $('#xlsxFile').on('change', function() {
         const file = this.files[0];
         if (file) {
-            $('#fileName').text('Arquivo: ' + file.name);
+            $('#xlsxFileName').text('Arquivo: ' + file.name);
         } else {
-            $('#fileName').text('');
+            $('#xlsxFileName').text('');
         }
     });
 
-    $('#painel').on('change', function() {
+    $('#painel-xlsx').on('change', function() {
         const painel = this.value;
-        const file = $('#file')[0].files[0];
+        const file = $('#xlsxFile')[0].files[0];
         if (painel && file) {
             $('#saveCables').prop('disabled', false);
         } else {
             $('#saveCables').prop('disabled', true);
+        }
+    });
+    
+    $('#pdfFile').on('change', function() {
+        const file = this.files[0];
+        if (file) {
+            $('#pdfFileName').text('Arquivo: ' + file.name);
+        } else {
+            $('#pdfFileName').text('');
+        }
+    });
+
+    $('#painel-pdf').on('change', function() {
+        const painel = this.value;
+        const file = $('#pdfFile')[0].files[0];
+        if (painel && file) {
+            $('#savePdf').prop('disabled', false);
+        } else {
+            $('#savePdf').prop('disabled', true);
         }
     });
 </script>

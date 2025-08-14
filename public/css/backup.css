@@ -181,7 +181,6 @@ a:link, a:visited{
     color: #121212 !important;
 }
 
-
 .numero_projeto + .cliente + .unidade + .valor + .prazo + .botoes{
     width: 10%;
     color: red;
@@ -676,13 +675,13 @@ a:link, a:visited{
     padding: 15px;
 }
 
-.div-gravar-cabos{
+.div-gravar-cabos, .div-gravar-pdf{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
-
 
 input[type="file"] {
     display: none;
@@ -724,14 +723,18 @@ input[type="file"] {
     color: #fff;
 }
 
+.pdf-file-name, .xlsx-file-name{
+    margin: 0px auto 35px auto;
+}
+
 .div-btn-gravar-cabos{
     /* border: solid 1px red; */
     margin-left: 30px;
     margin-right: 10px;
 }
 
-.btn-gravar-cabos{
-    width: fit-content;
+.btn-gravar-cabos, .btn-gravar-pdf{
+    width: 100%;
     height: fit-content;
 }
 
