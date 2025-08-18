@@ -82,7 +82,7 @@ class ZettawireController extends Controller
             'file' => 'file|mimes:xlsx,csv,xls|max:2048',
         ]);
 
-        $path = $request->file('file')->store('uploads');
+        $path = $request->file('xlsxFile')->store('uploads');
         $filepath = storage_path("app/{$path}");
 
         $spreadsheet = IOFactory::load($filepath);
@@ -180,10 +180,10 @@ class ZettawireController extends Controller
 
         $file = $request->file('pdfFile');
         $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $directoryName = 'uploads/' . $fileName;
+        $directoryName = 'uploads/' . substr($fileName,0,14) . '/' . substr($fileName,14,3);
         $path = $file->storeAs($directoryName, $file->getClientOriginalName(), 'local');
 
-        return back()->with('success', 'Arquivo enviado e salvo com sucesso em: ' . $path);
+        return back()->with('success', 'Diagrama do projeto salvo com sucesso.');
     }
 
     public function origem($id){
