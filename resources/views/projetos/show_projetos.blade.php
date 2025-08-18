@@ -95,15 +95,6 @@
                                 <span>Selecionar arquivo</span>
                             </label>
                             <input type="file" id="pdfFile" name="pdfFile">
-                            
-                            <div class="ms-4">
-                                <select class="form-select text-bg-dark" name="painel" id="painel-pdf">
-                                    <option selected hidden>Selecione o painel</option>
-                                    @foreach ($paineis as $painel)
-                                        <option value="{{ $painel }}">{{ $painel }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
                             <div class="ms-4">
                                 <button class="btn btn-gravar-pdf" id="savePdf" type="submit" disabled>
@@ -129,7 +120,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body ">
-                Cabos gravados com sucesso.
+                {{ session('success') }}
             </div>
         </div>
     </div>
@@ -155,7 +146,6 @@
         })
     }
 
-
     $('#xlsxFile').on('change', function() {
         const file = this.files[0];
         if (file) {
@@ -179,18 +169,9 @@
         const file = this.files[0];
         if (file) {
             $('#pdfFileName').text('Arquivo: ' + file.name);
-        } else {
-            $('#pdfFileName').text('');
-        }
-    });
-
-    $('#painel-pdf').on('change', function() {
-        const painel = this.value;
-        const file = $('#pdfFile')[0].files[0];
-        if (painel && file) {
             $('#savePdf').prop('disabled', false);
         } else {
-            $('#savePdf').prop('disabled', true);
+            $('#pdfFileName').text('');
         }
     });
 </script>

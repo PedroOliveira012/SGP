@@ -727,7 +727,7 @@ input[type="file"] {
     margin: 0px auto 35px auto;
 }
 
-.div-btn-gravar-cabos{
+.div-btn-gravar-cabos, .div-btn-gravar-pdf{
     /* border: solid 1px red; */
     margin-left: 30px;
     margin-right: 10px;
@@ -738,7 +738,7 @@ input[type="file"] {
     height: fit-content;
 }
 
-.btn-gravar-cabos:hover{
+.btn-gravar-cabos:hover, .btn-gravar-pdf:hover{
     background-color: #00aac0ad !important;
     color: #121212 !important;
 }
