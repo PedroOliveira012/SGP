@@ -186,6 +186,20 @@ class ZettawireController extends Controller
         return back()->with('success', 'Diagrama do projeto salvo com sucesso.');
     }
 
+    public function download($id, $panel){
+        $project = Project::find($id);
+        $filepath = 'uploads/' . $project->num_projeto . '/' . $panel . '/' . $project->num_projeto . $panel . ' - ' . $project->nome_projeto . '.pdf';
+
+        // 3. Verifique a existência e faça o download usando o caminho relativo.
+        if (Storage::disk('local')->exists($filepath)) {
+            return Storage::download($filepath);
+        }
+
+        // 4. Se o arquivo não existir, redirecione.
+        return redirect()->back()->with('error', 'O arquivo solicitado não foi encontrado.');
+
+    }
+
     public function origem($id){
         $originValue = (int) request()->input('origin_value');
         $cable = DB::table('cable_routing')->find($id);

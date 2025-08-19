@@ -71,6 +71,7 @@ Route::get('/zettawire/buscar/{id}', [ZettawireController::class, 'buscar'])->na
 Route::get('/zettawire/buttons/{id}', [ZettawireController::class, 'getButtons'])->name('zettawire.buttons');
 Route::post('/zettawire/roteamento/alterarStatus/{id}', [ZettawireController::class, 'alterarStatus'])->name('alterarStatus');
 Route::delete('/zettawire/finish-project/{id}', [ZettawireController::class, 'finishProject'])->name('finish-project')->middleware('auth');//funciona
+Route::get('/download/{id}/{panel}', [ZettawireController::class, 'download'])->name('download')->middleware('auth');
 
 // Rotas Zettawire Cable Confeccion
 Route::get('/zettawire/confeccion/index', [ZettawireController::class, 'confeccionIndex'])->name('index_confeccion')->middleware('auth');

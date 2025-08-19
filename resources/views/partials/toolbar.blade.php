@@ -20,7 +20,16 @@
         <input type="text" id="search" name="search" placeholder="Buscar" class="form-control search-input">
     </div>
     <div class="toolbar-buttons">
-        <button class="btn toolbar-button"><i class="fa-solid fa-file-pdf fa-xl"></i></button>
+         <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle toolbar-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-file-pdf fa-xl"></i>
+            </button>
+                <ul class="dropdown-menu  text-bg-dark">
+                @foreach ($paineis as $painel)
+                    <a href="{{ route('download', ['id' => $projeto->id, 'panel' => $painel]) }}"><option>{{ $painel }}</option></a>
+                @endforeach
+                </ul>
+        </div>
         <button disabled class="btn toolbar-button"><i class="fa-regular fa-message fa-xl"></i></button>
         <button disabled class="btn toolbar-button"><i class="fa-solid fa-filter fa-xl"></i></button>
     </div>
