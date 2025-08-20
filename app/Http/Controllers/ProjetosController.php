@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon as SupportCarbon;
 use App\Http\Requests\ProjetosRequest;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use Illuminate\Support\Carbon as SupportCarbon;
 use Laravel\Ui\Presets\React;
 
 class ProjetosController extends Controller
@@ -122,6 +123,21 @@ class ProjetosController extends Controller
 
     public function mostra($id){
         $busca = Project::find($id);
-        return view('projetos.show_projetos',['i' => $busca, 'paineis' => explode(';', $busca->paineis)]);
+        $cabos = DB::table('cable_routing')
+        ->where('project_id', $id)
+        ->get();
+        $paineis = explode(';', $busca->paineis);
+        if($cabos){
+            foreach ($paineis as $painel) {
+                foreach ($cabos as $cabo) {
+                    if($cabo->panel == $painel){
+                        unset($paineis[array_search($painel, $paineis)]);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return view('projetos.show_projetos',['i' => $busca, 'paineis' => $paineis]);
     }
 }
