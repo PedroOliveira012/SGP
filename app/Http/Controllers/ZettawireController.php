@@ -24,14 +24,18 @@ class ZettawireController extends Controller
 
     // ZETTAWIRE CABLE ROUTING
 
-    public function roteamento(Request $request, $id){
+    public function roteamento(Request $request, $id, $panel){
         
         $cabos = DB::table('cable_routing')
         ->where('project_id', $id)
+        ->where('panel', $panel)
         ->get();
+
+        // dd($cabos);
 
         $wire_harness = DB::table('cable_routing')
         ->where('project_id', $id)
+        ->where('panel', $panel)
         ->distinct()
         ->pluck('wire_harness');
 
@@ -61,8 +65,11 @@ class ZettawireController extends Controller
             ->where('project_id', $id)
             ->distinct()
             ->pluck('status');
-        $paineis = explode(';', $projeto->paineis);
 
+        $paineis = $projeto->paineis;
+        if ($paineis != "E01"){
+            $paineis = explode(';', $projeto->paineis);
+        }
 
         return view('zettawire.roteamento',[
             'projeto' => $projeto,

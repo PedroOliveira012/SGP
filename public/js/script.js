@@ -562,7 +562,7 @@ $('.multi').click(function() {
     multi.attr('disabled', 'disabled');
     single.removeAttr('disabled'); 
 
-    const charactere = '=-';
+    const charactersToHide = ['=-', 'SH'];
 
     $('table tbody tr[data-id]').each(function() {
         const $mainRow = $(this);
@@ -571,14 +571,14 @@ $('.multi').click(function() {
 
         const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
 
-        const shouldHideRow = cableType.includes(charactere);
+        const shouldShowRow = charactersToHide.some(character => cableType.includes(character));
 
-        if (!shouldHideRow) {
-            $mainRow.hide(); 
-            $detailRow.hide();
-        } else {
+        if (shouldShowRow) {
             $mainRow.show();
             $detailRow.show();
+        } else {
+            $mainRow.hide(); 
+            $detailRow.hide();
         }
     });
 

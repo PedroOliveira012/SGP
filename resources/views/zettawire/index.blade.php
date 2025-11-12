@@ -47,7 +47,7 @@
                     </td>
                     <td>
                         <div>
-                            <a class="m-1" href="{{ url('/zettawire/roteamento/' .$i->id) }}">
+                            <a class="m-1" href="{{ url('/zettawire/roteamento/' .$i->id. '/E01') }}">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa-solid fa-arrow-right"></i>
                                 </button>
