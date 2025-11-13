@@ -48,7 +48,7 @@
                     <td>
                         <div class="tabela__dados botoes centralizado">
                             <div class="tabela__dados--botoes ">
-                                <a class="tabela__dados--link" href="{{ url('/zettawire/confeccion/' .$i->id) }}">
+                                <a class="tabela__dados--link" href="{{ url('/zettawire/confeccion/' .$i->id. '/E01') }}">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa-solid fa-arrow-right"></i>
                                     </button>

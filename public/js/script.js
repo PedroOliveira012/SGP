@@ -505,29 +505,30 @@ $('.single').click(function() {
     const single = $(this);
     const toolbar = single.closest('.toolbar');
     const multi = toolbar.find('.multi');
-    const charactere = '=-';
     
     single.attr('disabled', 'disabled');
     multi.removeAttr('disabled'); 
 
+    const charactersToHide = ['=-', 'SH'];
+
     $('table tbody tr[data-id]').each(function() {
         const $mainRow = $(this);
         const mainRowId = $mainRow.data('id');
-        const cableType = $mainRow.find('td:nth-child(1) p').text();
+        const cableType = $mainRow.find('td:nth-child(1) p').text(); 
+
         const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
 
-        const shouldHideRow = cableType.includes(charactere);
+        const shouldShowRow = charactersToHide.some(character => cableType.includes(character));
 
-        if (shouldHideRow) {
+        if (shouldShowRow) {
             $mainRow.hide();
-            if ($detailRow.length) {
-                $detailRow.hide();
-            }
+            $detailRow.hide();
         } else {
-            $mainRow.show();
+            $mainRow.show(); 
             $detailRow.show();
         }
-    });
+    }
+);
     
     const chicotesVisiveis = new Set();
     $('table tbody tr[data-id]:visible').each(function() {
@@ -642,19 +643,5 @@ $(document).ready(function(){
 $('.panel-cables').on('change', function() {
     const selectedPanel = $(this).val();
     console.log('Painel selecionado:', selectedPanel);
-    $('table tbody tr[data-id]').each(function() {
-        const $mainRow = $(this);
-        const mainRowId = $mainRow.data('id');
-        const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
-
-        const panelText = $mainRow.find('.panel-text').text();
-
-        if (panelText.includes(selectedPanel)) {
-            $mainRow.show();
-            $detailRow.show();
-        } else {
-            $mainRow.hide();
-            $detailRow.hide();
-        }
-    });
+    window.location.href = selectedPanel;
 });

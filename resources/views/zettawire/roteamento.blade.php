@@ -7,7 +7,9 @@
         <h1 class="text-center"><?=$projeto->num_projeto?> - <?=$projeto->nome_projeto?></h1>
     </div>
 </div>
+
 @include('partials.toolbar')
+
 <div id="resultsNotFound"></div>
 <table class="table table-dark tabela">
     <thead>

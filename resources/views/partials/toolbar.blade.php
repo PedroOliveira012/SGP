@@ -2,14 +2,18 @@
     <div class="ms-4">
         <label for="painel">Selecione o painel</label>
         <select class="form-select text-bg-dark panel-cables" name="painel" id="painel">
-            <option value="E01" selected hidden>E01</option>
+            <option value="E01" selected hidden>{{ $selected_panel }}</option>
+            @if (is_array($paineis))
             @foreach ($paineis as $painel)
-                <option value="{{ $painel }}">{{ $painel }}</option>
+                <option value="{{ route($route_name, ['id' => $projeto->id, 'panel' => $painel]) }}">
+                        {{ $painel }}
+                </option>
             @endforeach
+            @endif
         </select>
     </div>
     <div class="d-flex justify-content-between align-items-center toolbar-cable-buttons">
-        <button class="btn toolbar-button single" disabled><i class="fa-solid fa-slash fa-rotate-270 fa-xl"></i></button>
+        <button class="btn toolbar-button single"><i class="fa-solid fa-slash fa-rotate-270 fa-xl"></i></button>
         <button class="btn toolbar-button multi"><i class="fa-solid fa-lines-leaning fa-rotate-by rotate-icon fa-xl"></i></button>
     </div>
     <div class="toolbar-progress d-flex">
@@ -25,9 +29,11 @@
                 <i class="fa-solid fa-file-pdf fa-xl"></i>
             </button>
                 <ul class="dropdown-menu  text-bg-dark">
+                @if (is_array($paineis))
                 @foreach ($paineis as $painel)
                     <a href="{{ route('download', ['id' => $projeto->id, 'panel' => $painel]) }}"><option>{{ $painel }}</option></a>
                 @endforeach
+                @endif
                 </ul>
         </div>
         <button disabled class="btn toolbar-button"><i class="fa-regular fa-message fa-xl"></i></button>

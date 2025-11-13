@@ -31,7 +31,7 @@ class ZettawireController extends Controller
         ->where('panel', $panel)
         ->get();
 
-        // dd($cabos);
+        $route_name = 'roteamento';
 
         $wire_harness = DB::table('cable_routing')
         ->where('project_id', $id)
@@ -81,7 +81,10 @@ class ZettawireController extends Controller
             'origins' => $origins,
             'targets' => $targets,
             'cable_cross_sections' => $cable_cross_sections,
-            'status' => $status,]);
+            'status' => $status,
+            'selected_panel' => $panel,
+            'route_name' => $route_name
+        ]);
     }
 
     public function uploadXlsx(Request $request, $id){
@@ -335,10 +338,12 @@ class ZettawireController extends Controller
         return view('zettawire.index_confeccao', ['lista' => $lista, 'search' => $search]);
     }
 
-    public function confeccao($id){
+    public function confeccao($id, $panel){
         $projeto = Project::find($id);
+        $route_name = 'confeccion';
         $cabos = DB::table('cable_routing')
             ->where('project_id', $id)
+            ->where('panel', $panel)
             ->get();
         $colors = DB::table('cable_routing')
             ->where('project_id', $id)
@@ -370,7 +375,10 @@ class ZettawireController extends Controller
             'tags' => $tags,
             'wire_harness' => $wire_harness,
             'cable_cross_sections' => $cable_cross_sections,
-            'status' => $status,]);
+            'status' => $status,
+            'selected_panel' => $panel,
+            'route_name' => $route_name
+        ]);
     }
 
     public function cableDone($id){
