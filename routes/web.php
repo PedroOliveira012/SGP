@@ -64,19 +64,19 @@ Route::get('/zettawire/roteamento/{id}/{panel}', [ZettawireController::class, 'r
 Route::get('/upload', [ZettawireController::class, 'form']);
 Route::post('/upload-xlsx/{id}', [zettawireController::class, 'uploadXlsx'])->name('uploadXlsx');
 Route::post('/upload-pdf/{id}', [zettawireController::class, 'uploadPdf'])->name('uploadPdf');
-Route::post('/zettawire/roteamento/{project_id}/origem/{id}', [ZettawireController::class, 'origem'])->name('origem')->middleware('auth');
-Route::post('/zettawire/roteamento/{project_id}/destino/{id}', [ZettawireController::class, 'destino'])->name('destino')->middleware('auth');
-Route::post('/zettawire/roteamento/{project_id}/finalizaCabo/{id}', [ZettawireController::class, 'finalizaCabo'])->name('finaliza')->middleware('auth');
+Route::post('/zettawire/roteamento/origem/{id}', [ZettawireController::class, 'origem'])->name('origem')->middleware('auth');
+Route::post('/zettawire/roteamento/destino/{id}', [ZettawireController::class, 'destino'])->name('destino')->middleware('auth');
+Route::post('/zettawire/roteamento/finalizaCabo/{id}', [ZettawireController::class, 'finalizaCabo'])->name('finaliza')->middleware('auth');
 Route::get('/zettawire/buscar/{id}', [ZettawireController::class, 'buscar'])->name('buscar');
 Route::get('/zettawire/buttons/{id}', [ZettawireController::class, 'getButtons'])->name('zettawire.buttons');
-Route::post('/zettawire/roteamento/{project_id}/alterarStatus/{id}', [ZettawireController::class, 'alterarStatus'])->name('alterarStatus');
+Route::post('/zettawire/roteamento/alterarStatus/{id}', [ZettawireController::class, 'alterarStatus'])->name('alterarStatus');
 Route::delete('/zettawire/finish-project/{id}', [ZettawireController::class, 'finishProject'])->name('finish-project')->middleware('auth');//funciona
 Route::get('/download/{id}/{panel}', [ZettawireController::class, 'download'])->name('download')->middleware('auth');
 
 // Rotas Zettawire Cable Confeccion
 Route::get('/zettawire/confeccion/index', [ZettawireController::class, 'confeccionIndex'])->name('index_confeccion')->middleware('auth');
 Route::get('/zettawire/confeccion/{id}/{panel}', [ZettawireController::class, 'confeccao'])->name('confeccion')->middleware('auth');
-Route::post('/zettawire/confeccion/{project_id}/cableDone/{id}', [ZettawireController::class, 'cableDone'])->name('cableDone')->middleware('auth');
+Route::post('/zettawire/confeccion/cableDone/{id}', [ZettawireController::class, 'cableDone'])->name('cableDone')->middleware('auth');
 
 //Rotas Funcionarios
 Route::get('/funcionarios/index', [FuncionariosController::class, 'index'])->name('index_funcionario')->middleware('auth');//funciona
