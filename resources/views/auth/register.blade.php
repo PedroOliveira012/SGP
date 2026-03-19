@@ -31,6 +31,8 @@
                 <x-label for="nivel_acesso" :value="__('Nível de acesso')" />
 
                 <x-input id="nivel_acesso" class="block mt-1 w-full" type="text" name="nivel_acesso" :value="old('nivel_acesso')" required autofocus />{{--cria o input para pegar o valor do nivel de acesso do usuario para cadastrar no banco--}}
+
+                <p style="color: #7f8387; margin-left: 12px; margin-top: 8px;">LEGENDA:</p>
                 <p style="color: #7f8387; margin-left: 12px;">1-Montador</p>
                 <p style="color: #7f8387; margin-left: 12px;">2-Analista e projetista</p>
                 <p style="color: #7f8387; margin-left: 12px;">3-Coordenador e líderes da produção</p>

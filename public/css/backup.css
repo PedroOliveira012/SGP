@@ -149,8 +149,9 @@ img{
     padding-bottom: none;
 }
 
-.search-and-add__input{
-    margin-right: 50px;
+.search-bar{
+    /* margin-right: 50px; */
+    width: 20%;
 }
 
 a:link, a:visited{

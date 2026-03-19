@@ -13,8 +13,8 @@
 <div class="topo-projetos">
     <h1>Projetos liberados para a fábrica</h1>
     <div class="search-and-add">
-        <form action="{{ url('/projeto/liberados') }}" method="GET" class="search-and-add__input">
-            <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por projetos...">
+        <form action="{{ url('/projeto/liberados') }}" method="GET" class="me-3">
+            <input type="text" id="search" name="search" class="form-control" placeholder="Buscar por projetos...">
         </form>
         <a href="{{ url('/projeto/novo') }}">
             <button type="button" class="btn search-and-add__button">
