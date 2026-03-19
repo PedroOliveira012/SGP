@@ -172,27 +172,6 @@ $('document').ready(function() {
     });
     $('.progress-count').text(countDone + '/' + countTotal);
 
-    //lógica para carregar a visualização dos cabos singelos
-    const charactere = '=-';
-    $('table tbody tr[data-id]').each(function() {
-        const $mainRow = $(this);
-        const mainRowId = $mainRow.data('id');
-        const cableType = $mainRow.find('td:nth-child(1) p').text();
-        const $detailRow = $('table tbody tr[data-child-id="' + mainRowId + '"]');
-
-        const shouldHideRow = cableType.includes(charactere);
-
-        if (shouldHideRow) {
-            $mainRow.hide();
-            if ($detailRow.length) {
-                $detailRow.hide();
-            }
-        } else {
-            $mainRow.show();
-            $detailRow.show();
-        }
-    });
-
     $('table tbody tr[data-id]:visible').each(function() {
         const chicote = $(this).find('.item-filtro p').text();
         if (chicote) {
@@ -235,16 +214,25 @@ $('.filtro-opcao').click(function(e) {
 $('#alterarStatus').on('click', function() {
     $('table tbody tr[data-id]:visible').each(function() {
         let icon = $(this).find('.status-icon');
-        let url = 'alterarStatus/';
+
+        let url = window.location.pathname.split("/");
+        url[url.length - 2] = 'alterarStatus';
+
+
+
+        
         if (icon.length === 0) {
             icon = $(this).find('.cable-done-icon');
-            url = "cableDone/";
+            url[url.length - 2] = "cableDone";
         }
         const id = $(this).data('id');
+        
+        url[url.length - 1] = id;
+        url = url.join("/")
 
         if (id) {
             $.ajax({
-                url: url+ id,
+                url: url,
                 type: 'POST',
                 success: function() {
                     console.log('Cabo ' + id + ' atualizado com sucesso.');
@@ -260,7 +248,7 @@ $('#alterarStatus').on('click', function() {
     
 });
 
-// Lógica do botão para marcar que o início foi conectada
+// Lógica do botão para marcar que o início foi conectado
 $('.cable-start-button').on('click', function(e) {
     e.preventDefault();
     const $button = $(this); 
@@ -279,9 +267,14 @@ $('.cable-start-button').on('click', function(e) {
         valueToSend = -1; 
     }
 
+    let url = window.location.pathname.split("/");
+    url[url.length - 2] = "origem";
+    url[url.length - 1] = id;
+    url = url.join("/");
+
     if (id) {
         $.ajax({
-            url: "origem/{id}".replace('{id}', id),
+            url: url,
             type: 'POST',
             data: {
                 origin_value: valueToSend,  
@@ -326,7 +319,7 @@ $('.cable-start-button').on('click', function(e) {
 
 });
 
-// Lógica do botão para marcar que a ponta do cabo foi conectada
+// Lógica do botão para marcar que o final do cabo foi conectado
 $('.cable-end-button').on('click', function(e) {
     e.preventDefault();
     const $button = $(this); 
@@ -345,9 +338,14 @@ $('.cable-end-button').on('click', function(e) {
         valueToSend = -1; 
     }
 
+    let url = window.location.pathname.split("/");
+    url[url.length - 2] = "destino";
+    url[url.length - 1] = id;
+    url = url.join("/");
+
     if (id) {
         $.ajax({
-            url: "destino/{id}".replace('{id}', id),
+            url: url,
             type: 'POST',
             data: {
                 target_value: valueToSend,  
@@ -413,9 +411,14 @@ $('.finish-button').on('click', function(e) {
     // Obtém o ícone do botão da ponta de destino do cabo 
     const $endIcon = $endButton.find('.cable-end-button-icon');
 
+    let url = window.location.pathname.split("/");
+    url[url.length - 2] = "finalizaCabo";
+    url[url.length - 1] = id;
+    url = url.join("/");
+
     if (id) {
         $.ajax({
-            url: "finalizaCabo/{id}".replace('{id}', id),
+            url: url,
             type: 'POST',
             data: {
 
@@ -461,17 +464,25 @@ $('.cable-done-button').on('click', function() {
     const $button = $(this);
     const id = $button.data('id');
     const $icon = $button.find('.cable-done-icon');
+    console.log(id);
+
+    let url = window.location.pathname.split('/');
+    url[url.length - 2] = "cableDone";
+    url[url.length - 1] = id;
+    url = url.join("/");
 
     if (id) {
         $.ajax({
-            url: "cableDone/{id}".replace('{id}', id),
+            url: url,
             type: 'POST',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
                 console.log('Cabo feito:', response);
+                console.log(id);
                 if(response.success){
+                    console.log('Cabo feito:', response);
                     const doneStatus = response.done_status;
                     $icon.removeClass('fa-solid red-icon green-icon');
 
@@ -489,7 +500,6 @@ $('.cable-done-button').on('click', function() {
                             countDone++;
                         }
                     });
-                    console.log(countDone, countTotal);
                     $('.progress-count').text(countDone + '/' + countTotal);
                 }
             },
