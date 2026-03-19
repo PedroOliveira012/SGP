@@ -11,11 +11,9 @@
 @endif
 
 <div>
-    <div class="projetos__titulo">
-        <h1 class="text-center">Projetos</h1>
-    </div>
-    <div class="search-and-add">
-        <form action="{{ url('/funcionarios/index') }}" method="GET" class="search-and-add__input">
+    <div class="w-75 m-auto d-flex justify-content-between align-items-center my-3">
+        <h1>Projetos</h1>
+        <form action="{{ url('/funcionarios/index') }}" method="GET" class="search-bar">
             <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por projetos...">
         </form>
     </div>
