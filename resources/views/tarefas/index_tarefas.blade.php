@@ -48,13 +48,6 @@
                     <td>
                         <div>
                             <div class="tabela__dados tabela__dados--botoes">
-                                <a href="{{ url('/projeto/mostra/' .$i->id) }}">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </button>
-                                </a>
-                            </div>
-                            <div class="tabela__dados tabela__dados--botoes">
                                 <a href="{{ url('/tarefas/lista/' .$i->id) }}">
                                     <button type="submit" class="btn btn-primary position-relative">
                                         <i class="fa-solid fa-bars"></i>
