@@ -31,12 +31,13 @@ Route::get('/projeto/novo', [ProjetosController::class,'formAdicionaProjeto'])->
 
 Route::get('/projeto/liberados', [ProjetosController::class, 'liberado'])->name('liberado')->middleware('auth');//funciona
 Route::put('/projeto/moverparateste/{id}', [ProjetosController::class, 'moverParaTeste'])->name('moverParaTeste')->middleware('auth');//funciona
+Route::put('/projeto/devolverLiberado/{id}', [ProjetosController::class, 'devolverParaLiberados'])->name('devolverLiberados')->middleware('auth');
 
 Route::get('/projeto/teste', [ProjetosController::class, 'teste'])->name('teste')->middleware('auth');//funciona
 Route::put('/projeto/devolverTeste/{id}', [ProjetosController::class, 'devolverParaTeste'])->name('devolverParaTeste')->middleware('auth');
 
 Route::get('/projeto/encerrados', [ProjetosController::class, 'encerrado'])->name('encerrado')->middleware('auth');//funciona
-Route::put('/projeto/concluir/{id}', [ProjetosController::class, 'moverParaEncerrados'])->name('encerrarProjeto')->middleware('auth');//funciona
+Route::put('/projeto/concluir/{id}', [ProjetosController::class, 'moverParaFinalizados'])->name('finalizarProjeto')->middleware('auth');//funciona
 
 Route::get('/projeto/mostra/{id}', [ProjetosController::class, 'mostra'])->name('mostra_projeto')->middleware('auth');//funciona
 Route::delete('/projeto/remove/{id}', [ProjetosController::class, 'remove'])->name('remover_projeto')->middleware('auth');//funciona
