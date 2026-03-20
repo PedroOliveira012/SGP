@@ -109,16 +109,6 @@
                     <td class="tarefas__dados--botoes centralizado">
                         <div>
                             <div class="tabela__dados--botoes centralizado">
-                                <a href="{{ url('/tarefas/mostra/' .$i->id) }}">
-                                    <button type="submit" class="btn btn-primary position-relative">
-                                        <i class="fa-solid fa-eye"></i>
-                                        @if ($i->termino_tarefa && $i->visualizado == 0)
-                                            <span class="alerta position-absolute top-0 start-100 translate-middle p-2 border-light rounded-circle"></span>
-                                        @endif
-                                    </button>
-                                </a>
-                            </div>
-                            <div class="tabela__dados--botoes centralizado">
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$i->id}}">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
