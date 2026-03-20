@@ -40,7 +40,7 @@ class ProjetosController extends Controller
         $projeto->status = "Em teste";
         $projeto->save();
 
-        return redirect('projeto/teste');
+        return redirect('projeto/encerrados');
     }
     
     public function teste(){
@@ -59,7 +59,7 @@ class ProjetosController extends Controller
         $projeto->status = "Liberado";
         $projeto->save();
 
-        return redirect('projeto/liberados');
+        return redirect('projeto/teste');
     }
 
     public function moverParaFinalizados($id){
