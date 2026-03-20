@@ -103,16 +103,14 @@
                     <section id="section-topline-3">
                         <div class="panel-board custom-sidebar">
                             @foreach ($opcoes as $opcao)
-                                <div class="panel-card">
+                                <label class="panel-card" style="cursor: pointer;">
                                     <span>
                                         <i class="fa-solid fa-toilet-portable fa-2xl" style="color: #ffffff;"></i>
                                     </span>
                                     <span>{{ $opcao }}</span>
-                                    <label>
-                                        <input class="input" type="checkbox" name="panel[]" value="{{  $opcao }}"/>
-                                        <span class="custom-checkbox"></span>
-                                    </label>
-                                </div>
+                                    <input class="input" type="checkbox" name="panel[]" value="{{ $opcao }}"/>
+                                    <span class="custom-checkbox"></span>
+                                </label>
                             @endforeach
                         </div>
                     </section>
