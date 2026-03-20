@@ -72,9 +72,6 @@
                         <div id="flush-collapseTwo" class="accordion-collapse collapse bg-dark" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <ul class="list-group">
-                                    @if (Auth::user()->nivel_acesso >= 2)
-                                        <li class="list-group-item text-bg-dark"><a href="{{ url('/tarefas/index') }}">Controle de tarefas</a></li>
-                                    @endif
                                     <li class="list-group-item text-bg-dark"><a href="{{ url('/funcionarios/index') }}">Tarefas designadas</a></li>
                                 </ul>
                             </div>

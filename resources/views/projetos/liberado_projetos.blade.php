@@ -52,6 +52,7 @@
                         <p><?= $i->nome_projeto?></p>
                     </td>
                     <td>
+                    @if (Auth::user()->nivel_acesso >= 4)
                         <div class="tabela__dados botoes centralizado">
                             <div class="tabela__dados--botoes ">
                                 <a class="tabela__dados--link" href="{{ url('/projeto/mostra/' .$i->id) }}">
@@ -66,6 +67,22 @@
                                 </button>
                             </div>
                         </div>
+                    @else
+                        <div class="tabela__dados botoes centralizado">
+                            <div class="tabela__dados tabela__dados--botoes">
+                                <a href="{{ url('/tarefas/lista/' .$i->id) }}">
+                                    <button type="submit" class="btn btn-primary position-relative">
+                                        <i class="fa-solid fa-bars"></i>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="tabela__dados tabela__dados--botoes">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#teste{{$i->id}}">
+                                    <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    @endif
                     </td>
                 </tr>
                 <form action="{{ url('/projeto/remove/' .$i->id) }}" method="POST">
@@ -82,6 +99,25 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
                                     <button type="submit" class="btn btn-danger">Excluir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form action="{{ url('/projeto/moverparateste/' .$i->id) }}" class="mb-5" method="POST">
+                    @csrf
+                        @method('PUT')
+                        <div class="modal fade" id="teste{{$i->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Mover projeto</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">Deseja realmente mover esse projeto?</div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-success">Mover</button>
                                 </div>
                             </div>
                         </div>
