@@ -25,17 +25,21 @@
 
 /* Dados dos projetos */
 .project-data div{
-    /* width: 45%; */
     background-color: #212529;
     border-radius: 8px;
 }
 
 .projects-list{
-    height: 100px;
+    width: 45%;
+    height: 445px;       
+    overflow-y: auto;    
+    overflow-x: hidden;  
+    padding-right: 5px;  
 }
 
 .dashboard_progress{
     width: 45%;
+    height: 445px;
     background-color: #212529;
     border-radius: 8px;
     padding: 20px;

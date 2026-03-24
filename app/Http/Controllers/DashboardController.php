@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon as SupportCarbon;
+use App\Models\Project;
+use App\Models\User;
+use Carbon\Carbon;
+use Laravel\Ui\Presets\React;
 
 class DashboardController extends Controller
 {
@@ -13,7 +20,13 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.dashboard');
+        $encerrados = Project::where('status', '=', 'Finalizado')
+        ->whereYear('data_fechamento', 2025)
+        ->get();
+        $andamento = Project::whereIn('status', ['Liberado', 'Em teste'])
+        ->whereYear('data_fechamento', 2025)
+        ->get();
+        return view('dashboard.dashboard', compact('encerrados', 'andamento'));
     }
 
     /**
