@@ -1,0 +1,43 @@
+/* Cartões do dashboard */
+.dashboard_card{
+    width: 22%;
+    background-color: #212529;
+    border-radius: 8px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.dashboard_card p{
+    font-size: 24px;
+    margin:auto;
+    width: fit-content;
+    padding: 5px;
+}
+
+/* Busca no dashboard */
+.dashboard_search input{
+    width: 15%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    
+}
+
+/* Dados dos projetos */
+.project-data div{
+    /* width: 45%; */
+    background-color: #212529;
+    border-radius: 8px;
+}
+
+.projects-list{
+    height: 100px;
+}
+
+.dashboard_progress{
+    width: 45%;
+    background-color: #212529;
+    border-radius: 8px;
+    padding: 20px;
+    height: fit-content;
+}

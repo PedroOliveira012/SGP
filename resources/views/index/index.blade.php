@@ -10,6 +10,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/backup.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tabstyles.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tabs.css') }}">
 
@@ -94,6 +95,22 @@
                             </div>
                         </div>
                     </div>
+                    @if (Auth::user()->nivel_acesso >=4)
+                    <div class="accordion-item text-light">
+                        <h2 class="accordion-header text-light">
+                            <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">
+                                Dashboard
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse bg-dark" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item text-bg-dark"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="accordion-item">
                     </div>
                 </div>
