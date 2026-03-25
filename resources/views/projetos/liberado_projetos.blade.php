@@ -52,7 +52,7 @@
                         <p><?= $i->nome_projeto?></p>
                     </td>
                     <td>
-                    @if (Auth::user()->nivel_acesso >= 4)
+                    @if (Auth::user()->nivel_acesso >= 4 || Auth::user()->nivel_acesso == 2)
                         <div class="tabela__dados botoes centralizado">
                             <div class="tabela__dados--botoes ">
                                 <a class="tabela__dados--link" href="{{ url('/projeto/mostra/' .$i->id) }}">

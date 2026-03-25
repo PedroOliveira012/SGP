@@ -34,10 +34,8 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user(); //cria a variavel com os dados do usuario
 
-        if( $user->nivel_acesso >= 4 || $user->nivel_acesso == 2){
+        if( $user->nivel_acesso >=  2){
             return redirect('/projeto/liberados');
-        }elseif ($user->cargo == 3) {
-            return redirect('/tarefas/index');
         }else{
             return redirect('/funcionarios/index');
         }
