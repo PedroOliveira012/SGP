@@ -26,7 +26,8 @@ class DashboardController extends Controller
         $andamento = Project::whereIn('status', ['Liberado', 'Em teste'])
         ->whereYear('data_fechamento', 2025)
         ->get();
-        return view('dashboard.dashboard', compact('encerrados', 'andamento'));
+        $cabos = DB::table('cable_routing')->get();
+        return view('dashboard.dashboard', compact('encerrados', 'andamento', 'cabos'));
     }
 
     /**
