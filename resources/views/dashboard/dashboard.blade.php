@@ -25,13 +25,13 @@
 </div>
 
 <div class="dashboard_search my-3 ms-5">
-    <input type="text" class="form-control" placeholder="Buscar por projetos...">
+    <input type="text" class="form-control" id="dashboard-search" placeholder="Buscar por projetos...">
 </div>
 
 <div class="project-data d-flex justify-content-between">
     <div class="projects-list custom-sidebar">
         @foreach ($andamento as $projeto)
-            <div class="accordion accordion-flush text-bg-dark"id="accordionExample">
+            <div class="accordion accordion-flush text-bg-dark"id="{{ $projeto->num_projeto }}">
                 <div class="accordion-item text-light">
                     <h2 class="accordion-header text-light">
                         <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-{{ $projeto->id }}" aria-expanded="false" aria-controls="flush-{{ $projeto->id }}">

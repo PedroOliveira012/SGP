@@ -655,3 +655,34 @@ $('.panel-cables').on('change', function() {
     console.log('Painel selecionado:', selectedPanel);
     window.location.href = selectedPanel;
 });
+
+let currentText = null 
+
+// Função única para aplicar todos os filtros
+function applyProjectFilter() {
+    // Itera sobre TODOS os elementos
+    $('.project-data .projects-list .accordion').each(function() {
+        const project = $(this);
+        const projectID = project.attr('id');
+        
+        let shouldShow = true;
+
+        if (projectID.includes(currentText)) {
+            shouldShow = true;
+        } else {
+            shouldShow = false;
+        }
+        // Exibe ou esconde o elemento com base na verificação
+        if (shouldShow) {
+            project.show();
+        } else {
+            project.hide();
+        }
+    });
+}
+
+$('#dashboard-search').on('input', function() {
+    currentText = $(this).val();
+    console.log('Texto digitado:', currentText);
+    applyProjectFilter();
+});
