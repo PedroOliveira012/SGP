@@ -658,21 +658,23 @@ $('.panel-cables').on('change', function() {
 
 let currentText = null 
 
-// Função única para aplicar todos os filtros
+//função que filtra os projetos na dashboard
 function applyProjectFilter() {
-    // Itera sobre TODOS os elementos
+    //itera sobre todos os accordion
     $('.project-data .projects-list .accordion').each(function() {
         const project = $(this);
         const projectID = project.attr('id');
         
         let shouldShow = true;
 
+        //verifica se o id do projeto contém o texto digitado
         if (projectID.includes(currentText)) {
             shouldShow = true;
         } else {
             shouldShow = false;
         }
-        // Exibe ou esconde o elemento com base na verificação
+
+        //exibe ou esconde o projeto com base na verificação
         if (shouldShow) {
             project.show();
         } else {
@@ -683,6 +685,37 @@ function applyProjectFilter() {
 
 $('#dashboard-search').on('input', function() {
     currentText = $(this).val();
-    console.log('Texto digitado:', currentText);
     applyProjectFilter();
+});
+
+//Pesquisar por projeto
+function searchProject() {
+    //itera sobre todos as linhas de qualquer tabela de projetos
+     $('div table tbody tr').each(function() {
+        const project = $(this);
+        const projectID = project.attr('id');
+        
+        let shouldShow = true;
+
+        //verifica se o id do projeto contém o texto digitado
+        if (projectID.includes(currentText)) {
+            shouldShow = true;
+        } else {
+            shouldShow = false;
+        }
+
+        //exibe ou esconde o projeto com base na verificação
+        if (shouldShow) {
+            project.show();
+        } else {
+            project.hide();
+        }
+
+    });
+}
+
+$('#search').on('input', function() {
+    currentText = $(this).val();
+    console.log('Texto digitado:', currentText);
+    searchProject();
 });

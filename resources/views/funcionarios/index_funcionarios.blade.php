@@ -13,9 +13,9 @@
 <div>
     <div class="w-75 m-auto d-flex justify-content-between align-items-center my-3">
         <h1>Projetos</h1>
-        <form action="{{ url('/funcionarios/index') }}" method="GET" class="search-bar">
-            <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por projetos...">
-        </form>
+        <div class="search-bar">
+            <input type="text" id="search" class="form-control" placeholder="Buscar por projetos...">
+        </div>
     </div>
 </div>
 <div>
@@ -32,7 +32,7 @@
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
                 @if ($i->status == "Liberado")
-                <tr>
+                <tr id="{{$i->num_projeto}}">
                     <td>
                         <p>{{$i->num_projeto}}</p>
                     </td>

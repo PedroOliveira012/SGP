@@ -13,9 +13,7 @@
 <div class="topo-projetos">
     <h1>Projetos encerrados</h1>
     <div class="search-and-add">
-        <form action="{{ url('/projeto/encerrados') }}" method="GET" class="search-and-add__input">
-            <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por projetos...">
-        </form>
+        <input type="text" id="search" class="form-control" placeholder="Buscar por projetos...">
     </div>
 </div>
 <div>
@@ -32,7 +30,7 @@
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
                 @if ($i->status == "Finalizado")
-                <tr class="align-middle">
+                <tr id={{$i->num_projeto}} class="align-middle">
                     <td>
                         <p><?= $i->num_projeto?></p>
                     </td>

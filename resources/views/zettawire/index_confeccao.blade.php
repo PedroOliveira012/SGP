@@ -32,7 +32,7 @@
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
                 @if ($i->status=='Liberado')
-                <tr class="align-middle">
+                <tr id={{$i->num_projeto}} class="align-middle">
                     <td>
                         <p><?= $i->num_projeto?></p>
                     </td>

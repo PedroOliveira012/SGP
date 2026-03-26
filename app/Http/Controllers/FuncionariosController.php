@@ -18,12 +18,6 @@ class FuncionariosController extends Controller
      */
     public function index(){
         $lista = Project::all();
-        $search = request('search');
-        if($search){
-            $lista = Project::where('num_projeto', 'like', '%'.$search.'%')->get();
-        }else{
-            $lista = Project::all();
-        }
         return view('funcionarios.index_funcionarios', ['lista' => $lista]);
     }
 

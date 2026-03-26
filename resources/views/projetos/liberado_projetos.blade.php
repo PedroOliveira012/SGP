@@ -13,9 +13,9 @@
 <div class="topo-projetos">
     <h1>Projetos liberados para a fábrica</h1>
     <div class="search-and-add">
-        <form action="{{ url('/projeto/liberados') }}" method="GET" class="me-3">
-            <input type="text" id="search" name="search" class="form-control" placeholder="Buscar por projetos...">
-        </form>
+        <div class="serch-bar me-3">
+            <input type="text" id="search" class="form-control" placeholder="Buscar por projetos...">
+        </div>
         <a href="{{ url('/projeto/novo') }}">
             <button type="button" class="btn search-and-add__button">
                 <i class="fa-solid fa-plus" aria-hidden="true"></i>
@@ -38,7 +38,7 @@
         <tbody class="table-group-divider">
             <?php foreach ($lista as $i): ?>
                 @if ($i->status=='Liberado')
-                <tr class="align-middle">
+                <tr id={{$i->num_projeto}} class="align-middle">
                     <td>
                         <p><?= $i->num_projeto?></p>
                     </td>

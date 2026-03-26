@@ -26,13 +26,7 @@ class ProjetosController extends Controller
     }
     public function encerrado(){
         $lista = Project::where('status', '=', 'Finalizado')->get();
-        $search = request('search');
-        if($search){
-            $lista = Project::where('num_projeto', 'like', '%'.$search.'%')->get();
-        }else{
-            $lista = Project::all();
-        }
-        return view('projetos.encerrados_projetos', ['lista' => $lista, 'search' => $search]);
+        return view('projetos.encerrados_projetos', ['lista' => $lista]);
     }
 
      public function devolverParaTeste($id){
@@ -45,13 +39,7 @@ class ProjetosController extends Controller
     
     public function teste(){
         $lista = Project::where('status', '=', 'Em teste')->get();
-        $search = request('search');
-        if($search){
-            $lista = Project::where('num_projeto', 'like', '%'.$search.'%')->get();
-        }else{
-            $lista = Project::all();
-        }
-        return view('projetos.teste_projetos', ['lista' => $lista, 'search' => $search]);
+        return view('projetos.teste_projetos', ['lista' => $lista]);
     }
 
     public function devolverParaLiberados($id){
@@ -71,13 +59,7 @@ class ProjetosController extends Controller
 
     public function liberado(){
         $lista = Project::all();
-        $search = request('search');
-        if($search){
-            $lista = Project::where('num_projeto', 'like', '%'.$search.'%')->get();
-        }else{
-            $lista = Project::all();
-        }
-        return view('projetos.liberado_projetos', ['lista' => $lista, 'search' => $search]);
+        return view('projetos.liberado_projetos', ['lista' => $lista]);
     }
 
     public function moverParaTeste($id){
