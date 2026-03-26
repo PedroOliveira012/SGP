@@ -80,9 +80,10 @@ img{
 .topo-projetos, .topo-zettawire, .topo-tarefas{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: auto;
-    padding: 15px 0px;
-    width: 80%;
+    padding: 35px 0px;
+    width: 90%;
 }
 
 .topo-formulario{
@@ -145,13 +146,9 @@ img{
 .search-and-add{
     display: flex;
     text-align: right;
-    margin-right: 3%;
-    padding-top: 10px;
-    padding-bottom: none;
 }
 
 .search-bar{
-    /* margin-right: 50px; */
     width: 20%;
 }
 

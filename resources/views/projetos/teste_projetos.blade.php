@@ -12,9 +12,7 @@
 
 <div class="topo-projetos">
     <h1>Projetos em fase de teste</h1>
-    <div class="search-bar">
-        <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por projetos...">
-    </div>
+    <input type="text" id="search" class="form-control search-bar" placeholder="Buscar por projetos...">
 </div>
 <div>
     <table class="table table-dark table-hover tabela">

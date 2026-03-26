@@ -12,11 +12,7 @@
 
 <div class="topo-zettawire">
     <h1>Zettawire - Projetos</h1>
-    <div class="search-and-add">
-        <form action="{{ url('/zettawire/index') }}" method="GET" class="search-and-add__input">
-            <input type="text" id="search" name="search" class="form-control " placeholder="Buscar por projetos...">
-        </form>
-    </div>
+    <input type="text" id="search" class="form-control search-bar" placeholder="Buscar por projetos...">
 </div>
 <div>
     <table class="table table-dark table-hover tabela align-middle">

@@ -11,7 +11,7 @@
 @endif
 
 <div>
-    <div class="w-75 m-auto d-flex justify-content-between align-items-center my-3">
+    <div class="topo-tarefas">
         <h1>Projetos</h1>
         <div class="search-bar">
             <input type="text" id="search" class="form-control" placeholder="Buscar por projetos...">
