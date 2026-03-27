@@ -1,0 +1,149 @@
+/* elementos gerais no sistema */
+body{
+    background-color: #121212;
+    color: #fff;
+}
+
+th, td{
+    color: #fff;
+    height: fit-content;
+}
+
+tr{
+    /* border-style: none !important; */
+    border-color: #212529 !important;
+}
+
+p{
+    margin: auto;
+    font-size: small;
+}
+
+i{
+    background: none;
+    color: #121212  ;
+}
+
+img{
+    margin: 15px;
+    position: relative;
+    left: 0%;
+    margin-left: 5%;
+}
+
+/* Estiliza a barra de rolagem inteira */
+.custom-sidebar::-webkit-scrollbar {
+  width: 6px; /* bem fina */
+}
+
+/* Estiliza a trilha da barra (o fundo) */
+.custom-sidebar::-webkit-scrollbar-track {
+  background: #1e1e1e; /* fundo escuro */
+  border-radius: 3px;
+}
+
+/* Estiliza o polegar da barra (a parte que desliza) */
+.custom-sidebar::-webkit-scrollbar-thumb {
+  background-color: #5a5a5a; /* cinza médio */
+  border-radius: 3px;        /* arredondamento das extremidades */
+}
+
+.btn{
+    background-color: #00ACC0;
+    border-color: #02A9B0;
+    color: #121212;
+}
+
+.btn:hover{
+    color: #121212;
+}
+
+.btn:disabled{
+    background-color: #363636;
+    border-color: #02A9B0;
+    color: #fff;
+}
+
+.tabela{
+    margin: auto;
+    width: 90%;
+    margin-bottom: 5%;
+}
+
+.tabela__dados--botoes{
+    display: inline-flex;
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
+    margin-left: 7px;
+}
+
+a:link, a:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.accordion-body{
+    background-color: #212529;
+    border-radius: none;
+}
+
+.topo-projetos, .topo-zettawire, .topo-tarefas{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    padding: 35px 0px;
+    width: 90%;
+}
+
+.topo-formulario{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 35px 0px 0px 0px;
+    width: 80%;
+}
+
+.voltar{
+    background: #121212;
+    font-size: x-large;
+    margin-left: 3%;
+    margin-top: 15px;
+    color: #ffffff;
+}
+
+.voltar-icone{
+    color: #ffffff;
+}
+
+.voltar-funcionario{
+    background: #121212;
+    font-size: x-large;
+    margin-left: 2.5%;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.quadro{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.filtro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.filtro-div{
+    width: 500px;
+}
+
+.quadro-div{
+    width: 500px;
+}

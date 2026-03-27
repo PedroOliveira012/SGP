@@ -17,7 +17,7 @@
             <input type="text" id="search" class="form-control" placeholder="Buscar por projetos...">
         </div>
         <a href="{{ url('/projeto/novo') }}">
-            <button type="button" class="btn search-and-add__button">
+            <button type="button" class="btn add_project">
                 <i class="fa-solid fa-plus" aria-hidden="true"></i>
                 <span>Adicionar</span>
             </button>

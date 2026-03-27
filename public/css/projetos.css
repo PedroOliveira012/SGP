@@ -1,0 +1,107 @@
+.dados_lista{
+    margin-top: 25px;
+}
+
+.contorno{
+    border: #02A9B0 solid 2px;
+    border-radius: 10px;
+    border-bottom-width: 5px;
+    margin-top: 15px;
+    background-color: #363636;
+    width: fit-content;
+    padding: 50px;
+}
+
+.info-projeto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
+    margin:auto;
+}
+
+
+.data-vermelha{
+    color: #ff0000;
+}
+
+.data-laranja{
+    color: #f4662d;
+}
+
+.data-amarela{
+    color:#ecbe13;
+}
+
+.data-verde{
+    color: #008000;
+}
+
+.div-gravar-cabos, .div-gravar-pdf{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-button {
+    background-color: #00aac0;
+    border-radius: 4px;
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.custom-file-button:hover {
+    background-color: #00aac0ad !important;
+    color: #000 !important;
+}
+
+.custom-file-name {
+    margin-top: 8px;
+    font-style: italic;
+    color: #fff;
+}
+
+.custom-file-name {
+    margin-left: 10px;
+    font-style: italic;
+    color: #fff;
+}
+
+.pdf-file-name, .xlsx-file-name{
+    margin: 0px auto 35px auto;
+}
+
+.btn-gravar-cabos, .btn-gravar-pdf{
+    width: 100%;
+    height: fit-content;
+}
+
+.btn-gravar-cabos:hover, .btn-gravar-pdf:hover{
+    background-color: #00aac0ad !important;
+    color: #121212 !important;
+}
+
+/* Projetos andamento */
+.search-and-add{
+    display: flex;
+    text-align: right;
+}
+
+.search-bar{
+    width: 20%;
+}
+
+.add_project:hover{
+    background-color: #F49F0A !important;
+    color: #121212 !important;
+}

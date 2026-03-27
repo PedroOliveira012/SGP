@@ -1,0 +1,51 @@
+.navbar__div{
+    height: 100px;
+}
+
+.navbar__div--menu{
+    width: auto;
+    position: absolute;
+    right: 5%;
+}
+
+.navbar__div--img{
+    margin-top: 5px;
+}
+
+.btn-close-white{
+    color: white;
+}
+
+.btn-menu{
+    background-color: #212529 !important;
+    border-color: #212529 !important;
+}
+
+.btn-menu:hover{
+    background-color: #212529 !important;
+    border-color: #00ACC0 !important;
+}
+
+.icone-menu{
+    color: #fff !important;
+    font-size: 45px;
+}
+
+.icone-logout{
+    color: #fff !important;
+    font-size: 25px;
+}
+
+.rodape{
+    background-color: #161616;
+    border-top: 1px solid #6c757d;
+    height: 6%;
+}
+
+.rodape_body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 100%;
+}

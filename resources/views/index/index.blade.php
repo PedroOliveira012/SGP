@@ -13,6 +13,11 @@
         <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tabstyles.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tabs.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/elementos.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/index_header.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/projetos.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/tarefas.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/zettawire.css') }}">
 
         <title>SGP</title>
 

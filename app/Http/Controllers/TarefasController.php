@@ -31,26 +31,6 @@ class TarefasController extends Controller
         return view('tarefas.index_tarefas', ['lista' => $filtro_painel, 'tarefa' => $tarefa]);
     }
 
-    public function mostra($id){
-        $busca = Task::find($id);
-        $busca->visualizado = 1;
-        $busca->save();
-
-        $horas = 0;
-        $minutos = $busca->tempo_total;
-
-        while($minutos >= 60){
-            $minutos = $minutos - 60;
-            $horas++;
-        }
-
-        if (empty($busca)){
-            return view('tarefas.mostra_tarefas',['i' => $busca, 'total_horas' => $horas, 'total_minutos' => $minutos]);
-        }
-
-        return view('tarefas.mostra_tarefas',['i' => $busca, 'total_horas' => $horas, 'total_minutos' => $minutos/*, 'diffFimJornada' => $diffFimJornada, 'diffInicioJornada' => $diffInicioJornada, 'totalDiff' => $totalDiff, 'dias' => $dias'retorno' => $retorno*/]);
-    }
-
     public function adiciona(){
         $tarefa = new Task;
         $tarefa->id_projeto = request('id_projeto');
@@ -109,34 +89,6 @@ class TarefasController extends Controller
         return redirect()->action([TarefasController::class, 'lista'], ['id' => $id_projeto]);
     }
 
-
-    public function nova_tarefa($id){
-        $projeto = Project::find($id);
-        $func = User::where('cargo', 'like', '%Montador%')->get();
-        $tarefa = Procedure::all();
-        $opcoes = explode(';', $projeto->paineis);
-
-        $tipo = request('tipo');
-        $area = request('area');
-        $processo = request('processo');
-
-        if ($tipo == '' && $area == '' && $processo == ''){
-            $tipo = '--Selecione o tipo de painel--';
-            $area = '--Selecione a área da produção--';
-            $processo = '--Selecione um processo--';
-        }
-
-        if ($tipo and $area and $processo){
-            $tarefa = Procedure::where([
-            ['tipo', '=', $tipo],
-            ['area', '=', $area],
-            ['processo', '=', $processo]
-            ])->get();
-        }
-
-        return view('tarefas.formulario_tarefas', ['func' => $func, 'tarefa' => $tarefa, 'projeto' => $projeto->id, 'tipo' => $tipo, 'area' => $area, 'processo' => $processo, 'opcoes' => $opcoes]);
-    }
-
     public function novo_conjunto($id){
         $projeto = Project::find($id);
         $opcoes = explode(';', $projeto->paineis);
@@ -150,14 +102,6 @@ class TarefasController extends Controller
         $tarefa = Task::find($id);
         $tarefa->delete();
         return redirect()->action([TarefasController::class, 'lista'], ['id' => $tarefa->id_projeto]);
-    }
-
-    public function editar($id){
-        $func = User::where('nivel_acesso', '=', 1)->get();
-        $proc = Procedure::all();
-        $tarefa = Task::find($id);
-
-        return view('tarefas.editar_tarefas', ['func'=>$func, 'tarefa' => $tarefa, 'proc'=>$proc]);
     }
 
     public function atualizar($id){
