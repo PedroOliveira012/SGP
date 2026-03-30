@@ -6,19 +6,19 @@
 </div>
 
 <div class="dashboard_cards d-flex justify-content-between  mb-4 w-fit">
-    <div class="dashboard_card">
+    <div class="dashboard_card card_total">
         <p>Total projetos</p>
         <p>{{$andamento->count() + $encerrados->count()}}</p>
     </div>
-    <div class="dashboard_card">
+    <div class="dashboard_card card_andamento">
         <p>Projetos em montagem</p>
         <p>{{$andamento->where('status', 'Liberado')->count()}}</p>
     </div>
-    <div class="dashboard_card">
+    <div class="dashboard_card card_teste">
         <p>Projetos em teste</p>
         <p>{{ $andamento->where('status', 'Em teste')->count() }}</p>
     </div>
-    <div class="dashboard_card">
+    <div class="dashboard_card card_encerrados">
         <p>Projetos finalizados</p>
         <p>{{$encerrados->count()}}</p>
     </div>

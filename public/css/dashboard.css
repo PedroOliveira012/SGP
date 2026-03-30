@@ -7,10 +7,35 @@
 /* Cartões do dashboard */
 .dashboard_card{
     width: 20%;
-    background-color: #212529;
+    /* 
+    #0083fe => gostei do azul
+    9400d3 - #4b0082 =>roxo bonito rx-rx
+    003d4d - 00c996 => verde bom
+    07c8f9 - 0d41e1 => azul mais bonito
+    8711c1 - 2472fc => parecido com as cores do canva
+    2278fb - 6bdfdb => azul bonito
+    6a11cb - 2575fc => roxo muito bonito rx-az
+    00c6fb - 005bea => azul bom
+    */
     border-radius: 8px;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.card_total{
+    background: linear-gradient(45deg, #07c8f9, #0d41e1);
+}
+
+.card_andamento{
+    background: linear-gradient(45deg, #ff9b10, #963e04);
+}
+
+.card_teste{
+    background: linear-gradient(45deg, #e2ce1e, #9b7c00);
+}
+
+.card_encerrados{
+    background: linear-gradient(45deg, #2e9039, #003d4d);
 }
 
 .dashboard_cards{
