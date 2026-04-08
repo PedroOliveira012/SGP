@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ZettawireController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GraficoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -87,6 +88,9 @@ Route::post('/funcionarios/terminoPausa/{id}', [FuncionariosController::class, '
 
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+
+//API
+Route::get('/dados-grafico', [GraficoController::class, 'index']);
 
 //Logout
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');

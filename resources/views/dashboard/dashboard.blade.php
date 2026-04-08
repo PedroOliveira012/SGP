@@ -69,8 +69,10 @@
             </div>
         @endforeach
     </div>
-    <div class="dashboard_progress">
-        
-    </div>
+    <div id="dashboard_chart"></div>
+</div>
+<div class="project-data d-flex justify-content-between mt-4">
+    <div id="dashboard_bar"></div>
+    <div id="dashboard_line"></div>
 </div>
 @endsection

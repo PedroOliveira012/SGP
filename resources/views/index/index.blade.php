@@ -9,7 +9,6 @@
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/backup.css') }}">
         <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tabstyles.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tabs.css') }}">
@@ -27,6 +26,7 @@
         <script src="https://kit.fontawesome.com/05b56d1101.js" crossorigin="anonymous"></script>
         <script src="{{ asset('js/modernizr.custom.js') }}"></script>
         <script src="{{ asset('js/cbpFWTabs.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -134,6 +134,7 @@
         @yield('conteudo')
     </body>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/charts.js') }}"></script>
     <script>
         (function() {
 
