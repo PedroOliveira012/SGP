@@ -8,7 +8,7 @@ fetch('http://localhost/SGP/public/dados-grafico')
         console.log(data);
         console.log(data.entregue);
 
-        renderChart(paineisEntregues, paineisVendidos, meses);
+        renderChartProjetos(paineisEntregues, paineisVendidos, meses);
     }
 )
 
@@ -23,7 +23,7 @@ window.Apex = {
     }
 }
 
-function renderChart(entregue, vendido, meses){
+function renderChartProjetos(entregue, vendido, meses){
     var options = {
     chart: {
         type: 'area',
@@ -59,3 +59,36 @@ function renderChart(entregue, vendido, meses){
 
     chart.render();
 }
+
+function renderChartTarefas(){
+    var options = {
+        series: [44, 55],
+        chart: {
+            width: 380,
+            type: 'pie',
+            background: '#212529',
+        },
+        theme:{
+            mode:'dark'
+        },
+        fill:{
+            colors: ['#00aac0', 'red'],
+        },
+        labels: ['Em andamento', 'Finalizadas'],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#projects-tasks-chart"), options);
+    chart.render();
+}
+renderChartTarefas()

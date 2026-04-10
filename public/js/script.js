@@ -661,7 +661,7 @@ let currentText = null
 //função que filtra os projetos na dashboard
 function applyProjectFilter() {
     //itera sobre todos os accordion
-    $('.project-data .projects-list .accordion').each(function() {
+    $('.project-data .projects-list .projects-list-item').each(function() {
         const project = $(this);
         const projectID = project.attr('id');
         
