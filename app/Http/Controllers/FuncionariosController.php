@@ -43,7 +43,7 @@ class FuncionariosController extends Controller
         return redirect()->back();
     }
 
-    public function termino($id){
+    public function termino($id){        
         $tarefa = Task::find($id); //Acha a tarefa
         $tarefa->termino_tarefa = Carbon::now()->subHour(3); //Subtrai 3 horas do horario que foi gravado
         $tarefa->status = 'concluido'; //Define o status da tarefa como concluido
@@ -53,31 +53,44 @@ class FuncionariosController extends Controller
 
         $inicio = Carbon::parse($tarefa->inicio_tarefa); //Formata o valor do inicio da tarefa
         $termino = Carbon::parse($tarefa->termino_tarefa); //Formata o valor do termino da tarefa
+        $minutosTotais = 0;
 
+        //definição dos horários da jornada de trabalho para calcular o tempo útil e inútil, considerando os horários de almoço e café
+        //esses horarios funcionam apenas para a comparação do tempo nas condições de inicio e nao de termino
         $inicio_jornada = Carbon::createFromTime(7, 0, 0); // Define a hora de início da jornada
-        $horario_almoço = Carbon::createFromTime(11, 25, 0); // Define a hora de almoço
-        $horario_cafe = Carbon::createFromTime(15, 15, 0); // Define a hora de café
+        $inicio_almoço = Carbon::createFromTime(11, 25, 0); // Define a hora de almoço
+        $fim_almoço = Carbon::createFromTime(12, 40, 0); // Define a hora de término do almoço
+        $inicio_cafe = Carbon::createFromTime(15, 15, 0); // Define a hora de café
+        $fim_cafe = Carbon::createFromTime(15, 30, 0); // Define a hora de término do café
         $fim_jornada = Carbon::createFromTime(17, 3, 0); //Define a hora de termino da jornada
 
-        $minutosTotais = 0;
-        // $pausa = $tarefa->total_pausa;
-        // $intervalo = 0;
-
         if ($inicio->day == $termino->day) { //se o dia de inicio e de termino forem iguais
-            if ($termino->lt($horario_almoço)){ //se terminar antes do almoço, não descontar nada
-                $minutosTotais = $termino->diffInMinutes($inicio_jornada); //calcula a diferença entre os horarios em minutos sem descontar nada
-            }else if($inicio->gt($horario_almoço) && $termino->lt($horario_cafe)){ //se o horario de inicio e termino estiver entre o almoco e o café
-                $minutosTotais = $termino->diffInMinutes($inicio); //calcula a diferença entre os horarios em minutos sem descontar nada
-            }else{
-                switch (true) {
-                    case $termino->lt($horario_cafe): //se o horario de termino for menor que o café
-                        $minutosTotais = $termino->diffInMinutes($inicio) - 75; //descontar o tempo de almoço no calculo
-                        break;
-                    default: //se não o horario vai ser maior
-                        $minutosTotais = $termino->diffInMinutes($inicio) - 90; //descontar o tempo de almoço e café no calculo
-                        break;
-                }
+
+            $minutosTotais = $termino->diffInMinutes($inicio);
+            switch (true) {
+                case $termino->lt($inicio_almoço): //inicio e termino antes do almoço
+                    $caso = 1;
+                    break;
+                case $inicio->lt($inicio_almoço) && ($termino->gt($inicio_almoço) && $termino->lt($inicio_cafe)): //inicio antes do almoço e termino entre o almoço e o café
+                    $minutosTotais -= 75; //descontar o tempo do almoço
+                    $caso = 2;
+                    break;
+                case $inicio->lt($inicio_almoço) && $termino->gt($fim_cafe): //inicio antes do almoço e termino depois do café
+                    $minutosTotais -= 90; //descontar o tempo do almoço e café
+                    $caso = 3;
+                    break;
+                case ($inicio->gt($inicio_almoço) && $inicio->lt($inicio_cafe)) && $termino->lt($fim_cafe): //inicio entre o almoço e o café e termino entre o almoço e o café
+                    $caso = 4;
+                    break;
+                case ($inicio->gt($inicio_almoço) && $inicio->lt($inicio_cafe)) && $termino->gt($fim_cafe): //inicio entre o almoço e o café e termino depois do café
+                    $minutosTotais -= 15; //descontar o tempo do café
+                    $caso = 5;
+                    break;
+                case $inicio->gt($fim_cafe) && $termino->lt($fim_jornada): //inicio depois do café e termino antes do fim da jornada
+                    $caso = 6;
+                    break;  
             }
+        
         }else{
             $inicio_jornada->setYear($inicio->year); //define a data do inicio da jornada usando a data de inicio da tarefa
             $inicio_jornada->setMonth($inicio->month);
@@ -87,43 +100,54 @@ class FuncionariosController extends Controller
             $fim_jornada->setMonth($termino->month);
             $fim_jornada->setDay($termino->day);
 
-            $dias_trabalhados = $termino->diffInWeekdays($inicio); //calcula a diferença em dias
-
-            if($termino->lt($inicio)){ //se o horario de termino for menor que o de inicio
-                $dias_trabalhados += 1; //adiciona 1 dia na diferença de dias
-            }
-
-            $min_uteis = $dias_trabalhados * 513; //define o tempo util do dia
-
+            $dias_trabalhados = $termino->diffInWeekdays($inicio) + 1; //calcula a diferença em dias
+            $min_uteis = $dias_trabalhados * 603; //define o tempo util do dia
             $diffInicio = $inicio->diffInMinutes($inicio_jornada); //calcula a diferença entre o inicio da tarefa e o inicio da jornada
             $diffTermino = $termino->diffInMinutes($fim_jornada); //calcula a diferença entre o termino da tarefa e o fim da jornada
 
-            if($termino->lt($horario_almoço)){ //
-                $diffTermino -= 90; //esse tempo é descontado por nao ser "útil" na execução da tarefa, então o 90 é a soma do almoço e café
-            }else if($termino->gt($horario_almoço) && $termino->lt($horario_cafe)){
-                $diffTermino -= 15; //descontado apenas o tempo do café
+            //padronização do primeiro dia da tarefa para calcular o tempo útil e inútil, considerando os horários de almoço e café
+            $minutos_dia_inicio = 603;
+            if ($inicio->lt($inicio_almoço)){ //se o inicio da tarefa for menor que o inicio do almoço no primeiro dia
+                $minutos_dia_inicio -= 90; // desconsiderar o tempo do almoço e café
+                $descontou = 'descontou 90 minutos dia 1';
+            }else if($inicio->gt($fim_almoço) && $inicio->lt($inicio_cafe)){ //se o inicio da tarefa for entre o inicio do almoço e o início do café no primeiro dia
+                $minutos_dia_inicio -= 15; //desconsiderar o tempo do café
+                $descontou = 'descontou 15 minutos dia 1';
+            }else{
+                $minutos_dia_inicio -= 0; //não descontar nada
+                $descontou = 'não descontou nada dia 1';
             }
 
-            //a lógica é repetida para calcular esse tempo útil e inútil no dia de inicio da tarefa
-            //horario cafe e almoço recebe o dia de inicio para esta comparação
-            $horario_almoço->setYear($inicio->year);
-            $horario_almoço->setMonth($inicio->month);
-            $horario_almoço->setDay($inicio->day);
+            //declaração dos hoarios do ultimo dia da tarefa para calcular o tempo útil e inútil, considerando os horários de almoço e café
+            $inicio_jornada = $termino->copy()->setTime(7, 0, 0);
+            $inicio_almoço = $termino->copy()->setTime(11, 25, 0);
+            $fim_almoço = $termino->copy()->setTime(12, 40, 0);
+            $inicio_cafe = $termino->copy()->setTime(15, 15, 0);
+            $fim_cafe = $termino->copy()->setTime(15, 30, 0);
+            $fim_jornada = $termino->copy()->setTime(17, 3, 0);
 
-            $horario_cafe->setYear($inicio->year);
-            $horario_cafe->setMonth($inicio->month);
-            $horario_cafe->setDay($inicio->day);
-
-            if($inicio->gt($horario_almoço)){
-                $diffInicio -= 75;
-            }else if($inicio->lt($horario_cafe) && $inicio->gt($horario_almoço)){
-                $diffInicio -= 90;
+            //padronização do ultimo dia da tarefa para calcular o tempo útil e inútil, considerando os horários de almoço e café
+            $minutos_dia_termino = 603;
+            if ($termino->gt($fim_almoço) && $termino->lt($inicio_cafe)){ //se o termino da tarefa for depois do fim do café no último dia
+                $minutos_dia_termino -= 75; //desconsiderar o tempo do almoço
+                $descontou_termino = 'descontou 75 minutos dia 2';
+            }else if ($termino->gt($fim_cafe)){ //se o termino da tarefa for entre o fim do almoço e o início do café no último dia
+                $minutos_dia_termino -= 90; // desconsiderar o tempo do almoço e café
+                $descontou_termino = 'descontou 90 minutos dia 2';
+            }else{
+                $minutos_dia_termino -= 0; //não descontar nada
+                $descontou_termino = 'não descontou nada dia 2';
+            }
+            
+            $minutos_dias_intermediarios = 0;
+            if ($dias_trabalhados > 2){ //se a tarefa tiver mais de 2 dias, descontar os dias intermediários
+                $minutos_dias_intermediarios += ($dias_trabalhados - 2) * 513; //adicionar o tempo útil dos dias intermediários
             }
 
             $diffTotal = $diffInicio + $diffTermino; //soma das diferenças
-            $minutosTotais +=  $min_uteis - $diffTotal; //subtração das diferenças do tempo útil total
+            $minutosTotais +=  $minutos_dia_inicio + $minutos_dia_termino + $minutos_dias_intermediarios - $diffTotal; //subtração das diferenças do tempo útil total
         }
-
+        
         $tarefa->tempo_total = $minutosTotais;
 
         $projeto->tempo_total += $tarefa->tempo_total;
