@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class GraficoController extends Controller
 {
@@ -54,6 +55,44 @@ class GraficoController extends Controller
             'meses' => $meses,
             'fechamento' => $fechamentoArr,
             'entregue' => $entregueArr
+        ]);
+    }
+
+    public function getProjetos($id){
+        $projeto = DB::table('projects')->where('id', $id)->first();
+        $status_entrega = Carbon::parse($projeto->data_fechamento)->diffInDays($projeto->data_entrega);
+
+        $total = DB::table('cable_routing')->where('project_id', $projeto->id)->count();
+        $feitos = DB::table('cable_routing')->where('project_id', $projeto->id)
+                        ->where('status', 2) // ou ->where('concluido', 1)
+                        ->count();
+        $progresso = $total > 0 ? ($feitos / $total) * 100 : 0;
+
+        $tarefas = DB::table('tasks')
+            ->selectRaw('painel, COUNT(*) as total')
+            ->where('id_projeto', $id)
+            ->where('status', 'concluido')
+            ->groupBy('painel')
+            ->orderBy('painel')
+            ->get();
+
+            $labels = [];
+            $valores = [];
+
+            foreach ($tarefas as $item) {
+                $labels[] = $item->painel;
+                $valores[] = $item->total;
+            }
+
+        return response()->json([
+            'projeto' => $projeto,
+            'status_entrega' => $status_entrega,
+            'total' => $total,
+            'feitos' => $feitos,
+            'progresso' => $progresso,
+            'tarefas' => $tarefas,
+            'labels' => $labels,
+            'series' => $valores
         ]);
     }
 

@@ -33,42 +33,34 @@
         @foreach ($andamento as $projeto)
         <div class="projects-list-item" id="{{ $projeto->num_projeto }}">
             {{ $projeto->num_projeto }}
-            <button class="btn btn-primary projects-list-btn" type="button">Visualizar</button>
+            <button onclick="visualizarProjeto('{{ $projeto->id }}')" class="btn btn-primary projects-list-btn" type="button">
+                Visualizar
+            </button>
         </div>
         @endforeach
     </div>
     <div class="task-info-chart">
         <div class=" m-auto task-info-header">
-            <h3>{{ $projeto->num_projeto }} - {{ $projeto->nome_projeto }}</h3>
+            <h3><span id="num_projeto"></span> - <span id="nome_projeto"></span></h3>
         </div>
         <div class="task-info">
             <ul>
-                <li><b>Cliente: </b><?= $projeto->cliente?></li>
-                <li><b>Unidade: </b><?= $projeto->unidade?></li>
-                <li><b>Data de fechamento do projeto: </b><?= Carbon\Carbon::parse($projeto->data_fechamento)->isoFormat('DD/MM/YYYY')?></li>
-                <li><b>Data de entrega: </b><?= Carbon\Carbon::parse($projeto->data_entrega)->isoFormat('DD/MM/YYYY')?></li>
-                <li><b>Status de entrega: </b><?= Carbon\Carbon::parse($projeto->data_fechamento)->diffInDays($projeto->data_finalizacao)?> dias</li>
-
-                @php
-                    $total = $cabos->where('project_id', $projeto->id)->count();
-                    $feitos = $cabos->where('project_id', $projeto->id)
-                                    ->where('status', 2) // ou ->where('concluido', 1)
-                                    ->count();
-
-                    $progresso = $total > 0 ? ($feitos / $total) * 100 : 0;
-                @endphp
-                
-                @if ($progresso == 0)
+                <li><b>Cliente: </b><span id="cliente"></span></li>
+                <li><b>Unidade: </b><span id="unidade"></span></li>
+                <li><b>Data de fechamento do projeto: </b><span id="data_fechamento"></span></li>
+                <li><b>Data de entrega: </b><span id="data_entrega"></span></li>
+                <li><b>Status de entrega: </b><span id="status_entrega"></span></li>                
+                {{-- @if ($progresso == 0)
                     <li><b>Progresso dos cabos: </b>Sem cabos cadastrados</li>
-                @else
+                @else --}}
                     <li>
                         <b>Progresso dos cabos: </b>
-                        <p>{{  $feitos }}/{{ $total }}</p>
+                        <p><span id="feitos"></span>/<span id="total"></span></p>
                         <div class="progress">
-                            <div class="progress-bar" style="width: {{ $progresso }}%" aria-valuenow="{{ $feitos }}" aria-valuemin="0" aria-valuemax="{{ $total }}"></div>
+                            <div class="progress-bar" style="" aria-valuenow="" aria-valuemin="0" aria-valuemax=""></div>
                         </div>
                     </li>
-                @endif
+                {{-- @endif --}}
             </ul>
         </div>
         <div class=" m-auto" id="projects-tasks-chart"></div>

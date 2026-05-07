@@ -91,6 +91,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 //API
 Route::get('/dados-grafico', [GraficoController::class, 'index']);
+Route::get('/dados-projeto/{id}', [GraficoController::class, 'getProjetos']);
 
 //Logout
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');
