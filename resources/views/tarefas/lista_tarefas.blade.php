@@ -109,6 +109,11 @@
                     <td class="tarefas__dados--botoes centralizado">
                         <div>
                             <div class="tabela__dados--botoes centralizado">
+                                <button type="button" class="btn btn-primary me-1">
+                                    <a href="{{ url('/tarefas/detalhes/' .$i->id) }}" class="text-light">
+                                        <i class="fa-solid fa-circle-info" style="color: #000;"></i>
+                                    </a>
+                                </button>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$i->id}}">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>

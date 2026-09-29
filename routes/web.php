@@ -56,6 +56,7 @@ Route::get('/tarefas/conjunto/{id}', [TarefasController::class, 'novo_conjunto']
 Route::put('/tarefas/atualizar/{id}', [TarefasController::class, 'atualizar'])->name('atualizar_tarefa')->middleware('auth');//funciona
 Route::put('/tarefas/retrabalho/{id}', [TarefasController::class, 'retrabalho'])->name('retrabalho')->middleware('auth');
 Route::get('/tarefas/concluir/{id}', [TarefasController::class, 'concluir'])->name('concluir_tarefa')->middleware('auth');//funciona
+Route::get('/tarefas/detalhes/{id}', [TarefasController::class, 'detalhes'])->name('detalhes_tarefa')->middleware('auth');//funciona
 Route::delete('/tarefas/remove/{id}', [TarefasController::class, 'remove'])->name('remover_tarefa')->middleware('auth');//funciona
 
 //Rotas Zettawire Cable Routing

@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{ asset('css/projetos.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tarefas.css') }}">
         <link rel="stylesheet" href="{{ asset('css/zettawire.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/details.css') }}">
 
         <title>SGP</title>
 

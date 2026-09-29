@@ -1,0 +1,38 @@
+.card-box{
+    border: none; 
+    border-left: 5px solid #00aac0; 
+    border-radius: 3px; width: 70%; 
+    margin:auto
+}
+
+.card-box-body{
+    background-color: #212529;
+}
+
+.project-info, .task-details{
+    border-bottom: 1px solid #5a5a5a; 
+    padding-bottom: 10px;
+}
+
+.card-text-title{
+    color: #778a9d; 
+    font-size: 10px;
+}
+
+.card-text-subtitle{
+    color: #00aac0; 
+    font-size: 22px; 
+    font-weight: 600;
+}
+
+.info-box {
+    border: 1px solid #5a5a5a;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #404040;
+    min-width: 0;
+}
+
+.start-finish-dates{
+    justify-content: space-evenly;
+}

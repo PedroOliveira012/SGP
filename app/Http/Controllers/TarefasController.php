@@ -169,4 +169,13 @@ class TarefasController extends Controller
 
         return redirect()->action([TarefasController::class, 'mostra'], ['id' => $busca->id]);
     }
+
+    public function detalhes($id){
+        $tarefa = Task::find($id);
+        $projeto = Project::find($tarefa->id_projeto);
+        $func = User::where('nivel_acesso', '=', 1)->get();
+        $tarefa_processo = Procedure::all();
+
+        return view('tarefas.detalhes_tarefa', ['tarefa' => $tarefa, 'projeto' => $projeto, 'func' => $func, 'tarefa_processo' => $tarefa_processo]);
+    }
 }

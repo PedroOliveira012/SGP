@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81fcd5d64d72ce1d8c243fef64623315",
+    "content-hash": "d484f18d1e5a8ab2085ce49741f202fe",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1248,6 +1248,61 @@
                 }
             ],
             "time": "2026-03-10T16:41:02+00:00"
+        },
+        {
+            "name": "hughgrigg/php-business-time",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hughgrigg/php-business-time.git",
+                "reference": "ee3baa63fbd9efbd96f5e434df738b7f61a5092a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hughgrigg/php-business-time/zipball/ee3baa63fbd9efbd96f5e434df738b7f61a5092a",
+                "reference": "ee3baa63fbd9efbd96f5e434df738b7f61a5092a",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^1.2 || ^2.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.3",
+                "guzzlehttp/psr7": "^1.4",
+                "johnkary/phpunit-speedtrap": "^2.0 || ^3.0",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": "^9.5",
+                "psr/http-message": "^1.0",
+                "squizlabs/php_codesniffer": "@stable"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Required for using remote sources"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BusinessTime\\": "src/",
+                    "BusinessTime\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hugh Grigg",
+                    "email": "hugh.grigg@gmail.com"
+                }
+            ],
+            "description": "Business time / working days extension for Carbon dates",
+            "support": {
+                "issues": "https://github.com/hughgrigg/php-business-time/issues",
+                "source": "https://github.com/hughgrigg/php-business-time/tree/3.0.0"
+            },
+            "time": "2023-03-18T11:52:18+00:00"
         },
         {
             "name": "laravel/framework",
