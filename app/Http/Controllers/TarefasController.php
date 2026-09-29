@@ -81,6 +81,7 @@ class TarefasController extends Controller
                     $conjunto->prazo = request('prazo');
                     $conjunto->status = 'aguardo';
                     $conjunto->visualizado = 0;
+                    $conjunto->Notas = request('obs');
                     $conjunto->save();
                 }
             }

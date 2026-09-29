@@ -125,13 +125,13 @@
                                         <div class="yes-no-options">
                                             <div class="radio-button-container d-flex">
                                                 <label class="radio-button">
-                                                    <input type="radio" name="radio-group" value="option1">
+                                                    <input type="radio" name="tarefaConjunta" value=1>
                                                     <span class="radio"></span>
                                                     Sim
                                                 </label>
 
                                                 <label class="radio-button">
-                                                    <input type="radio" name="radio-group" value="option2">
+                                                    <input type="radio" name="tarefaConjunta" value=0>
                                                     <span class="radio"></span>
                                                     Não
                                                 </label>
