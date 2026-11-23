@@ -23,10 +23,16 @@ class FuncionariosController extends Controller
 
     public function lista(Request $request, $id){
         $projeto = Project::find($id);
-        $lista = Task::where([
-            ['id_projeto', '=', $projeto->id],
-            ['funcionario', 'like', '%'.Auth::user()->name.'%']
-        ])->get();
+
+        $lista = Task::where('id_projeto', $projeto->id)
+            ->when(Auth::user()->cargo == 'Montador', function ($query) {
+                $query->where(
+                    'funcionario',
+                    'like',
+                    '%' . Auth::user()->name . '%'
+                );
+            })
+            ->get();
 
         return view('funcionarios.lista_funcionarios', compact('lista', 'projeto'));
     }

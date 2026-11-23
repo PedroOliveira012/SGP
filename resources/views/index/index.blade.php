@@ -134,8 +134,16 @@
         </div>
         @yield('conteudo')
     </body>
-    <script src="{{ asset('js/script.js') }}"></script>
+    {{-- <script src="{{ asset('js/script.js') }}"></script> --}}
+    <script src="{{ asset('js/cabos-status.js') }}"></script>
+    <script src="{{ asset('js/cabos-tabela.js') }}"></script>
     <script src="{{ asset('js/charts.js') }}"></script>
+    <script src="{{ asset('js/confeccao-detalhe.js') }}"></script>
+    <script src="{{ asset('js/core.js') }}"></script>
+    <script src="{{ asset('js/projetos-busca.js') }}"></script>
+    <script src="{{ asset('js/projetos.js') }}"></script>
+    <script src="{{ asset('js/roteamento.js') }}"></script>
+    <script src="{{ asset('js/tarefas.js') }}"></script>
     <script>
         (function() {
 

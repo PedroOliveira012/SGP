@@ -338,46 +338,115 @@ class ZettawireController extends Controller
         return view('zettawire.index_confeccao', ['lista' => $lista, 'search' => $search]);
     }
 
-    public function confeccao($id, $panel){
-        $projeto = Project::find($id);
-        $route_name = 'confeccion';
-        $cabos = DB::table('cable_routing')
+    private const LIMITE_BUSCA = 300; //Constante que define o limite de cabos retornados na busca
+    
+    public function confeccao(Request $request, $id, $panel){
+        $projeto = Project::findOrFail($id);
+    
+        // Regra da tela (antes aplicada em PHP, depois de carregar TODOS os cabos):
+        // seção < 16 mm² OU anilha PE ligada a um destino "=-l."
+        $regraConfeccao = function ($q) {
+            $q->whereRaw("CAST(REPLACE(cable_cross_section, 'mm²', '') AS UNSIGNED) < 16")
+              ->orWhere(function ($q2) {
+                  $q2->where('tag', 'PE')->where('target', 'like', '%=-l.%');
+                }
+            );
+        };
+    
+        // Query base: cabos DESTE painel que entram na confecção.
+        $base = fn () => DB::table('cable_routing')
             ->where('project_id', $id)
             ->where('panel', $panel)
+            ->where($regraConfeccao);
+    
+        $colunas = [
+            'id', 'wire_harness', 'tag', 'cable_cross_section',
+            'origin_terminal_type', 'origin', 'origin_direction',
+            'target_terminal_type', 'target', 'target_direction',
+            'color', 'length', 'isdone', 'panel',
+        ];
+    
+        // 1) Chicotes do painel, com total e feitos. Uma query agrupada (poucas linhas).
+        //    Ordem = ordem de primeira aparição (MIN(id)), igual à que o dropdown tinha.
+        //    Para ordem alfabética, troque por ->orderBy('wire_harness').
+        $chicotesPainel = $base()
+            ->select(
+                'wire_harness',
+                DB::raw('COUNT(*) AS total'),
+                DB::raw('SUM(CASE WHEN isdone = 1 THEN 1 ELSE 0 END) AS feitos'),
+                DB::raw('MIN(id) AS primeiro_id')
+            )
+            ->groupBy('wire_harness')
+            ->orderBy('primeiro_id')
             ->get();
-        $colors = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->distinct()
-            ->pluck('color');
-        $tags = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->distinct()
-            ->pluck('tag');
-        $wire_harness = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->distinct()
-            ->pluck('wire_harness');
-        $cable_cross_sections = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->distinct()
-            ->pluck('cable_cross_section');
-        $status = DB::table('cable_routing')
-            ->where('project_id', $id)
-            ->distinct()
-            ->pluck('status');
-        $paineis = explode(';', $projeto->paineis);
-
-        return view('zettawire.confeccao',[
-            'projeto' => $projeto,
-            'paineis' => $paineis,
-            'cabos' => $cabos,
-            'colors' => $colors,
-            'tags' => $tags,
-            'wire_harness' => $wire_harness,
-            'cable_cross_sections' => $cable_cross_sections,
-            'status' => $status,
+    
+        // 2) Progresso do PAINEL INTEIRO (sai da mesma query, sem custo extra)
+        $progresso = [
+            'total'  => (int) $chicotesPainel->sum('total'),
+            'feitos' => (int) $chicotesPainel->sum('feitos'),
+        ];
+    
+        // 3) Tipo (singelo x multivias): multivias = chicote com '=-' ou 'SH' no nome
+        $tipo = in_array($request->query('tipo'), ['singelo', 'multi'], true)
+            ? $request->query('tipo')
+            : null;
+    
+        $ehMulti = fn ($nome) => str_contains($nome, '=-') || str_contains($nome, 'SH');
+    
+        $chicotes = $tipo === null ?
+            $chicotesPainel : 
+            $chicotesPainel->filter(
+                fn ($c) => $tipo === 'multi' ? $ehMulti($c->wire_harness) : ! $ehMulti($c->wire_harness)
+            )->values();
+    
+        // 4) Busca (em TODOS os cabos do painel) ou chicote atual
+        $busca = trim((string) $request->query('busca', ''));
+        $chicoteAtual = null;
+        $totalBusca = null;
+    
+        if ($busca !== '') {
+            $termo = '%' . addcslashes($busca, '%_\\') . '%';
+    
+            $consulta = $base()->where(function ($q) use ($termo) {
+                $q->where('tag', 'like', $termo)            // anilha
+                  ->orWhere('wire_harness', 'like', $termo) // chicote
+                  ->orWhere('origin', 'like', $termo)       // componente origem
+                  ->orWhere('target', 'like', $termo);      // componente destino
+            });
+    
+            $totalBusca = (clone $consulta)->count();
+            $cabos = $consulta->select($colunas)
+                ->orderBy('id')
+                ->limit(self::LIMITE_BUSCA)
+                ->get();
+        } else {
+            // Chicote pedido na URL (se existir neste painel) ou o primeiro da lista
+            $pedido = $request->query('chicote');
+            $chicoteAtual = filled($pedido)
+                ? $chicotesPainel->firstWhere('wire_harness', $pedido)
+                : null;
+            $chicoteAtual = $chicoteAtual ?? $chicotes->first();
+    
+            $cabos = $chicoteAtual
+                ? $base()->select($colunas)
+                    ->where('wire_harness', $chicoteAtual->wire_harness)
+                    ->orderBy('id')
+                    ->get()
+                : collect();
+        }
+    
+        return view('zettawire.confeccao', [
+            'projeto'        => $projeto,
+            'paineis'        => explode(';', $projeto->paineis),
+            'cabos'          => $cabos,
+            'chicotes'       => $chicotes,       // lista do dropdown (já filtrada pelo tipo)
+            'chicoteAtual'   => $chicoteAtual,   // null no modo busca
+            'tipo'           => $tipo,
+            'busca'          => $busca,
+            'totalBusca'     => $totalBusca,
+            'progresso'      => $progresso,
             'selected_panel' => $panel,
-            'route_name' => $route_name
+            'route_name'     => 'confeccion',
         ]);
     }
 
